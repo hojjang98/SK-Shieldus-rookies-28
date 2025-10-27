@@ -18,28 +18,28 @@
 
 ```bash
 
-- **soc/** — 보안관제 (Security Operation Center)  
+- soc/ — 보안관제 (Security Operation Center)  
   로그 기반 이상 탐지 및 SIEM 자동화 관련 논문  
 
-- **cert/** — 침해대응 (Computer Emergency Response Team)  
+- cert/ — 침해대응 (Computer Emergency Response Team)  
   사고 대응 프로세스 및 포렌식 관련 논문  
 
-- **pentest/** — 모의해킹 (Penetration Testing)  
+- pentest/ — 모의해킹 (Penetration Testing)  
   웹/시스템 취약점 공격 및 방어 관련 논문  
 
-- **vuln_assessment/** — 취약점 진단 (Vulnerability Assessment)  
+- vuln_assessment/ — 취약점 진단 (Vulnerability Assessment)  
   취약점 스캐닝 및 CVSS 평가 관련 논문  
 
-- **ot_security/** — OT/ICS 보안 (Operational Technology Security)  
+- ot_security/ — OT/ICS 보안 (Operational Technology Security)  
   산업제어시스템(ICS) 보안 및 네트워크 이상탐지 관련 논문  
 
-- **cloud_security/** — 클라우드 보안 (Cloud Security)  
+- cloud_security/ — 클라우드 보안 (Cloud Security)  
   Zero Trust, IAM, CSP 설정 취약점 관련 논문  
 
-- **consulting/** — 보안 컨설팅 (Security Consulting & Risk Management)  
+- consulting/ — 보안 컨설팅 (Security Consulting & Risk Management)  
   보안 정책, 위험 관리, 거버넌스 관련 논문  
 
-- **si_integration/** — 보안 SI (Security Integration / Architecture)  
+- si_integration/ — 보안 SI (Security Integration / Architecture)  
   통합 보안 아키텍처, 시스템 설계 관련 논문  
 
 ```
