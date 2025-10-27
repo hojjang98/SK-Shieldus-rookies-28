@@ -42,18 +42,26 @@
 
 ---
 
-## 🗓️ Study Plan (예시 8주 구성)
+## 🗓️ Study Plan (구성 방식)
 
-| 주차 | 분야 | 주요 학습/프로젝트 | 논문 |
-|------|------|----------------|------|
-| Week 1 | SOC | 로그 기반 이상탐지 | *DeepLog: Anomaly Detection and Diagnosis from System Logs* |
-| Week 2 | CERT | 침해대응 프로세스 및 포렌식 | *Incident Response Best Practices (NIST SP 800-61)* |
-| Week 3 | Pentest | 웹 취약점 실습 (SQLi/XSS) | *OWASP Top 10 Case Study* |
-| Week 4 | Vulnerability Assessment | 취약점 스캐닝 및 CVSS 평가 | *Automated Vulnerability Scoring Methods* |
-| Week 5 | OT Security | ICS 네트워크 보안 | *Anomaly Detection in Industrial Control Systems* |
-| Week 6 | Cloud Security | AWS 클라우드 보안 설계 | *Zero Trust Architecture for Cloud* |
-| Week 7 | Consulting | 보안정책 수립 및 리스크 관리 | *Information Security Risk Management Frameworks* |
-| Week 8 | SI Integration | 통합 보안 아키텍처 설계 | *Enterprise Security Architecture Models* |
+이 리포지토리의 학습 흐름은 **매일의 학습 정리 → 주차별 실습 프로젝트 → 분야별 논문 리뷰**로 구성되어 있습니다.  
+루키즈 활동 중 각 주차의 학습 내용이나 과제 주제에 따라 유동적으로 조정됩니다.
+
+| 구성 요소 | 설명 | 예시 |
+|------------|------|------|
+| **Daily Log** | 교육 중 배운 개념, 실습 결과, 도구 사용법 등을 매일 정리 | 예: “2025-10-27 · ELK 기반 로그 수집 구조 이해” |
+| **Field Project** | 주차별 혹은 분야별로 배운 내용을 실제로 적용한 미니 프로젝트 | 예: “Week 1 · LSTM 기반 로그 이상탐지 실습” |
+| **Paper Review** | 각 분야(SOC, CERT, Pentest 등)와 연계된 핵심 논문을 선정해 읽고 요약 | 예: “DeepLog: Anomaly Detection and Diagnosis from System Logs” |
+
+> 💡 **진행 방식 예시:**  
+> 1. 매주 초, 학습 분야(예: SOC, CERT 등)와 실습 목표를 설정  
+> 2. 주중에는 Daily Log를 통해 배운 내용을 정리  
+> 3. 주말에는 Field Project와 Paper Review를 마무리하여 GitHub에 업로드  
+> 4. 모든 내용은 실제 실무 감각을 키우는 방향으로 작성  
+
+이 구조는 루키즈 과정 중 배운 내용을 단순 기록에 그치지 않고  
+**‘이해 → 실습 → 정리 → 확장’**의 순환 학습이 이루어지도록 설계되어 있습니다.
+
 
 ---
 
