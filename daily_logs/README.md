@@ -38,7 +38,8 @@
 | :--- | :--- | :--- |
 | 2025.10.27 | 파이썬 기본 문법 및 데이터 타입 | [`20251027_Python_Basic_Types.md`](./20251027_Python_Basic_Types.md) |
 | 2025.10.28 | 클래스, 함수, 제어구문, 딕셔너리 | [`20251028_Python_Basic_Dict.md`](./20251028_Python_Basic_Dict.md) |
-| 2025.10.29 | 제어문, 문자열, 날짜 다루기 | [`20251029_Python_Control_String_Date.md`] (./20251029_Python_Control_String_Date.md) |
+| 2025.10.29 | 제어문, 문자열, 날짜 다루기 | [`20251029_Python_Control_String_Date.md`](./20251029_Python_Control_String_Date.md) |
+
 
 ---
 
