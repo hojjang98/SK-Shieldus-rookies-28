@@ -39,9 +39,11 @@
 | 2025.10.27 | 파이썬 기본 문법 및 데이터 타입 | [`20251027_Python_Basic_Types.md`](./20251027_Python_Basic_Types.md) |
 | 2025.10.28 | 클래스, 함수, 제어구문, 딕셔너리 | [`20251028_Python_Basic_Dict.md`](./20251028_Python_Basic_Dict.md) |
 | 2025.10.29 | 제어문, 문자열, 날짜 다루기 | [`20251029_Python_Control_String_Date.md`](./20251029_Python_Control_String_Date.md) |
-
+| 2025.10.30 | 함수, 람다, 예외 처리 | [`20251030_Python_Function_Lambda.md`](./20251030_Python_Function_Lambda.md) |
+| 2025.10.31 | 코드 복원력과 로깅 기법 | [`20251031_Code_Resilience_and_Logging.md`](./20251031_Code_Resilience_and_Logging.md) |
 
 ---
 
 > 📌 앞으로도 매일 학습한 내용을 위 규칙에 따라 정리하며,  
 > **보안 로직 중심의 Python 학습 로그 아카이브**로 발전시킬 예정이다.
+
