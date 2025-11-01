@@ -65,18 +65,23 @@
 ---
 
 ## 🧩 실행 예시 (Example)
+
 ```bash
 $ python main.py
 ```
 
 출력 예시:
+
 ```bash
 [INFO] 접근 성공: ad**
 [WARNING] 접근 실패: ca** (PermissionError)
 ```
 
 ## 📂 파일 구조 (Structure)
+
+```bash
 ├── README.md
 ├── main.py
 ├── access.log
 └── system.log
+```
