@@ -81,7 +81,7 @@ $ python main.py
 
 ```bash
 ├── README.md
-├── main.py
+├── secure_log_monitor.py
 ├── access.log
 └── system.log
 ```
@@ -125,7 +125,7 @@ $ python main.py
     ```
 3. **프로그램 실행**
     ```bash
-    python main.py
+    python secure_log_monitor.py
     ```
 4. **결과 확인**
 - 콘솔 출력 예시
