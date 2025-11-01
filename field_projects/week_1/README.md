@@ -85,3 +85,53 @@ $ python main.py
 ├── access.log
 └── system.log
 ```
+
+---
+
+## 🧾 구현 참고 (Implementation Notes)
+
+### main.py
+
+- 전체 흐름이 한눈에 보이도록 하나의 파일 안에 구성했다.
+- 각 기능(로깅 설정, 데코레이터, 클래스, 실행부)은 구분되지만, 너무 많은 파일로 나누지 않아 가독성과 학습 효율을 우선했다.
+- 코드 내에는 이해를 돕기 위한 최소한의 주석만 포함되어 있다.
+
+### system.log
+
+- 실제 시스템 로그를 대신하는 임시 테스트용 파일이다.
+- 예시 로그를 직접 추가해 main.py의 탐지 로직을 확인할 수 있다.
+- ERROR, INFO 등의 키워드를 포함하면 필터링 테스트가 가능하다.
+
+### access.log
+
+- 프로그램 실행 시 자동 생성되는 감사 로그 파일이다.
+- 접근 성공/실패 내역이 JSON 형식으로 누적 저장되며, 콘솔 출력([INFO], [WARNING])과 동일한 정보가 기록된다.
+
+---
+
+
+## ▶️ 실행 방법 (How to Run)
+
+1. **폴더로 이동**
+   ```bash
+   cd field_projects/week_1
+   ```
+2. **테스트 로그 준비***
+- system.log 파일이 없으면 예시로 아래와 같이 작성하면 된다.
+    ```bash
+    2025-11-01 09:00 [INFO] System boot completed
+    2025-11-01 09:12 [ERROR] Connection timeout
+    2025-11-01 10:25 [ERROR] Unauthorized access attempt detected
+    ```
+3. **프로그램 실행**
+    ```bash
+    python main.py
+    ```
+4. **결과 확인**
+- 콘솔 출력 예시
+    ```bash
+    [INFO] 접근 성공: ad**
+    [WARNING] 접근 실패: ca** (PermissionError)
+    ```
+- access.log 파일이 생성되어 JSON 형식으로 접근 내역이 기록된다.
+
