@@ -41,6 +41,7 @@
 | 2025.10.29 | 제어문, 문자열, 날짜 다루기 | [`20251029_Python_Control_String_Date.md`](./20251029_Python_Control_String_Date.md) |
 | 2025.10.30 | 함수, 람다, 예외 처리 | [`20251030_Python_Function_Lambda.md`](./20251030_Python_Function_Lambda.md) |
 | 2025.10.31 | 코드 복원력과 로깅 기법 | [`20251031_Code_Resilience_and_Logging.md`](./20251031_Code_Resilience_and_Logging.md) |
+| 2025.11.03 | Numpy 기초 및 벡터화 연산 | [`20251103_Numpy_Vectorization.md`](./20251103_Numpy_Vectorization.md) |
 
 ---
 
