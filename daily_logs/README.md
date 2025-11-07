@@ -23,16 +23,22 @@
 ### 🧱 내부 구성 템플릿
 각 로그 파일은 아래 네 가지 섹션으로 구성한다.
 
-| 섹션 | 설명 | 초점 |
-| :--- | :--- | :--- |
+| 구분 | 내용 | 예시 |
+|:---|:---|:---|
 | **1. 🧠 핵심 개념 정리 (Concepts)** | 배운 주요 이론·문법 요약 | 클래스, 함수, 제어구문, 자료구조 개념 이해 |
 | **2. 💻 실습 코드 & 응용 (Practice & Code)** | 수업 중 다룬 예제 및 응용 | 실제 코드 예제와 보안 로직 연관성 |
 | **3. 🛡️ 보안 관점 분석 (Security Insight)** | 배운 개념의 보안 실무 적용 분석 | SOC, CERT, 로그 분석, 취약점 진단 등 |
 | **4. 🧩 요약 (Summary)** | 하루 학습 핵심 정리 | 실무에서 바로 쓸 수 있는 포인트 3줄 요약 |
+| **5. 💭 개인 인사이트 (Reflection)** | 개인적인 느낀 점, 성장 포인트, 다음 학습 방향 | 배운 내용을 프로젝트나 실무에 어떻게 적용할지 구체화 |
+
 
 ---
 
-## 🔗 로그 목록
+## 🔗 학습 로그 목록
+
+---
+
+### 🗓️ **Week 1**
 
 | 날짜 | 주제 | 파일 경로 |
 | :--- | :--- | :--- |
@@ -41,9 +47,19 @@
 | 2025.10.29 | 제어문, 문자열, 날짜 다루기 | [`20251029_Python_Control_String_Date.md`](./20251029_Python_Control_String_Date.md) |
 | 2025.10.30 | 함수, 람다, 예외 처리 | [`20251030_Python_Function_Lambda.md`](./20251030_Python_Function_Lambda.md) |
 | 2025.10.31 | 코드 복원력과 로깅 기법 | [`20251031_Code_Resilience_and_Logging.md`](./20251031_Code_Resilience_and_Logging.md) |
+
+---
+
+### 🗓️ **Week 2**
+
+| 날짜 | 주제 | 파일 경로 |
+| :--- | :--- | :--- |
 | 2025.11.03 | Numpy 기초 및 벡터화 연산 | [`20251103_Numpy_Vectorization.md`](./20251103_Numpy_Vectorization.md) |
 | 2025.11.04 | Numpy·Pandas를 활용한 EDA 기초 | [`20251104_Numpy_Pandas_EDA.md`](./20251104_Numpy_Pandas_EDA.md) |
 | 2025.11.05 | Numpy & Pandas 기초 실습 | [`20251105_Numpy_Pandas_Basics.md`](./20251105_Numpy_Pandas_Basics.md) |
+| 2025.11.06 | Matplotlib · Seaborn 기반 로그 시각화 및 데이터 분석 | [`20251106_Visualization.md`](./20251106_Visualization.md) |
+| 2025.11.07 | Folium · Plotly · Streamlit 기반 시각화 실습 | [`20251107_Visualization_Streamlit.md`](./20251107_Visualization_Streamlit.md) |
+
 ---
 
 > 📌 앞으로도 매일 학습한 내용을 위 규칙에 따라 정리하며,  
