@@ -1,4 +1,4 @@
-# 📄 2025.11.11 (Day 7) [LangChain · Streamlit 기반 OpenAI Dashboard 구축]
+# 📄 2025.11.11 (Day 12) [LangChain · Streamlit 기반 OpenAI Dashboard 구축]
 
 ---
 
