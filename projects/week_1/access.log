@@ -1,4 +1,4 @@
 {"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
-2025-11-01 15:15:20,811 [INFO] ad*** 접근 성공
+2025-11-12 15:53:12,119 [INFO] ad*** 접근 성공
 {"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
-2025-11-01 15:15:20,811 [WARNING] ca*** 접근 실패 (PermissionError)
+2025-11-12 15:53:12,119 [WARNING] ca*** 접근 실패 (PermissionError)

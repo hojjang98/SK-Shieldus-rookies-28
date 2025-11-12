@@ -1,8 +1,8 @@
 import json
 import logging
+import os
 
-
-# ===== 로깅 설정 =====
+# 로그 설정
 logging.basicConfig(
     filename="access.log",
     level=logging.INFO,
@@ -10,15 +10,21 @@ logging.basicConfig(
     encoding="utf-8"
 )
 
+# system.log 초기 생성 (없을 경우만)
+if not os.path.exists("system.log"):
+    with open("system.log", "w", encoding="utf-8") as f:
+        f.write("2025-11-12 09:00 [INFO] System boot completed\n")
+        f.write("2025-11-12 09:15 [ERROR] Connection timeout\n")
+        f.write("2025-11-12 09:27 [ERROR] Unauthorized access attempt\n")
+        f.write("2025-11-12 09:41 [INFO] Service recovered\n")
+    print("[INFO] system.log created")
 
-# ===== 사용자 클래스 =====
 class User:
     def __init__(self, name: str, authenticated: bool = False):
         self.name = name
         self.authenticated = authenticated
 
-
-# ===== 공통 로깅 데코레이터 =====
+# 접근 로깅 데코레이터
 def access_logger(func):
     def wrapper(user: User):
         masked = user.name[:2] + "*" * (len(user.name) - 2)
@@ -49,24 +55,27 @@ def access_logger(func):
             print(f"[WARNING] 접근 실패: {masked} ({type(e).__name__})")
     return wrapper
 
-
-# ===== 보안 로그 접근 함수 =====
 @access_logger
 def read_secure_log(user: User):
     if not user.authenticated:
         raise PermissionError("인증되지 않은 사용자입니다.")
     with open("system.log", "r", encoding="utf-8") as f:
         logs = f.readlines()
-    filtered = [line.strip() for line in logs if "ERROR" in line][-5:]
-    return filtered
+    filtered = [line.strip() for line in logs if "ERROR" in line]
+    return filtered[-5:]
 
-
-# ===== 실행부 =====
 if __name__ == "__main__":
+    print("=== Mini Security Log Monitor ===\n")
+
     users = [
         User("admin", authenticated=True),
         User("carol", authenticated=False)
     ]
 
     for u in users:
-        read_secure_log(u)
+        result = read_secure_log(u)
+        if result:
+            print(f"{u.name} → 최근 오류 로그 {len(result)}건 탐지됨.")
+            for line in result:
+                print("   ", line)
+        print("-" * 50)
