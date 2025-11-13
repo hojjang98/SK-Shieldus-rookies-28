@@ -4,17 +4,7 @@ import os
 import random
 import time
 
-# ===== [신규] system.log 자동 생성 =====
-if not os.path.exists("system.log"):
-    with open("system.log", "w", encoding="utf-8") as f:
-        f.write("INFO Server started\n")
-        f.write("ERROR Connection timeout\n")
-        f.write("ERROR Database connection lost\n")
-        f.write("INFO System recovered\n")
-        f.write("ERROR Unauthorized access attempt\n")
-    print("[INFO] system.log 파일이 새로 생성되었습니다.")
-
-# ===== 로깅 설정 =====
+# 로그 설정
 logging.basicConfig(
     filename="access.log",
     level=logging.INFO,
@@ -22,23 +12,26 @@ logging.basicConfig(
     encoding="utf-8"
 )
 
-# ===== 사용자 클래스 =====
+# system.log 생성 (없을 경우만)
+if not os.path.exists("system.log"):
+    with open("system.log", "w", encoding="utf-8") as f:
+        f.write("2025-11-12 09:00 [INFO] System boot completed\n")
+        f.write("2025-11-12 09:15 [ERROR] Connection timeout\n")
+        f.write("2025-11-12 09:27 [ERROR] Unauthorized access attempt\n")
+        f.write("2025-11-12 09:41 [INFO] Service recovered\n")
+    print("[INFO] system.log created")
+
 class User:
     def __init__(self, name: str, authenticated: bool = False):
         self.name = name
         self.authenticated = authenticated
 
-# ===== 공통 로깅 데코레이터 =====
 def access_logger(func):
     def wrapper(user: User):
         masked = user.name[:2] + "*" * (len(user.name) - 2)
         try:
             result = func(user)
-            log_entry = {
-                "user": masked,
-                "result": "SUCCESS",
-                "message": "로그 접근 성공"
-            }
+            log_entry = {"user": masked, "result": "SUCCESS", "message": "로그 접근 성공"}
             with open("access.log", "a", encoding="utf-8") as f:
                 json.dump(log_entry, f, ensure_ascii=False)
                 f.write("\n")
@@ -59,52 +52,35 @@ def access_logger(func):
             print(f"[WARNING] 접근 실패: {masked} ({type(e).__name__})")
     return wrapper
 
-# ===== 보안 로그 접근 함수 =====
 @access_logger
 def read_secure_log(user: User):
     if not user.authenticated:
         raise PermissionError("인증되지 않은 사용자입니다.")
     with open("system.log", "r", encoding="utf-8") as f:
         logs = f.readlines()
-    filtered = [line.strip() for line in logs if "ERROR" in line][-5:]
-    return filtered
+    errors = [line.strip() for line in logs if "ERROR" in line]
+    return errors[-5:]
 
-# ===== 실행부 =====
 if __name__ == "__main__":
-    # 사용자 풀 구성
+    print("=== Mini Security Log Monitor ===\n")
+
+    # 사용자 풀 정의
     users = [
         User("admin", authenticated=True),
         User("carol", authenticated=False),
-        User("guest", authenticated=random.choice([True, False])),
         User("root", authenticated=True),
-        User("analyst", authenticated=random.choice([True, False])),
-        User("intern", authenticated=False),
+        User("guest", authenticated=False),
+        User("analyst", authenticated=True),
+        User("intern", authenticated=False)
     ]
 
-    # system.log 업데이트 (다양한 에러 메시지 포함)
-    error_templates = [
-        "ERROR Connection timeout",
-        "ERROR Unauthorized access attempt",
-        "ERROR Disk quota exceeded",
-        "ERROR Invalid token",
-        "ERROR Database connection lost",
-        "ERROR Firewall rule conflict",
-        "ERROR Suspicious packet detected",
-        "ERROR Privilege escalation attempt",
-        "ERROR Memory leak in module",
-        "ERROR Service unavailable",
-    ]
-    with open("system.log", "w", encoding="utf-8") as f:
-        f.write("INFO Secure Log Simulation Started\n")
-        for _ in range(30):
-            f.write(random.choice(error_templates) + "\n")
-        f.write("INFO Simulation Completed\n")
-    print("[INFO] system.log 에 다양한 에러 패턴이 생성되었습니다.\n")
-
-    # ===== 랜덤 로그 100개 생성 =====
-    for i in range(100):
+    for _ in range(50):
         u = random.choice(users)
-        read_secure_log(u)
-        time.sleep(0.03)  # 속도 조절 (0.03초 간격 → 약 3초 내 100개 생성)
 
-    print("\n✅ 100개의 랜덤 접근 로그가 access.log에 기록 완료되었습니다.")
+        if random.random() < 0.25:
+            u.authenticated = not u.authenticated
+
+        read_secure_log(u)
+        time.sleep(0.05)
+
+    print("\n 50개의 랜덤 접근 로그가 access.log에 기록되었습니다.")

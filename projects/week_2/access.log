@@ -1,0 +1,156 @@
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-12 15:53:12,119 [INFO] ad*** 접근 성공
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-12 15:53:12,119 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 10:46:15,791 [INFO] ad*** 접근 성공
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 10:46:15,791 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 10:48:10,699 [INFO] ad*** 접근 성공
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 10:48:10,701 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 10:48:20,516 [INFO] ad*** 접근 성공
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 10:48:20,527 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 10:51:59,065 [INFO] ad*** 접근 성공
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 10:51:59,066 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 10:54:14,504 [INFO] ad*** 접근 성공
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 10:54:14,505 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 10:54:44,372 [INFO] ad*** 접근 성공
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 10:54:44,372 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 10:58:18,147 [INFO] ad*** 접근 성공
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 10:58:18,147 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 10:58:18,448 [INFO] ad*** 접근 성공
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 10:58:18,448 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 10:58:18,704 [INFO] ad*** 접근 성공
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 10:58:18,704 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 10:58:18,972 [INFO] ad*** 접근 성공
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 10:58:18,972 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 10:58:19,221 [INFO] ad*** 접근 성공
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 10:58:19,222 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 10:58:19,468 [INFO] ad*** 접근 성공
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 10:58:19,468 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 10:58:19,724 [INFO] ad*** 접근 성공
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 10:58:19,724 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:37,077 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "gu***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:37,128 [WARNING] gu*** 접근 실패 (PermissionError)
+{"user": "gu***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:37,195 [WARNING] gu*** 접근 실패 (PermissionError)
+{"user": "gu***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:37,248 [INFO] gu*** 접근 성공
+{"user": "in****", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:37,312 [INFO] in**** 접근 성공
+{"user": "ro**", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:37,377 [WARNING] ro** 접근 실패 (PermissionError)
+{"user": "ro**", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:37,430 [WARNING] ro** 접근 실패 (PermissionError)
+{"user": "in****", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:37,495 [INFO] in**** 접근 성공
+{"user": "gu***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:37,563 [INFO] gu*** 접근 성공
+{"user": "ad***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:37,629 [WARNING] ad*** 접근 실패 (PermissionError)
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:37,694 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "ad***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:37,745 [WARNING] ad*** 접근 실패 (PermissionError)
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:37,798 [INFO] ad*** 접근 성공
+{"user": "an*****", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:37,848 [INFO] an***** 접근 성공
+{"user": "gu***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:37,903 [WARNING] gu*** 접근 실패 (PermissionError)
+{"user": "in****", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:37,970 [INFO] in**** 접근 성공
+{"user": "in****", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:38,036 [INFO] in**** 접근 성공
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:38,087 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "gu***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:38,152 [WARNING] gu*** 접근 실패 (PermissionError)
+{"user": "ro**", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:38,203 [WARNING] ro** 접근 실패 (PermissionError)
+{"user": "an*****", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:38,255 [INFO] an***** 접근 성공
+{"user": "an*****", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:38,310 [WARNING] an***** 접근 실패 (PermissionError)
+{"user": "in****", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:38,378 [INFO] in**** 접근 성공
+{"user": "gu***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:38,442 [WARNING] gu*** 접근 실패 (PermissionError)
+{"user": "in****", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:38,493 [INFO] in**** 접근 성공
+{"user": "an*****", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:38,560 [WARNING] an***** 접근 실패 (PermissionError)
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:38,626 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "ca***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:38,687 [WARNING] ca*** 접근 실패 (PermissionError)
+{"user": "gu***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:38,751 [WARNING] gu*** 접근 실패 (PermissionError)
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:38,819 [INFO] ad*** 접근 성공
+{"user": "gu***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:38,872 [INFO] gu*** 접근 성공
+{"user": "ad***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:38,936 [WARNING] ad*** 접근 실패 (PermissionError)
+{"user": "ca***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:38,987 [INFO] ca*** 접근 성공
+{"user": "ca***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:39,062 [INFO] ca*** 접근 성공
+{"user": "an*****", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:39,119 [INFO] an***** 접근 성공
+{"user": "ad***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:39,185 [INFO] ad*** 접근 성공
+{"user": "gu***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:39,238 [INFO] gu*** 접근 성공
+{"user": "an*****", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:39,303 [INFO] an***** 접근 성공
+{"user": "gu***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:39,367 [INFO] gu*** 접근 성공
+{"user": "ro**", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:39,419 [WARNING] ro** 접근 실패 (PermissionError)
+{"user": "ca***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:39,487 [INFO] ca*** 접근 성공
+{"user": "an*****", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:39,552 [INFO] an***** 접근 성공
+{"user": "ro**", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:39,602 [WARNING] ro** 접근 실패 (PermissionError)
+{"user": "ro**", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:39,667 [INFO] ro** 접근 성공
+{"user": "ro**", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:39,721 [INFO] ro** 접근 성공
+{"user": "ca***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:39,787 [INFO] ca*** 접근 성공
+{"user": "ca***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:39,853 [INFO] ca*** 접근 성공
+{"user": "an*****", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:39,920 [INFO] an***** 접근 성공
+{"user": "ca***", "result": "SUCCESS", "message": "로그 접근 성공"}
+2025-11-13 11:04:39,987 [INFO] ca*** 접근 성공
+{"user": "ad***", "result": "FAIL", "error": "PermissionError", "message": "인증되지 않은 사용자입니다."}
+2025-11-13 11:04:40,053 [WARNING] ad*** 접근 실패 (PermissionError)
