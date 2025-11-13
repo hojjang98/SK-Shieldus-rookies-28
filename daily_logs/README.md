@@ -62,6 +62,16 @@
 
 ---
 
+### 🗓️ **Week 3**
+
+| 날짜 | 주제 | 파일 경로 |
+| :--- | :--- | :--- |
+| 2025.11.10 | OpenAI API · Streamlit 기본 활용 | [`20251110_openAI_streamlit.md`](./20251110_openAI_streamlit.md) |
+| 2025.11.11 | LangChain 기초 및 RAG 구조 이해 | [`20251111_langchain.md`](./20251111_langchain.md) |
+| 2025.11.12 | RAG & LLM 기반 보안 로그 분석 대시보드 구축 | [`20251112_RAG & LLM-Powered Security Log Analysis.md`](./20251112_RAG%20&%20LLM-Powered%20Security%20Log%20Analysis.md) |
+
+---
+
 > 📌 앞으로도 매일 학습한 내용을 위 규칙에 따라 정리하며,  
 > **보안 로직 중심의 Python 학습 로그 아카이브**로 발전시킬 예정이다.
 
