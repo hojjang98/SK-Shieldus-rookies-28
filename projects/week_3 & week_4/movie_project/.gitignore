@@ -1,0 +1,23 @@
+# 1. 민감 정보/환경 파일
+.env
+
+# 2. 파이썬 및 IDE 파일
+
+__pycache__/
+*.pyc
+*.swp
+.ipynb_checkpoints/
+.DS_Store
+
+
+# 3. 데이터 및 DB (로컬 생성)
+vector_db/ 
+
+# 대용량 원본 데이터 파일 
+# data/movie.zip 
+
+# 로컬에서 생성된 데이터 파일 (선택 사항)
+data/tmdb_cleaned.csv 
+
+# 4. Streamlit 캐싱 및 로그
+.streamlit/
