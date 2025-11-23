@@ -42,11 +42,11 @@
 
 | 날짜 | 주제 | 파일 경로 |
 | :--- | :--- | :--- |
-| 2025.10.27 | 파이썬 기본 문법 및 데이터 타입 | [`20251027_Python_Basic_Types.md`](./20251027_Python_Basic_Types.md) |
-| 2025.10.28 | 클래스, 함수, 제어구문, 딕셔너리 | [`20251028_Python_Basic_Dict.md`](./20251028_Python_Basic_Dict.md) |
-| 2025.10.29 | 제어문, 문자열, 날짜 다루기 | [`20251029_Python_Control_String_Date.md`](./20251029_Python_Control_String_Date.md) |
-| 2025.10.30 | 함수, 람다, 예외 처리 | [`20251030_Python_Function_Lambda.md`](./20251030_Python_Function_Lambda.md) |
-| 2025.10.31 | 코드 복원력과 로깅 기법 | [`20251031_Code_Resilience_and_Logging.md`](./20251031_Code_Resilience_and_Logging.md) |
+| 2025.10.27 | 파이썬 기본 문법 및 데이터 타입 | [`20251027_Python_Basic_Types.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week1/20251027_Python_Basic_Types.md) |
+| 2025.10.28 | 클래스, 함수, 제어구문, 딕셔너리 | [`20251028_Python_Basic_Dict.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week1/20251028_Python_Basic_Dict.md) |
+| 2025.10.29 | 제어문, 문자열, 날짜 다루기 | [`20251029_Python_Control_String_Date.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week1/20251029_Python_Control_String_Date.md) |
+| 2025.10.30 | 함수, 람다, 예외 처리 | [`20251030_Python_Function_Lambda.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week1/20251030_Python_Function_Lambda.md) |
+| 2025.10.31 | 코드 복원력과 로깅 기법 | [`20251031_Code_Resilience_and_Logging.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week1/20251031_Code_Resilience_and_Logging.md) |
 
 ---
 
@@ -54,11 +54,11 @@
 
 | 날짜 | 주제 | 파일 경로 |
 | :--- | :--- | :--- |
-| 2025.11.03 | Numpy 기초 및 벡터화 연산 | [`20251103_Numpy_Vectorization.md`](./20251103_Numpy_Vectorization.md) |
-| 2025.11.04 | Numpy·Pandas를 활용한 EDA 기초 | [`20251104_Numpy_Pandas_EDA.md`](./20251104_Numpy_Pandas_EDA.md) |
-| 2025.11.05 | Numpy & Pandas 기초 실습 | [`20251105_Numpy_Pandas_Basics.md`](./20251105_Numpy_Pandas_Basics.md) |
-| 2025.11.06 | Matplotlib · Seaborn 기반 로그 시각화 및 데이터 분석 | [`20251106_Visualization.md`](./20251106_Visualization.md) |
-| 2025.11.07 | Folium · Plotly · Streamlit 기반 시각화 실습 | [`20251107_Visualization_Streamlit.md`](./20251107_Visualization_Streamlit.md) |
+| 2025.11.03 | Numpy 기초 및 벡터화 연산 | [`20251103_Numpy_Vectorization.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week2/20251103_Numpy_Vectorization.md) |
+| 2025.11.04 | Numpy·Pandas를 활용한 EDA 기초 | [`20251104_Numpy_Pandas_EDA.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week2/20251104_Numpy_Pandas_EDA.md) |
+| 2025.11.05 | Numpy & Pandas 기초 실습 | [`20251105_Numpy_Pandas_Basics.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week2/20251105_Numpy_Pandas_Basics.md) |
+| 2025.11.06 | Matplotlib · Seaborn 기반 로그 시각화 및 데이터 분석 | [`20251106_Visualization.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week2/20251106_Visualization.md) |
+| 2025.11.07 | Folium · Plotly · Streamlit 기반 시각화 실습 | [`20251107_Visualization_Streamlit.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week2/20251107_Visualization_Streamlit.md) |
 
 ---
 
@@ -66,11 +66,11 @@
 
 | 날짜 | 주제 | 파일 경로 |
 | :--- | :--- | :--- |
-| 2025.11.10 | OpenAI API · Streamlit 기본 활용 | [`20251110_openAI_streamlit.md`](./20251110_openAI_streamlit.md) |
-| 2025.11.11 | LangChain 기초 및 RAG 구조 이해 | [`20251111_langchain.md`](./20251111_langchain.md) |
-| 2025.11.12 | RAG & LLM 기반 보안 로그 분석 대시보드 구축 | [`20251112_RAG & LLM-Powered Security Log Analysis.md`](./20251112_RAG%20&%20LLM-Powered%20Security%20Log%20Analysis.md) |
-| 2025.11.13 | 실시간 로그 모니터링 · RAG 보안 챗봇 통합 실습 | [`20251113_streaming_log_monitoring_with_RAG_security_assistant.md`](./20251113_streaming_log_monitoring_with_RAG_security_assistant.md) |
-| 2025.11.14 | Team Project Kickoff · Movie Trend Analysis | [`20251114_team_project01.md`](./20251114_team_project01.md) |
+| 2025.11.10 | OpenAI API · Streamlit 기본 활용 | [`20251110_openAI_streamlit.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week3/20251110_openAI_streamlit.md) |
+| 2025.11.11 | LangChain 기초 및 RAG 구조 이해 | [`20251111_langchain.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week3/20251111_langchain.md) |
+| 2025.11.12 | RAG & LLM 기반 보안 로그 분석 대시보드 구축 | [`20251112_RAG & LLM-Powered Security Log Analysis.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week3/20251112_RAG%20&%20LLM-Powered%20Security%20Log%20Analysis.md) |
+| 2025.11.13 | 실시간 로그 모니터링 · RAG 보안 챗봇 통합 실습 | [`20251113_streaming_log_monitoring_with_RAG_security_assistant.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week3/20251113_Streaming_Log_Monitoring_with_RAG_Security_Assistant.md) |
+| 2025.11.14 | Team Project Kickoff · Movie Trend Analysis | [`20251114_team_project01.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week3/20251114_team_project01.md) |
 
 ---
 
