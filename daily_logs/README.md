@@ -74,6 +74,14 @@
 
 ---
 
-> 📌 앞으로도 매일 학습한 내용을 위 규칙에 따라 정리하며,  
-> **보안 로직 중심의 Python 학습 로그 아카이브**로 발전시킬 예정이다.
+### 🗓️ **Week 4**
+
+| 날짜 | 주제 | 파일 경로 |
+| :--- | :--- | :--- |
+| 2025.11.17 | 팀 프로젝트: 데이터 수집 및 전처리 (EDA / TMDB) | [`20251117_Project_Data_Acquisition.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week4/20251117_Project_Data_Acquisition.md) |
+| 2025.11.18 | 팀 프로젝트: Streamlit 시각화 대시보드 구현 완료 | [`20251118_Project_Visualization_Complete.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week4/20251118_Project_Visualization_Complete.md) |
+| 2025.11.19 | 팀 프로젝트: LangChain/RAG 분석 모델 통합 및 PPT 초안 제작 | [`20251119_Project_RAG_Integration_and_PPT.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week4/20251119_Project_RAG_Integration_and_PPT.md) |
+| 2025.11.20 | 팀 프로젝트: 분석 결과 수정 및 최종 발표 자료 완성 | [`20251120_Project_Final_Review_Completion.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week4/20251120_Project_Final_Review_Completion.md) |
+| 2025.11.21 | 팀 프로젝트: 최종 프레젠테이션 및 발표 | [`20251121_Project_Final_Presentation.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week4/20251121_Project_Final_Presentation.md) |
+
 
