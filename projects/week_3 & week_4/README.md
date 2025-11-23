@@ -109,7 +109,9 @@ pip install -r requirements.txt
 
 ### 2. Vector DB 구축
 
+```bash
 Movie_Vector_DB.ipynb 또는 별도 스크립트를 실행하여 vector_db/chroma_db 폴더에 DB를 생성해야 합니다.
+```
 
 ### 3. Streamlit 대시보드 실행
 
