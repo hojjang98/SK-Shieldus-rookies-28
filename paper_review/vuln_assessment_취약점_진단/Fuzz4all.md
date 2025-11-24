@@ -33,8 +33,8 @@
 
 ### 5. 분석가 인사이트 (Analyst Insight)
 * **Exploitation vs. Discovery:**
-    * 앞서 분석한 *LLM Agents Exploit...* 논문이 "알려진 취약점(1-day)을 이용해 공격하는 기술"이라면, Fuzz4All은 **"알려지지 않은 취약점(0-day)을 찾아내는 탐지 기술"**이다. 보안의 전체 주기에서 두 논문은 상호보완적이다.
+    * 앞서 분석한 *LLM Agents Exploit...* 논문이 "알려진 취약점(1-day)을 이용해 공격하는 기술"이라면, Fuzz4All은 알려지지 않은 취약점(0-day)을 찾아내는 탐지 기술"이다. 보안의 전체 주기에서 두 논문은 상호보완적이다.
 * **패러다임의 전환:**
-    * 기존의 Mutation-based Fuzzing(입력을 비트 단위로 변조)에서 **Generation-based Fuzzing(LLM이 코드를 생성)**으로의 전환을 가속화하는 연구이다.
+    * 기존의 Mutation-based Fuzzing(입력을 비트 단위로 변조)에서 Generation-based Fuzzing(LLM이 코드를 생성)으로의 전환을 가속화하는 연구이다.
 * **실무적 가치:**
     * 새로운 라이브러리나 API를 진단해야 할 때, 퍼징 환경 구축에 소요되는 시간을 획기적으로 단축할 수 있어 보안 컨설팅 및 QA 업무에 즉각적인 적용이 가능하다.
