@@ -84,4 +84,19 @@
 | 2025.11.20 | 팀 프로젝트: 분석 결과 수정 및 최종 발표 자료 완성 | [`20251120_Project_Final_Review_Completion.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week4/20251120_Project_Final_Review_Completion.md) |
 | 2025.11.21 | 팀 프로젝트: 최종 프레젠테이션 및 발표 | [`20251121_Project_Final_Presentation.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week4/20251121_Project_Final_Presentation.md) |
 
+---
+
+### 🗓️ **Week 5**
+
+| 날짜 | 주제 | 파일 경로 |
+| :--- | :--- | :--- |
+| 2025.11.24 | Linux 기초: 파일 시스템, 기본 명령어, 권한 관리 | [`20251124_Linux_Basic.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week5/20251124_Linux_Basic.md) |
+| 2025.11.25 | Linux 시스템 관리: Shell 기초, 환경 변수, 사용자 관리 | [`20251125_Linux_Admin_Shell_Basics.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week5/20251125_Linux_Admin_Shell_Basics.md) |
+| 2025.11.26 | Linux Shell 심화: I/O 제어, 정규식, 프로세스 관리 | [`20251126_Linux_Shell_Process.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week5/20251126_Linux_Shell_Process.md) |
+| 2025.11.27 | Linux 시스템 보안: 로그 관리, 무결성 검사, 패키지 관리 | [`20251127_Linux_Security.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week5/20251127_Linux_Security.md) |
+| 2025.11.28 | TCP/IP 네트워크: IPv4, Wireshark 패킷 분석 기초 | [`20251128_TCP_IP_IPv4_Wireshark.md`](https://github.com/hojjang98/SK-Shieldus-rookies-28/blob/main/daily_logs/week5/20251128_TCP_IP_IPv4_Wireshark.md) |
+
+
+
+
 
