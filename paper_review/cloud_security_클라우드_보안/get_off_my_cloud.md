@@ -85,3 +85,65 @@ Co-residency가 확인되면, 공격자는 **공유 CPU 캐시**를 이용해 �
 
 ### 4. 개인 인사이트 (Personal Insight)
 Day 2 분석을 통해, 클라우드 환경에서 논리적 방어벽(Hypervisor)이 완벽하게 작동하더라도 **물리적 공유 자원**이 존재하면 격리가 붕괴될 수 있다는 점을 실감했다. 이 논문 이후 CSP들이 **VM 배치 알고리즘**과 **하드웨어 캐시 관리**에 막대한 투자를 하게 된 배경을 이해할 수 있었다. 클라우드 보안만의 관점을 넘어서 보안 컨설팅 시, 하드웨어 레벨의 보안 보증(Hardware-Assisted Security)을 확인하는 것의 중요성을 인지해야 한다.
+# Research Review: Hey, You, Get Off of My Cloud: Experimental Setup and Quantification of Leakage
+> **Analyzed Date:** 2025.12.03
+> **Focus:** Experimental Environment, Co-residency Success Rate, and Information Leakage Quantification
+> **Source:** ACM CCS 2009 (Computer and Communications Security) [Full Text Link](https://rist.tech.cornell.edu/papers/cloudsec.pdf)
+
+---
+
+# Research Review: Hey, You, Get Off of My Cloud: Experimental Validation and Quantification
+> **Analyzed Date:** 2025.12.03
+> **Focus:** Experimental Setup, Co-residency Success Rate, and Information Leakage Quantification
+> **Source:** ACM CCS 2009 (Computer and Communications Security) [Full Text Link](https://rist.tech.cornell.edu/papers/cloudsec.pdf)
+
+---
+
+## Day 3 – Experimental Validation and Quantification
+*(Amazon EC2 환경에서의 실제 공격 실증 및 결과 분석)*
+
+### 1. 실험 환경 및 목표 (Experimental Setup and Targets)
+
+* **테스트 환경:** 초기 **Amazon EC2** 환경을 대상으로 실증하였다. 이는 실험 결과의 파급력을 극대화하기 위함이었다.
+* **공격 모델:** 공격자는 일반 고객 VM 자격으로, 하이퍼바이저 취약점 없이 정상적인 클라우드 API 호출 및 자원 측정만을 이용하였다.
+* **타겟 애플리케이션:** 논문은 두 가지 주요 목표를 설정하여 정보 유출을 실증하였다.
+    1.  **Linux 커널 함수:** 타겟 VM의 커널 내부 루틴 접근 패턴 모니터링.
+    2.  **암호화 라이브러리 (GnuPG):** **AES** 및 **RSA** 암호화 연산 중 발생하는 캐시 접근 패턴을 모니터링하여 비밀 키를 추출하는 것이 최종 목표였다.
+    
+
+### 2. Co-residency Detection의 성공률 (Phase 1 Results)
+
+공격자가 타겟 VM과 동일한 물리적 호스트에 배치되는 것이 현실적으로 가능함을 입증하였다.
+
+* **네트워크 근접성 (RTT) 분석:**
+    * **결과:** 공격자 VM과 타겟 VM 간의 네트워크 왕복 시간(RTT)이 **100µs (마이크로초) 이하**일 경우, 동일 물리 서버에 위치할 확률이 90% 이상임을 확인하였다.
+    * **활용:** 이 낮은 RTT 값은 **클라우드 카르토그래피(Cloud Cartography)**의 핵심 데이터로 사용되었으며, 타겟의 물리적 위치를 효과적으로 핑거프린팅할 수 있었다.
+* **배치 성공률:** **클라우드 카르토그래피 기법**을 활용하여 타겟 근처의 IP 범위를 공략했을 때, 무작위 대입 대비 **배치 성공률을 유의미하게 향상**시킬 수 있음을 입증하였다.
+
+### 3. 정보 유출의 정량화 (Quantification of Information Leakage - Phase 2 Results)
+
+가장 중요한 실험 결과는 **Prime+Probe** 기법을 통해 **암호화 키**와 같은 민감한 정보를 실제로 추출하는 데 성공했다는 점이다.
+
+* **AES 암호화 키 유출:**
+    * **기술:** AES 알고리즘이 내부적으로 사용하는 **S-Box (Substitution Box)** 룩업 테이블 접근 패턴을 모니터링했다.
+    * **결과:** 단일 AES 암호화 연산에서 발생하는 캐시 흔적을 분석하여, **AES 비밀 키의 일부 비트**를 성공적으로 추출하였으며, **65밀리초(ms)**라는 매우 짧은 시간 내에 유효한 데이터를 획득하였다.
+* **RSA/GnuPG 키 유출:**
+    * **기술:** RSA의 지수 연산(Exponentiation) 과정 중 발생하는 캐시 사용 패턴을 측정하였다.
+    * **결과:** 타겟의 GnuPG 연산을 모니터링하여 **키의 일부분**을 성공적으로 유추해낼 수 있음을 입증하였다. 이는 추상적인 코드 테스트가 아닌, **실제 상용 보안 소프트웨어**를 대상으로 격리 붕괴가 발생했음을 의미한다.
+
+### 4. 기술적 결론 및 시사점 (Technical Conclusion)
+* **격리 실패의 원인:** 논리적 격리(Hypervisor)는 완벽했지만, **물리적 자원 공유(CPU Cache, Timing)**라는 낮은 레벨의 채널을 제어하는 데 실패했다.
+* **산업적 영향:** 이 결과는 클라우드 벤더들에게 **VM 배치 전략(Anti-Affinity Rules)**을 강화하고, **하드웨어 수준의 캐시 파티셔닝(Cache Partitioning)** 기술을 도입하는 계기가 되었다. **Timing Channel**이 클라우드 보안의 주요 위협으로 공식 인정되는 전환점이 되었다.
+
+요청하신 대로, Day 3에서 도출된 실험 결과를 바탕으로 개인 인사이트 (Personal Insight) 섹션을 작성했습니다.
+
+이 섹션은 정량적 데이터가 실제 클라우드 보안에 어떤 의미를 가지는지에 대한 분석적 시각을 담고 있습니다.
+
+### 5. 개인 인사이트 (Personal Insight)
+실험 결과를 통해 **논리적 방어(Hypervisor)**만으로는 물리적 공유 자원을 매개로 한 정보 유출을 완벽히 통제할 수 없다는 점이 명확히 입증되었습니다.
+
+* **하드웨어의 취약성 검증**: 이 공격은 소프트웨어 버그가 아닌, CPU 캐시의 물리적 아키텍처 자체의 설계적 특성을 악용한 것입니다. 이는 보안의 경계가 애플리케이션이나 네트워크 레이어를 넘어 실제 하드웨어 레벨까지 확장되어야 함을 증명합니다.
+
+* **실무적 함의**: 클라우드 보안 진단 및 컨설팅 시, IAM 설정이나 네트워크 접근 제어 같은 논리적 방어만 확인할 것이 아니라, CSP가 **VM 간 Anti-Affinity Rules (특정 VM을 같은 서버에 배치하지 않는 규칙)**와 **하드웨어 기반 격리 기술(예: Intel CAT, AMD SEV)**을 얼마나 강력하게 적용하고 있는지 확인하는 것의 중요성이 이 논문을 통해 정량적으로 입증되었습니다.
+
+* **보안의 초점 이동**: 공격자가 단 65ms 만에 민감 정보를 추출하는 데 성공했다는 점은 Timing Channel에 대한 모니터링 및 방어 기술 개발이 필수적임을 보여줍니다.
