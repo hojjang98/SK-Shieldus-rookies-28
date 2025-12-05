@@ -186,3 +186,44 @@ Day 2 분석을 통해, 클라우드 환경에서 논리적 방어벽(Hypervisor
 
 * **실무적 함의:** 클라우드 보안 전문가로서 **IAM이나 방화벽** 같은 소프트웨어 통제는 물론, CSP가 **물리적 자원(캐시)**을 어떻게 관리하고 격리하는지에 대한 **보안 보증서(Security Assurance)**를 확인하는 것이 필수적인 지식이 되었음을 확인합니다.
 * **방어 전략의 변화:** 논리적 방어가 무력화될 수 있다는 교훈을 바탕으로, 방어의 기준점을 **"소프트웨어 오류 방지"**에서 **"물리적 자원 공유 통제"**로 상향시켜야 합니다. 이 연구는 **Anti-Affinity** 및 **하드웨어 기반 캐시 격리 기술**이 왜 현대 클라우드 보안 아키텍처에서 가장 중요한 요소 중 하나가 되었는지를 이해하는 근거가 됩니다.
+
+# Research Review: Hey, You, Get Off of My Cloud: Conclusion and Final Evaluation
+> **Analyzed Date:** 2025.12.05
+> **Focus:** Final Synthesis, Impact on Shared Responsibility Model, and Future Trajectory
+> **Source:** ACM CCS 2009 (Computer and Communications Security) [Full Text Link](https://rist.tech.cornell.edu/papers/cloudsec.pdf)
+
+---
+
+## Day 5 – Conclusion and Future Trajectory
+*(연구 최종 결론, 공유 책임 모델에 미친 영향 및 미래적 함의)*
+
+### 1. 연구 최종 요약 및 평가 (Final Synthesis and Evaluation)
+
+본 논문은 클라우드 컴퓨팅의 핵심 신뢰 요소인 **하이퍼바이저 기반의 논리적 격리 모델**이 **물리적 자원 공유**라는 근본적인 취약점에 의해 붕괴될 수 있음을 실증적으로 증명하였습니다.
+
+* **핵심 증명:** 악의적인 테넌트가 **Co-residency** 를 확보하고 **공유 CPU 캐시** 를 이용한 **Prime+Probe 측면 채널 공격** 을 통해 타겟 **VM** 의 암호화 키를 성공적으로 추출할 수 있음을 입증했습니다.
+* **연구 가치:** 이 연구는 **소프트웨어 버그** 가 아닌, **하드웨어 아키텍처** 자체의 설계적 특성이 보안 위협이 될 수 있음을 최초로 명확히 보여주면서 클라우드 보안 역사에서 **가장 중요한 전환점** 중 하나로 평가됩니다.
+
+### 2. 클라우드 공유 책임 모델의 재정의 (Redefining the Shared Responsibility Model)
+
+이 논문은 클라우드 서비스 제공자 (**CSP**) 와 고객 간의 보안 책임 경계인 **공유 책임 모델** 에 직접적인 영향을 미쳤습니다.
+
+* **이전의 가정:** **CSP** 는 **"클라우드의 보안 (Security of the Cloud)"** 을 책임지며, 이는 하이퍼바이저를 통한 **VM** 간의 완벽한 격리를 포함한다고 여겨졌습니다.
+* **논문 이후의 변화:** 이 공격은 **CSP** 의 책임 영역이었던 **'물리적 인프라'** 내의 **'공유 캐시 관리'** 가 미흡했음을 드러냈습니다. 즉, **CSP** 는 단순한 **VM** 격리 보장을 넘어, **타이밍 채널** 및 **하드웨어 자원의 간섭** 으로부터 고객을 보호해야 하는 책임이 추가되었습니다.
+* **결과:** **CSP** 들은 고객의 워크로드를 보호하기 위해 **Anti-Affinity Rules**, **캐시 파티셔닝 (Intel CAT)** 등 **"하드웨어 레벨의 보안 통제"** 기술을 강화하는 방향으로 책임 영역을 확장했습니다.
+
+### 3. 향후 연구 및 산업적 함의 (Future Trajectory and Industrial Implication)
+
+이 연구 이후, 보안 연구는 측면 채널 공격을 넘어선 새로운 격리 위협과 방어 기술에 집중하고 있습니다.
+
+* **잔여 문제 (Residual Issues):** 메모리 버스 (**Memory Bus**), **TLB (Translation Lookaside Buffer)**, **L1 캐시** 등 **CPU** 의 다른 공유 자원을 이용한 측면 채널 공격이 지속적으로 연구되었으며, 이는 **Spectre 및 Meltdown** 과 같은 제로데이 취약점 연구의 기반이 되었습니다.
+* **하드웨어 루트 오브 트러스트 (Hardware Root of Trust):** 향후 클라우드 보안은 **VM 격리** 뿐만 아니라, **기밀 컴퓨팅 (Confidential Computing)** 기술을 통해 데이터를 사용 중일 때조차 **암호화된 상태** 로 유지 (예: **TEE, Trusted Execution Environment**) 하여 측면 채널 공격으로부터의 유출 가능성을 근본적으로 차단하는 방향으로 나아가고 있습니다.
+
+---
+
+### 4. 개인 인사이트 (Personal Insight)
+
+**"Hey, You, Get Off of My Cloud"** 논문은 보안 아키텍트라면 반드시 이해해야 할 **클라우드 보안의 근본 원리** 를 담고 있습니다. 논문의 가장 큰 시사점은 다음과 같습니다.
+
+* **보안의 심층적 이해:** 이 논문 덕분에 클라우드 보안은 단순히 방화벽 설정이나 **IAM** 정책을 넘어, **CPU 마이크로아키텍처** 의 동작 방식까지 이해해야 하는 **심층 방어 (Defense in Depth)** 의 영역이 되었음을 깨닫습니다.
+* **실무적 판단 기준:** 현재 클라우드 인프라의 안정성을 평가할 때, **Anti-Affinity Rules** 의 적용 여부, **Intel CAT** 과 같은 캐시 격리 기술의 사용 유무는 더 이상 선택 사항이 아니라, **기본적인 보안 보증 (Security Assurance)** 을 판단하는 결정적인 기준이 되었습니다. 이 논문은 우리가 클라우드를 선택하고 설계할 때 어떤 질문을 던져야 하는지에 대한 명확한 기준을 제시해 주었습니다.
