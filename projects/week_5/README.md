@@ -59,10 +59,10 @@ Week 5 커리큘럼에서는 리눅스와 네트워크의 기초 개념을 중�
 
 ## 프로젝트 구조
 
-```
+``` bash
 .
-├── README.md                                        # 프로젝트 문서
-└── 리눅스_파일시스템과_권한관리_보고서.docx           # 기술 보고서 (메인 산출물)
+├── README.md                                        
+└── 리눅스_파일시스템과_권한관리_보고서.pdf            # 기술 보고서 (메인 산출물)
 ```
 
 ---
@@ -121,16 +121,6 @@ Week 5 커리큘럼에서는 리눅스와 네트워크의 기초 개념을 중�
 
 ---
 
-## 보고서 확인
-
-생성된 보고서는 DOCX 형식이며 다음 프로그램에서 열람 가능합니다:
-- Microsoft Word
-- LibreOffice Writer
-- Google Docs
-- 기타 DOCX 호환 뷰어
-
----
-
 ## 핵심 인사이트
 
 ### 왜 문서화 중심인가?
@@ -165,24 +155,12 @@ Week 5 커리큘럼에서는 리눅스와 네트워크의 기초 개념을 중�
 
 ---
 
+
 ## 참고문헌
 
-- Linux File System Hierarchy Standard (FHS)
-- UNIX and Linux System Administration Handbook
-- The Linux Command Line by William Shotts
-- Red Hat Enterprise Linux Documentation
-- Ubuntu Server Guide
+* Linux 시스템 보안 (교안)
+* Linux 실습 (교안)
 
----
 
-## 작성자 노트
 
-본 프로젝트는 폭보다 깊이를 우선시하는 의도적인 선택입니다. 실습 중심의 개발 프로젝트가 시각적으로 더 인상적일 수 있지만, 기초 개념의 체계적인 문서화는 개인 참고 자료와 전문성 개발 측면에서 지속적인 가치를 제공합니다.
 
-기술 문서 작성에 초점을 맞춘 것은 실무 엔지니어링 관행을 반영한 것이기도 합니다. 명확한 문서화는 코드 자체만큼이나 중요하기 때문입니다.
-
----
-
-## 라이선스
-
-본 프로젝트는 구조화된 학습 커리큘럼의 일환으로 교육 목적으로 작성되었습니다.
