@@ -20,16 +20,8 @@
 | **Week 1** | 🛡️ Mini Security Log Monitor | 로그 파일(`system.log`)의 오류 이벤트를 탐지하고, 접근 결과를 JSON(`access.log`) 형식으로 기록하는 보안 감사 시스템 |
 | **Week 2** | 📊 Streamlit Log Dashboard | Week1에서 생성된 로그 데이터를 시각화하여, 보안 이벤트의 발생 추이와 접근 현황을 대시보드 형태로 표현하는 프로젝트 |
 | **Week 3 & 4** | 🎬 LLM/RAG 기반 영화 흥행 분석 시스템 | **LangChain, ChromaDB, Streamlit**을 활용하여 RAG 기반 영화 추천/분석 기능 및 흥행 요인 시각화 대시보드를 구축하고 최종 발표. (Week 3의 LLM/RAG 실습 내용을 확장 적용) |
+| **Week 5** | 🐧 리눅스 파일 시스템 및 권한 관리 보고서 | 리눅스 파일 시스템의 계층적 디렉토리 구조 및 파일 타입 분석. 소유자/그룹/기타 사용자 기반의 권한 구조와 chmod를 이용한 심볼릭/숫자 모드 권한 변경 실습. 최소 권한 원칙 및 SetUID, Sticky Bit 등 특수 권한의 보안 관점에서의 중요성 분석 |
+| **Week 6** | 🌐 TCP/IP 네트워크 프로토콜 분석 보고서 | OSI/TCP-IP 계층 모델 이해 , ARP, ICMP, TCP 3-Way Handshake, HTTPS/TLS 동작 원리 분석 , 그리고 Wireshark를 활용한 패킷 분석 및 방화벽, IDS/IPS 기반 네트워크 보안 기초 학습 |
 
----
 
-## 📅 업데이트 로그
-
-| 날짜 | 내용 |
-|------|------|
-| 2025-11-01 | `projects` 폴더 초기화 및 README.md 작성 |
-| 2025-11-01 | **Week 1 – Mini Security Log Monitor** 프로젝트 추가 |
-| 2025-11-08 | **Week 2 – Streamlit Log Dashboard** 프로젝트 신규 등록<br>– `access.log` 데이터 기반 시각화 구조 설계<br>– Streamlit 대시보드 초기 버전 구현 및 필터 기능 추가 |
-| 2025-11-10 | **Week 3** - LLM/RAG 기초 학습 및 보안 로그 분석 대시보드 구축 시작 |
-| 2025-11-23 | **Week 3 & 4 – 영화 흥행 분석 시스템** 최종 프로젝트 완료 및 문서 업데이트 |
 
