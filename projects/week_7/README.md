@@ -122,15 +122,15 @@
 
 ```bash
 AWS_3Tier_Web_Infrastructure/
-├── README.md                                    # 프로젝트 개요 (본 문서)
+├── README.md                           # 프로젝트 개요
 ├── docs/
-│   └── AWS_3Tier_인프라_구축_가이드.pdf          # 상세 기술 문서
-├── diagrams/
-│   ├── architecture_overview.png               # 전체 아키텍처 다이어그램
-│   ├── network_design.png                      # VPC 네트워크 설계도
-│   └── security_flow.png                       # 보안 흐름도
-└── cost-estimate/
-    └── monthly_cost_breakdown.xlsx             # 월간 비용 추정서
+│   └── AWS_3Tier_인프라_구축_가이드.docx   # 상세 설계 문서
+├── terraform/                          # 인프라 코드 (추후 작성)
+│   └── .gitkeep
+├── scripts/                            # 설정 스크립트 (추후 작성)
+│   └── .gitkeep
+└── app/                                # 애플리케이션 코드 (추후 작성)
+    └── .gitkeep
 ```
 
 ---
