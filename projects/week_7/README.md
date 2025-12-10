@@ -1,8 +1,8 @@
-# AWS 3-Tier 웹 서비스 인프라 구축
+# Week 7: AWS 3-Tier 웹 서비스 인프라 설계 및 구축
 
 ## 프로젝트 개요
 
-본 프로젝트는 AWS 클라우드 교육을 통해 학습한 내용을 실무 시나리오에 적용하여, **안전하고 확장 가능한 3-Tier 웹 애플리케이션 인프라**를 설계하고 구축 방안을 문서화한 프로젝트입니다.
+본 프로젝트는 SK 쉴더스 루키즈 AWS 클라우드 교육 과정의 일환으로, 프로덕션 수준의 **3-Tier 웹 애플리케이션 인프라**를 설계하고 핵심 구성요소를 실제로 구축한 프로젝트입니다.
 
 ---
 
@@ -18,11 +18,11 @@
 
 본 프로젝트는 다음의 핵심 목표를 달성하기 위해 설계되었습니다:
 
-1. **가용성 (High Availability)**: 장애 발생 시에도 서비스가 중단되지 않도록 Multi-AZ 구성
-2. **확장성 (Scalability)**: 트래픽 변동에 자동으로 대응하는 Auto Scaling 적용
-3. **보안성 (Security)**: 계층별 격리 및 최소 권한 원칙 적용
+1. **가용성**: 장애 발생 시에도 서비스가 중단되지 않도록 Multi-AZ 구성
+2. **확장성**: 트래픽 변동에 자동으로 대응하는 Auto Scaling 적용
+3. **보안성**: 계층별 격리 및 최소 권한 원칙 적용
 4. **비용 최적화**: 필요한 리소스만 사용하고 모니터링을 통한 비용 관리
-5. **관리 용이성**: 중앙화된 로깅 및 모니터링 체계 구축
+5. **실무 역량**: AWS 아키텍처 설계 및 구축 경험
 
 ---
 
@@ -48,7 +48,7 @@
 
 ## 아키텍처 설계
 
-### 전체 구조
+### 전체 구조 (설계 범위)
 
 본 프로젝트는 **3-Tier 아키텍처**를 기반으로 설계되었습니다:
 
@@ -93,107 +93,111 @@
 │  - AWS IAM (권한 관리)                                       │
 │  - Amazon CloudWatch (모니터링)                             │
 │  - AWS CloudTrail (감사 로그)                                │
-│  - AWS Config (구성 관리)                                    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### 주요 AWS 서비스 구성
+### 실제 구현 범위
 
-| 계층 | AWS 서비스 | 역할 |
-|------|-----------|------|
-| **네트워크** | Amazon VPC | 격리된 가상 네트워크 환경 제공 |
-| | Route 53 | DNS 서비스 및 트래픽 라우팅 |
-| | CloudFront | 글로벌 CDN, 정적 콘텐츠 배포 |
-| **컴퓨팅** | EC2 Auto Scaling | 웹/앱 서버, 트래픽에 따른 자동 확장 |
-| | Elastic Load Balancer | 트래픽 분산 및 상태 확인 |
-| **스토리지** | Amazon S3 | 정적 파일 (이미지, CSS, JS) 저장 |
-| | Amazon EBS | EC2 인스턴스 볼륨 |
-| **데이터베이스** | Amazon RDS | 관계형 데이터베이스 (MySQL/PostgreSQL) |
-| | ElastiCache | 세션 캐싱 및 성능 향상 |
-| **보안** | AWS IAM | 사용자 및 권한 관리 |
-| | Security Groups | 네트워크 접근 제어 |
-| | AWS WAF | 웹 애플리케이션 방화벽 |
-| **모니터링** | CloudWatch | 리소스 모니터링 및 알람 |
-| | CloudTrail | API 호출 감사 로그 |
+교육 목적 및 비용 효율을 고려하여 핵심 구성요소만 실제로 구축했습니다:
+
+- **VPC 네트워크 구성** (Single-AZ, Public Subnet)
+- **EC2 인스턴스** (t2.micro, 단일 인스턴스)
+- **보안 그룹** (HTTP, SSH 규칙)
+- **Nginx 웹서버** 운영
+
+**구축 리전**: ap-northeast-3 (오사카)  
+**소요 시간**: 약 1시간  
+**실제 비용**: $0 (프리티어 활용 + 즉시 삭제)
 
 ---
 
 ## 프로젝트 구조
 
 ```bash
-AWS_3Tier_Web_Infrastructure/
-├── README.md                           # 프로젝트 개요
+week7_AWS_3Tier_Infrastructure/
+├── README.md                                    # 프로젝트 개요 (본 문서)
 ├── docs/
-│   └── AWS_3Tier_인프라_구축_가이드.docx   # 상세 설계 문서
-├── terraform/                          # 인프라 코드 (추후 작성)
-│   └── .gitkeep
-├── scripts/                            # 설정 스크립트 (추후 작성)
-│   └── .gitkeep
-└── app/                                # 애플리케이션 코드 (추후 작성)
-    └── .gitkeep
+│   └── AWS_3Tier_인프라_구축_가이드.docx         # 상세 설계 문서 (13페이지)
+├── implementation/
+│   ├── BUILD_RECORD.md                          # 구축 완료 기록
+│   └── screenshots/                             # 구축 과정 스크린샷
+│       ├── 01_vpc_created.png                   # VPC, Subnet, IGW 생성 확인
+│       ├── 02_ec2_running.png                   # EC2 인스턴스 실행 중
+│       ├── 03_website_live.png                  # 웹사이트 접속 화면
+│       └── 04_security_groups.png               # 보안 그룹 규칙
+└── scripts/
+    └── setup_webserver.sh                       # EC2 웹서버 설치 스크립트
 ```
 
 ---
 
 ## 핵심 설계 원칙
 
-### 1. 계층별 격리 (Network Segmentation)
+### 1. 계층별 격리
 
 - **Public Subnet**: 인터넷과 직접 통신이 필요한 리소스 (ALB, NAT Gateway)
 - **Private Subnet**: 외부 접근이 차단된 애플리케이션 서버
 - **Database Subnet**: 완전히 격리된 데이터베이스 계층
 
-### 2. 고가용성 (High Availability)
+### 2. 고가용성
 
 - **Multi-AZ 배포**: 최소 2개 이상의 가용 영역 사용
 - **Auto Scaling**: 자동 장애 복구 및 용량 조정
 - **Load Balancer**: 헬스 체크 및 트래픽 분산
 
-### 3. 보안 우선 (Security First)
+### 3. 보안 우선
 
 - **최소 권한 원칙**: IAM 정책을 통한 세밀한 권한 관리
-- **심층 방어**: 여러 계층의 보안 제어 (WAF, Security Groups, NACLs)
+- **심층 방어**: 여러 계층의 보안 제어 (WAF, Security Groups)
 - **암호화**: 전송 중(TLS) 및 저장 시(S3, EBS, RDS) 암호화
 
-### 4. 비용 효율성 (Cost Optimization)
+### 4. 비용 효율성
 
 - **적절한 인스턴스 타입 선택**: 워크로드에 맞는 EC2 타입
 - **Auto Scaling**: 필요한 만큼만 리소스 사용
-- **S3 Lifecycle 정책**: 오래된 데이터 자동 아카이빙
-
-### 5. 운영 우수성 (Operational Excellence)
-
-- **중앙화된 로깅**: CloudWatch Logs로 모든 로그 수집
-- **자동화된 모니터링**: CloudWatch Alarms로 이상 징후 감지
-- **백업 전략**: RDS 자동 백업 및 스냅샷
+- **프리티어 활용**: 학습 단계에서 비용 최소화
 
 ---
 
-## 상세 기술 문서
+## 주요 산출물
 
-본 프로젝트의 핵심 산출물인 **기술 보고서**는 다음 내용을 포함합니다:
+### 1. 설계 문서
+`docs/AWS_3Tier_인프라_구축_가이드.docx`
 
-### 목차
+**내용:**
+- 프로젝트 개요 및 시나리오
+- 완전한 3-Tier 아키텍처 설계
+- 네트워크 설계 (VPC, Subnet, Routing)
+- 컴퓨팅/데이터 계층 설계
+- 보안 구성
+- 비용 분석 (완전 구현 시 $318/월)
 
-1. **프로젝트 개요 및 목적**
-2. **시나리오 분석 및 요구사항 정의**
-3. **아키텍처 설계**
-   - 네트워크 설계 (VPC, Subnet, Routing)
-   - 컴퓨팅 계층 설계 (EC2, Auto Scaling, ELB)
-   - 데이터 계층 설계 (RDS, S3, ElastiCache)
-   - 보안 설계 (IAM, Security Groups, WAF)
-4. **각 서비스별 구성 상세**
-   - VPC 및 네트워크 구성
-   - EC2 인스턴스 및 Auto Scaling 설정
-   - RDS 데이터베이스 구성
-   - S3 및 CloudFront 설정
-   - 보안 및 모니터링 구성
-5. **구축 절차 및 단계별 가이드**
-6. **보안 고려사항 및 Best Practices**
-7. **비용 분석 및 최적화 방안**
-8. **트러블슈팅 및 운영 가이드**
-9. **결론 및 향후 개선 방향**
-10. **참고문헌**
+### 2. 구축 기록
+`implementation/BUILD_RECORD.md`
+
+**내용:**
+- 실제 구축 과정 상세 기록
+- Phase별 구축 단계
+- 트러블슈팅 기록 (User Data 문제 해결)
+- 학습 성과 및 인사이트
+- 구현 범위 및 제약사항 설명
+
+### 3. 증빙 자료
+`implementation/screenshots/`
+
+**4장의 스크린샷:**
+- VPC 대시보드 (VPC, Subnet, IGW, Route Table)
+- EC2 인스턴스 실행 중 (Public IP 표시)
+- 웹사이트 접속 화면 (실제 작동 확인)
+- 보안 그룹 규칙 (HTTP, SSH)
+
+### 4. 자동화 스크립트
+`scripts/setup_webserver.sh`
+
+**기능:**
+- Nginx 설치 및 시작
+- 웹 페이지 자동 배포
+- 깔끔한 코드 (불필요한 출력 제거)
 
 ---
 
@@ -205,11 +209,71 @@ AWS_3Tier_Web_Infrastructure/
 |------|----------|
 | **클라우드 아키텍처** | 3-Tier 아키텍처 설계 및 AWS 서비스 통합 |
 | **네트워크 설계** | VPC, Subnet, Routing, Security Groups 구성 |
-| **컴퓨팅 관리** | EC2, Auto Scaling, Load Balancing 이해 |
-| **데이터베이스** | RDS Multi-AZ, 백업 전략 수립 |
-| **보안** | IAM, 계층별 보안 제어, 암호화 적용 |
-| **비용 관리** | AWS 리소스 비용 추정 및 최적화 |
-| **모니터링** | CloudWatch, CloudTrail을 통한 운영 관리 |
+| **컴퓨팅 관리** | EC2 인스턴스 생성, SSH 접속, 웹서버 운영 |
+| **보안** | 보안 그룹을 통한 접근 제어, 키 페어 관리 |
+| **비용 관리** | 프리티어 활용 전략, 리소스 즉시 삭제 |
+| **문제 해결** | User Data 문제 진단 및 수동 설치로 해결 |
+| **문서화** | 기술 문서 작성, 구축 과정 기록 |
+
+---
+
+## 프로젝트 특징
+
+### 설계 중심 프로젝트
+
+본 프로젝트는 **완전한 설계 + 핵심 검증**의 접근 방식을 취했습니다:
+
+**설계 범위 (완전한 아키텍처):**
+- Multi-AZ VPC, ALB, Auto Scaling
+- RDS Multi-AZ, ElastiCache
+- S3, CloudFront, WAF
+- CloudWatch 모니터링
+- 예상 비용: $318/월
+
+**실제 구현 (핵심 검증):**
+- VPC + Subnet (Single-AZ)
+- EC2 단일 인스턴스
+- 기본 보안 그룹
+- Nginx 웹서버
+- 실제 비용: $0
+
+### 왜 이렇게 했는가?
+
+**교육 목적:**
+- 설계 역량 강화 (완전한 아키텍처 설계 능력)
+- 핵심 개념 검증 (AWS 서비스 실제 작동 방식 이해)
+- 비용 효율 (프리티어 범위 내 학습)
+
+**학습 효과:**
+완전한 구현(RDS, ALB 등)은 동일한 개념의 반복이며, 교육 목표인 "클라우드 인프라 설계 및 구축 이해"는 현재 범위로 충분히 달성했습니다.
+
+---
+
+## 빠른 시작
+
+### 1. 설계 문서 확인
+```bash
+docs/AWS_3Tier_인프라_구축_가이드.docx
+```
+전체 아키텍처 설계, 네트워크 구성, 보안 설계, 비용 분석
+
+### 2. 구축 과정 확인
+```bash
+implementation/BUILD_RECORD.md
+```
+실제 구축 절차, Phase별 단계, 트러블슈팅 기록
+
+### 3. 스크린샷 확인
+```bash
+implementation/screenshots/
+```
+VPC 생성, EC2 실행, 웹사이트 접속, 보안 그룹 규칙
+
+### 4. 스크립트 활용
+```bash
+scripts/setup_webserver.sh
+```
+EC2 인스턴스에서 실행하여 웹서버 자동 설치
 
 ---
 
@@ -229,7 +293,7 @@ AWS_3Tier_Web_Infrastructure/
 
 ### AWS와 시스템 관리의 결합
 
-이전 프로젝트에서 학습한 **Linux 시스템 관리** 지식과 **네트워크 프로토콜** 이해는 AWS 인프라 운영에 직접적으로 활용됩니다. 클라우드 환경에서도 결국 Linux 서버를 관리하고, TCP/IP 통신을 이해해야 효과적인 문제 해결이 가능합니다.
+이전 주차에 학습한 **Linux 시스템 관리** 지식과 **TCP/IP 네트워크** 이해는 AWS 인프라 운영에 직접적으로 활용됩니다. 클라우드 환경에서도 결국 Linux 서버를 관리하고, 네트워크 통신을 이해해야 효과적인 문제 해결이 가능합니다.
 
 ---
 
@@ -242,15 +306,35 @@ AWS_3Tier_Web_Infrastructure/
 
 ### 장기 개선 사항
 - **글로벌 확장**: 다중 리전 배포 및 Route53 지리적 라우팅
-- **AI/ML 통합**: SageMaker를 통한 추천 시스템 구축
-- **빅데이터 분석**: Redshift, Athena를 활용한 데이터 분석 파이프라인
+- **빅데이터 분석**: Redshift, Athena를 활용한 데이터 분석
 
 ---
 
-## 참고문헌
+## 비용 분석
+
+### 실제 구현 비용
+| 항목 | 비용 |
+|------|------|
+| EC2 t2.micro (프리티어) | $0 |
+| VPC | $0 |
+| 총계 | **$0** |
+
+### 완전 구현 시 예상 비용
+| 서비스 | 월간 비용 |
+|--------|----------|
+| EC2 (t3.medium × 2) | $60 |
+| ALB | $25 |
+| RDS Multi-AZ | $120 |
+| NAT Gateway | $45 |
+| ElastiCache | $25 |
+| S3 + CloudFront | $88 |
+| **총계** | **$318/월** |
+
+---
+
+## 참고 자료
 
 - AWS Well-Architected Framework (https://aws.amazon.com/architecture/well-architected/)
 - AWS Architecture Center (https://aws.amazon.com/architecture/)
 - AWS 공식 문서 (https://docs.aws.amazon.com/)
 - SK 쉴더스 루키즈 AWS 클라우드 교육 자료
-
