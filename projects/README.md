@@ -22,6 +22,6 @@
 | **Week 3 & 4** | 🎬 LLM/RAG 기반 영화 흥행 분석 시스템 | **LangChain, ChromaDB, Streamlit**을 활용하여 RAG 기반 영화 추천/분석 기능 및 흥행 요인 시각화 대시보드를 구축하고 최종 발표. (Week 3의 LLM/RAG 실습 내용을 확장 적용) |
 | **Week 5** | 🐧 리눅스 파일 시스템 및 권한 관리 보고서 | 리눅스 파일 시스템의 계층적 디렉토리 구조 및 파일 타입 분석. 소유자/그룹/기타 사용자 기반의 권한 구조와 chmod를 이용한 심볼릭/숫자 모드 권한 변경 실습. 최소 권한 원칙 및 SetUID, Sticky Bit 등 특수 권한의 보안 관점에서의 중요성 분석 |
 | **Week 6** | 🌐 TCP/IP 네트워크 프로토콜 분석 보고서 | OSI/TCP-IP 계층 모델 이해 , ARP, ICMP, TCP 3-Way Handshake, HTTPS/TLS 동작 원리 분석 , 그리고 Wireshark를 활용한 패킷 분석 및 방화벽, IDS/IPS 기반 네트워크 보안 기초 학습 |
-
+| **Week 7** | ☁️ AWS 3-Tier 웹 인프라 완전 구축 | 프로덕션 수준의 완전한 3-Tier 아키텍처 구축. Multi-AZ VPC 네트워크 설계 (6개 Subnets, NAT Gateway 2개), Application Load Balancer 및 Auto Scaling Group 구성, RDS MySQL 데이터베이스 구축, Security Groups 계층별 보안 설정. 실제 구축 시간 3시간, 비용 ~$0.5로 고가용성 웹 인프라 완성 |
 
 
