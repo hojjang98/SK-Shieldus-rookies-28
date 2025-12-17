@@ -11,7 +11,7 @@
 ### 1. Stuxnet의 역사적 의의
 
 #### A. 사이버 전쟁의 서막
-* **정의:** Stuxnet은 **역사상 최초의 사이버-물리 무기(Cyber-Physical Weapon)**로 기록됩니다. 2010년 발견 이전까지 사이버 공격은 주로 데이터 탈취, 서비스 거부, 금전적 손실에 초점을 맞췄습니다.
+* **정의:** Stuxnet은 역사상 최초의 사이버-물리 무기(Cyber-Physical Weapon)로 기록됩니다. 2010년 발견 이전까지 사이버 공격은 주로 데이터 탈취, 서비스 거부, 금전적 손실에 초점을 맞췄습니다.
 * **패러다임 전환:** Stuxnet은 **디지털 수단으로 물리적 파괴**를 달성한 최초의 사례입니다. 이는 사이버 보안의 범위가 정보 보호를 넘어 물리적 안전까지 확장되어야 함을 입증하였습니다.
 
 | 구분 | 기존 사이버 공격 | Stuxnet |
@@ -22,7 +22,7 @@
 | **복잡성** | 단일 레이어 | IT → ICS → 물리적 레이어 |
 
 #### B. 저자 Ralph Langner의 역할
-* **기여:** Ralph Langner는 독일의 ICS 보안 전문가로, Stuxnet의 **실제 공격 대상(이란 나탄즈 핵시설)**을 최초로 규명하였습니다.
+* **기여:** Ralph Langner는 독일의 ICS 보안 전문가로, Stuxnet의 실제 공격 대상(이란 나탄즈 핵시설)을 최초로 규명하였습니다.
 * **분석 범위:** 그의 분석은 단순 악성코드 역공학을 넘어 **공격 대상 플랜트의 물리적 설계, 계측 시스템, 제어 로직**까지 포괄합니다.
 
 ### 2. 공격 대상: 이란 나탄즈 핵시설
@@ -35,7 +35,7 @@
     * **보상 설계:** 신뢰성 문제를 극복하기 위한 과도한 계측/제어 시스템이 도입되었습니다.
 
 #### B. 캐스케이드 보호 시스템 (CPS)
-* **목적:** 이란은 원심분리기의 낮은 신뢰성을 보상하기 위해 **캐스케이드 보호 시스템(Cascade Protection System)**을 구축하였습니다.
+* **목적:** 이란은 원심분리기의 낮은 신뢰성을 보상하기 위해 캐스케이드 보호 시스템(Cascade Protection System)을 구축하였습니다.
 * **핵심 기능:**
 
 ```
@@ -85,8 +85,6 @@ Day 1 분석을 통해 Stuxnet이 단순한 악성코드가 아니라 **새로�
 
 ---
 
-*"Stuxnet marks a clear turning point in the history of cyber security and in military history as well."*
-— Ralph Langner (2013)
 
 # Research Review: To Kill a Centrifuge: A Technical Analysis of What Stuxnet's Creators Tried to Achieve
 > **Analyzed Date:** 2025.12.16
@@ -140,7 +138,7 @@ Stuxnet의 가장 정교한 부분은 **제어 시스템 레벨에서의 MITM �
 3. **Isolate (격리):** 정상 제어 로직을 실제 입출력과 분리하여 가짜 데이터만 전달합니다.
 4. **Manipulate (조작):** 압력 컨트롤러의 센서 캘리브레이션을 조작하여 배기 밸브를 비활성화합니다.
 
-* **핵심 통찰:** 운영자는 화면에서 **완전히 정상적인 값**을 보지만, 실제로는 공격이 진행 중입니다. 이것이 **무결성 공격(Integrity Attack)**의 본질입니다.
+* **핵심 통찰:** 운영자는 화면에서 **완전히 정상적인 값**을 보지만, 실제로는 공격이 진행 중입니다. 이것이 무결성 공격(Integrity Attack)의 본질입니다.
 
 #### C. 저수율(Low-Yield) 무기 설계
 * **설계 의도:** Stuxnet은 **파국적 파괴를 의도적으로 회피**하였습니다.
@@ -188,9 +186,6 @@ Stuxnet의 가장 정교한 부분은 **제어 시스템 레벨에서의 MITM �
 #### B. 전략적 함의
 * **핵심 분석:** Stuxnet은 **이란 핵 프로그램 지연**이라는 원래 목표를 넘어서, **사이버 무기의 실효성을 입증**하는 역사적 실험이 되었습니다.
 
-> *"Operation Olympic Games started as an experiment with unpredictable outcome. Along the road, one result became clear: Digital weapons work."*
-> — Ralph Langner (2013)
-
 ### 5. 개인 인사이트 (Personal Insight)
 
 Day 2 분석을 통해 Stuxnet의 **기술적 정교함**을 파악하였습니다. 주요 통찰은 다음과 같습니다:
@@ -219,7 +214,7 @@ Langner는 Stuxnet에 대한 여러 **오해**를 지적합니다:
 |------|------|
 | "Air Gap이면 안전" | Stuxnet은 **USB와 계약업체**를 통해 Air Gap 우회 |
 | "안티바이러스로 방어 가능" | 2007년 버전은 **6년간 미탐지**, 맞춤형 악성코드는 시그니처 없음 |
-| "보안 패치 적용이 해결책" | ICS 레벨 취약점은 **기능(Feature)**이지 버그가 아님 |
+| "보안 패치 적용이 해결책" | ICS 레벨 취약점은 기능(Feature)이지 버그가 아님 |
 | "국가 수준 자원만 가능" | 공격 **전술과 기법**은 복제 가능, 규모 확장으로 정교함 대체 가능 |
 | "단일 목표 특화라 재사용 불가" | 공격 방법론은 **범용적**, 다른 목표에 적용 가능 |
 
@@ -248,9 +243,6 @@ Stuxnet이 악용한 ICS 레벨 취약점들은 버그가 아닌 **정상 기능
 | 드라이버 DLL 하이재킹 | Step7 소프트웨어의 정상 로딩 메커니즘 | 패치 대상 아님 |
 | 입력 프로세스 이미지 조작 | PLC 메모리 쓰기 기능 | 패치 불가 |
 | PROFIBUS 직접 통신 | 정상 산업 프로토콜 기능 | 패치 불가 |
-
-> *"In the industrial control system space, the worst vulnerabilities are not bugs, they are features."*
-> — Ralph Langner (2013)
 
 ### 3. 효과적인 방어 전략
 
