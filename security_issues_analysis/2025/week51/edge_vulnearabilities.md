@@ -129,16 +129,6 @@ Blink 렌더링 엔진의 Toolbar 구현에서 사용자 입력을 적절히 검
 
 또한 일반 사용자는 이러한 취약점의 존재조차 모른 채 브라우저를 사용하고 있으며, 자동 업데이트가 활성화되지 않은 경우 장기간 위험에 노출될 수 있다는 점이 우려스럽다.
 
-### 관련하여 더 공부해야 할 내용
-- [ ] Use-After-Free 취약점의 발생 원리 및 exploit 기법
-- [ ] 브라우저 샌드박싱(Sandboxing) 메커니즘
-- [ ] V8 JavaScript 엔진과 Blink 렌더링 엔진의 아키텍처
-- [ ] Chromium 보안 패치 프로세스 및 다운스트림 벤더의 통합 절차
-- [ ] 메모리 안전 언어(Rust, Go 등)와 C/C++의 차이
-- [ ] XSS 공격의 유형(Reflected, Stored, DOM-based)과 방어 기법
-- [ ] Content Security Policy(CSP) 구현 방법
-- [ ] CVSS 점수 산정 방법 및 위험도 평가 기준
-
 ---
 
 ## 관련 자료
