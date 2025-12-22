@@ -14,6 +14,7 @@
 
 **Week 9 이후:**  
 SOC 관련 논문을 집중적으로 읽으며 **SOC가 무엇인지, 어떻게 운영되는지** 근본부터 이해한다.
+
 ---
 
 ## 목적
@@ -28,6 +29,9 @@ SOC 관련 논문을 집중적으로 읽으며 **SOC가 무엇인지, 어떻게 
 
 - **DeepLog: Anomaly Detection and Diagnosis from System Logs** (CCS 2017)  
   [Paper Link](https://users.cs.utah.edu/~lifeifei/papers/deeplog.pdf)
+
+- **Mining Invariants from Console Logs for System Problem Detection** (USENIX ATC 2010)  
+  [Paper Link](https://www.usenix.org/legacy/events/atc10/tech/full_papers/Lou.pdf)
 
 ---
 
