@@ -136,9 +136,9 @@ SELECT * FROM users WHERE username='admin' --' AND password='아무거나'
 
 **공격 결과**
 
-![XSS 공격](../screenshots/03_xss_공격.png)
+![XSS 공격](../screenshots/03_xss.png)
 
-![XSS 공격 성공](../screenshots/04_xss_공격성공.png)
+![XSS 공격 성공](../screenshots/04_xss_success.png)
 
 **결과**: 페이지 로드 시 알림창 실행
 
