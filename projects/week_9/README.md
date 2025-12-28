@@ -21,7 +21,7 @@
 
 ## 디렉토리 구조
 ```
-web_security_project/
+week_9/
 ├── vulnerable_app/          # 취약한 웹 애플리케이션
 │   ├── app.py              # Flask 메인 애플리케이션
 │   ├── init_db.py          # 데이터베이스 초기화 스크립트
