@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Board{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>📝 게시판</h2>
+    {% if session.username %}
+        <a href="/board/write" class="btn btn-primary">글쓰기</a>
+    {% endif %}
+</div>
+
+<div class="alert alert-warning">
+    <strong>⚠️ XSS 취약점:</strong> 이 게시판은 XSS 공격에 취약합니다. 게시글에 스크립트가 실행될 수 있습니다.
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th width="10%">번호</th>
+                <th width="50%">제목</th>
+                <th width="20%">작성자</th>
+                <th width="20%">작성일</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td>
+                    <!-- 취약: XSS 방어 없음 (|safe 사용) -->
+                    {{ post.title|safe }}
+                </td>
+                <td>{{ post.author }}</td>
+                <td>{{ post.created_at }}</td>
+            </tr>
+            <tr>
+                <td colspan="4" class="bg-light">
+                    <!-- 취약: XSS 방어 없음 -->
+                    <div class="p-2">{{ post.content|safe }}</div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

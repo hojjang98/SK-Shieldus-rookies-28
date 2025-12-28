@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0">👤 프로필</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-danger">
+                    <strong>⚠️ CSRF 취약점:</strong> 이 폼은 CSRF 토큰이 없습니다. 
+                    외부 사이트에서 이 폼을 제출할 수 있습니다.
+                </div>
+                
+                <form method="POST" action="/profile">
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" value="{{ user.username }}" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Role</label>
+                        <input type="text" class="form-control" value="{{ user.role }}" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">프로필 업데이트</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

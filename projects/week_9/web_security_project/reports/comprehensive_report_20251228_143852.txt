@@ -1,0 +1,220 @@
+
+======================================================================
+COMPREHENSIVE SECURITY SCAN REPORT
+======================================================================
+Scan Date: 2025-12-28 14:38:52
+Target URL: http://localhost:5000
+======================================================================
+
+VULNERABILITY SUMMARY
+----------------------------------------------------------------------
+Total Vulnerabilities Found: 33
+
+  - SQL Injection: 11 vulnerabilities
+  - XSS: 6 vulnerabilities
+  - CSRF: 2 vulnerabilities
+  - File Upload: 14 vulnerabilities
+
+======================================================================
+
+SEVERITY BREAKDOWN
+----------------------------------------------------------------------
+  CRITICAL: 13
+  HIGH: 19
+  MEDIUM: 1
+
+======================================================================
+
+DETAILED VULNERABILITY LIST
+======================================================================
+
+1. [HIGH] SQL Injection
+   Location: /login
+   Payload: ' OR '1'='1' --
+   Description: SQL Injection in login form with payload: ' OR '1'='1' --
+
+2. [HIGH] SQL Injection
+   Location: /login
+   Payload: ' OR '1'='1' /*
+   Description: SQL Injection in login form with payload: ' OR '1'='1' /*
+
+3. [HIGH] SQL Injection
+   Location: /login
+   Payload: admin' --
+   Description: SQL Injection in login form with payload: admin' --
+
+4. [HIGH] SQL Injection (Error-based)
+   Location: /login
+   Payload: admin' #
+   Description: SQL error message detected: SQLite
+
+5. [HIGH] SQL Injection (Error-based)
+   Location: /login
+   Payload: ' UNION SELECT NULL--
+   Description: SQL error message detected: SQLite
+
+6. [HIGH] SQL Injection (Error-based)
+   Location: /login
+   Payload: ' UNION SELECT username, password FROM users--
+   Description: SQL error message detected: SQLite
+
+7. [HIGH] SQL Injection (Error-based)
+   Location: /search
+   Payload: admin' #
+   Description: SQL error in search with payload: admin' #
+
+8. [HIGH] SQL Injection (Error-based)
+   Location: /search
+   Payload: ' UNION SELECT NULL--
+   Description: SQL error in search with payload: ' UNION SELECT NULL--
+
+9. [CRITICAL] SQL Injection (UNION-based)
+   Location: /search
+   Payload: ' UNION SELECT NULL--
+   Description: UNION-based SQL Injection possible
+
+10. [HIGH] SQL Injection (Error-based)
+   Location: /search
+   Payload: ' UNION SELECT username, password FROM users--
+   Description: SQL error in search with payload: ' UNION SELECT username, password FROM users--
+
+11. [CRITICAL] SQL Injection (UNION-based)
+   Location: /search
+   Payload: ' UNION SELECT username, password FROM users--
+   Description: UNION-based SQL Injection possible
+
+12. [HIGH] Reflected XSS
+   Location: /board
+   Payload: <script>alert('XSS')</script>
+   Description: XSS payload reflected in board: <script>alert('XSS')</script>
+
+13. [HIGH] Reflected XSS
+   Location: /board
+   Payload: <img src=x onerror=alert('XSS')>
+   Description: XSS payload reflected in board: <img src=x onerror=alert('XSS')>
+
+14. [HIGH] Reflected XSS
+   Location: /board
+   Payload: <svg/onload=alert('XSS')>
+   Description: XSS payload reflected in board: <svg/onload=alert('XSS')>
+
+15. [HIGH] Reflected XSS
+   Location: /board
+   Payload: javascript:alert('XSS')
+   Description: XSS payload reflected in board: javascript:alert('XSS')
+
+16. [HIGH] Reflected XSS
+   Location: /board
+   Payload: <iframe src='javascript:alert("XSS")'></iframe>
+   Description: XSS payload reflected in board: <iframe src='javascript:alert("XSS")'></iframe>
+
+17. [HIGH] Reflected XSS
+   Location: /board
+   Payload: <body onload=alert('XSS')>
+   Description: XSS payload reflected in board: <body onload=alert('XSS')>
+
+18. [HIGH] CSRF (Cross-Site Request Forgery)
+   Location: /profile
+   Description: No CSRF token found in profile update form. Vulnerable to CSRF attacks.
+
+19. [MEDIUM] CSRF (Cross-Site Request Forgery)
+   Location: /board/write
+   Description: No CSRF token found in post creation form.
+
+20. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .php
+   Description: Dangerous file extension allowed: .php
+
+21. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .jsp
+   Description: Dangerous file extension allowed: .jsp
+
+22. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .asp
+   Description: Dangerous file extension allowed: .asp
+
+23. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .aspx
+   Description: Dangerous file extension allowed: .aspx
+
+24. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .exe
+   Description: Dangerous file extension allowed: .exe
+
+25. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .bat
+   Description: Dangerous file extension allowed: .bat
+
+26. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .sh
+   Description: Dangerous file extension allowed: .sh
+
+27. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .py
+   Description: Dangerous file extension allowed: .py
+
+28. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .rb
+   Description: Dangerous file extension allowed: .rb
+
+29. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .pl
+   Description: Dangerous file extension allowed: .pl
+
+30. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .cgi
+   Description: Dangerous file extension allowed: .cgi
+
+31. [HIGH] File Upload Vulnerability (Double Extension)
+   Location: /upload
+   Description: Double extension bypass possible: malicious.php.jpg
+
+32. [HIGH] File Upload Vulnerability (Double Extension)
+   Location: /upload
+   Description: Double extension bypass possible: malicious.asp.png
+
+33. [HIGH] File Upload Vulnerability (Double Extension)
+   Location: /upload
+   Description: Double extension bypass possible: shell.php.txt
+
+======================================================================
+SECURITY RECOMMENDATIONS
+======================================================================
+
+1. SQL Injection Prevention:
+   - Use parameterized queries (prepared statements)
+   - Implement input validation and sanitization
+   - Use ORM frameworks with built-in protections
+
+2. XSS Prevention:
+   - Implement output encoding/escaping
+   - Use Content Security Policy (CSP)
+   - Validate and sanitize user inputs
+
+3. CSRF Prevention:
+   - Implement CSRF tokens for all state-changing operations
+   - Use SameSite cookie attribute
+   - Verify Origin and Referer headers
+
+4. File Upload Security:
+   - Validate file extensions (whitelist approach)
+   - Verify file content (magic bytes)
+   - Store uploaded files outside web root
+   - Implement file size limits
+   - Rename uploaded files
+
+
+======================================================================
+End of Report
+======================================================================

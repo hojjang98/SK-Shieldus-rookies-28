@@ -1,0 +1,79 @@
+
+============================================================
+FILE UPLOAD VULNERABILITY SCAN REPORT
+============================================================
+Scan Date: 2025-12-28 14:42:09
+Target: http://localhost:5000
+Total Vulnerabilities Found: 14
+============================================================
+
+1. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .php
+   Description: Dangerous file extension allowed: .php
+
+2. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .jsp
+   Description: Dangerous file extension allowed: .jsp
+
+3. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .asp
+   Description: Dangerous file extension allowed: .asp
+
+4. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .aspx
+   Description: Dangerous file extension allowed: .aspx
+
+5. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .exe
+   Description: Dangerous file extension allowed: .exe
+
+6. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .bat
+   Description: Dangerous file extension allowed: .bat
+
+7. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .sh
+   Description: Dangerous file extension allowed: .sh
+
+8. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .py
+   Description: Dangerous file extension allowed: .py
+
+9. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .rb
+   Description: Dangerous file extension allowed: .rb
+
+10. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .pl
+   Description: Dangerous file extension allowed: .pl
+
+11. [CRITICAL] File Upload Vulnerability
+   Location: /upload
+   Extension: .cgi
+   Description: Dangerous file extension allowed: .cgi
+
+12. [HIGH] File Upload Vulnerability (Double Extension)
+   Location: /upload
+   Filename: malicious.php.jpg
+   Description: Double extension bypass possible: malicious.php.jpg
+
+13. [HIGH] File Upload Vulnerability (Double Extension)
+   Location: /upload
+   Filename: malicious.asp.png
+   Description: Double extension bypass possible: malicious.asp.png
+
+14. [HIGH] File Upload Vulnerability (Double Extension)
+   Location: /upload
+   Filename: shell.php.txt
+   Description: Double extension bypass possible: shell.php.txt
+

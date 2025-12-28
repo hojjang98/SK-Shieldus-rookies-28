@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">🔐 로그인</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning">
+                    <strong>⚠️ SQL Injection 취약점:</strong> 이 로그인 폼은 SQL Injection에 취약합니다.
+                </div>
+                
+                <form method="POST" action="/login">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </form>
+                
+                <hr>
+                <p class="text-center mb-0">
+                    계정이 없으신가요? <a href="/register">회원가입</a>
+                </p>
+                
+                <div class="mt-3">
+                    <small class="text-muted">
+                        <strong>테스트 계정:</strong><br>
+                        - admin / admin123<br>
+                        - user1 / password1
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

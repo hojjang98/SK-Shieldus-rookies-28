@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Upload File{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">📤 파일 업로드</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-danger">
+                    <strong>⚠️ File Upload 취약점:</strong> 이 파일 업로드는 확장자 검증이 없습니다. 
+                    악성 파일(.php, .jsp, .asp 등)을 업로드할 수 있습니다.
+                </div>
+                
+                <form method="POST" action="/upload" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="file" class="form-label">파일 선택</label>
+                        <input type="file" class="form-control" id="file" name="file" required>
+                        <small class="text-muted">모든 파일 형식이 허용됩니다.</small>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="/files" class="btn btn-secondary">파일 목록</a>
+                        <button type="submit" class="btn btn-primary">업로드</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

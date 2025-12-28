@@ -1,0 +1,17 @@
+
+============================================================
+CSRF SCAN REPORT
+============================================================
+Scan Date: 2025-12-28 14:41:05
+Target: http://localhost:5000
+Total Vulnerabilities Found: 2
+============================================================
+
+1. [HIGH] CSRF (Cross-Site Request Forgery)
+   Location: /profile
+   Description: No CSRF token found in profile update form. Vulnerable to CSRF attacks.
+
+2. [MEDIUM] CSRF (Cross-Site Request Forgery)
+   Location: /board/write
+   Description: No CSRF token found in post creation form.
+

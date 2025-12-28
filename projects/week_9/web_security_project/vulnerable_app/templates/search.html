@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+<h2>🔍 검색</h2>
+
+<div class="alert alert-warning mb-4">
+    <strong>⚠️ SQL Injection 취약점:</strong> 이 검색 기능은 SQL Injection에 취약합니다.
+</div>
+
+<form method="GET" action="/search" class="mb-4">
+    <div class="input-group input-group-lg">
+        <input type="text" class="form-control" name="q" placeholder="검색어를 입력하세요..." value="{{ query }}">
+        <button class="btn btn-primary" type="submit">검색</button>
+    </div>
+    <small class="text-muted">
+        <strong>SQL Injection 테스트:</strong> 
+        <code>' OR '1'='1</code> 또는 
+        <code>' UNION SELECT username, password, email, role FROM users--</code>
+    </small>
+</form>
+
+{% if query %}
+<h4>검색 결과: "{{ query }}"</h4>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>작성자</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td>{{ result.id }}</td>
+                <td>{{ result.title }}</td>
+                <td>{{ result.content }}</td>
+                <td>{{ result.author }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" class="text-center">검색 결과가 없습니다.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+{% endblock %}
