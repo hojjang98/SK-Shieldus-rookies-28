@@ -33,6 +33,9 @@ SOC 관련 논문을 집중적으로 읽으며 **SOC가 무엇인지, 어떻게 
 - **Mining Invariants from Console Logs for System Problem Detection** (USENIX ATC 2010)  
   [Paper Link](https://www.usenix.org/legacy/events/atc10/tech/full_papers/Lou.pdf)
 
+- **Beehive: Large-Scale Log Analysis for Detecting Suspicious Activity in Enterprise Networks** (ACSAC 2013)  
+  [Paper Link](https://doi.org/10.1145/2523649.2523670)
+
 ---
 
 ## 학습 원칙
