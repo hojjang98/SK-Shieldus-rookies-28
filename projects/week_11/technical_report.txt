@@ -1,0 +1,269 @@
+
+==============================================
+기술 상세 보고서
+Critical 취약점 분석
+==============================================
+
+이 보고서는 발견된 Critical 심각도 취약점에 대한
+상세한 기술적 분석과 개선 방안을 제시합니다.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WEB-002: SQL Injection
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+심각도: Critical
+CVSS 스코어: 9.8
+CWE: CWE-89
+발견 건수: 28개
+
+취약점 설명:
+MyBatis에서 ${} 파라미터 바인딩 사용으로 인한 SQL Injection
+
+영향받는 컴포넌트:
+UserMapper.xml, BoardMapper.xml, /user/profile, login
+
+비즈니스 영향:
+전체 데이터베이스 유출, 인증 우회, 데이터 변조 가능
+
+ISO 27001 관련 통제항목:
+A.8.16, A.8.3
+
+개선 방안:
+PreparedStatement 사용, MyBatis #{} 파라미터 바인딩 적용
+
+구현 예시:
+
+Before (취약한 코드):
+
+// MyBatis Mapper - 취약한 코드
+<select id="login" resultType="User">
+    SELECT * FROM users 
+    WHERE username = '${username}' 
+    AND password = '${password}'
+</select>
+
+After (개선된 코드):
+// MyBatis Mapper - 안전한 코드
+<select id="login" resultType="User">
+    SELECT * FROM users 
+    WHERE username = #{username} 
+    AND password = #{password}
+</select>
+
+주요 변경사항:
+- ${} (문자열 대체) → #{} (PreparedStatement) 변경
+- SQL Injection 완전 차단
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WEB-003: OS Command Injection
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+심각도: Critical
+CVSS 스코어: 9.8
+CWE: CWE-78
+발견 건수: 4개
+
+취약점 설명:
+Runtime.exec()에 사용자 입력이 직접 전달되어 임의 OS 명령어 실행 가능
+
+영향받는 컴포넌트:
+AdminController.java:86, /admin/system/ping
+
+비즈니스 영향:
+서버 전체 제어권 탈취, 시스템 파괴, 내부망 침투
+
+ISO 27001 관련 통제항목:
+A.8.8, A.8.16
+
+개선 방안:
+Runtime.exec() 사용 금지, 화이트리스트 기반 입력 검증
+
+구현 예시:
+
+Before (취약한 코드):
+
+// Java Controller - 취약한 코드
+@PostMapping("/ping")
+public String ping(@RequestParam String host) {
+    String command = "ping " + host;
+    Runtime.getRuntime().exec(command);
+    return "success";
+}
+
+After (개선된 코드):
+// Java Controller - 안전한 코드
+@PostMapping("/ping")
+public String ping(@RequestParam String host) {
+    // 화이트리스트 검증
+    if (!host.matches("^[0-9.]+$")) {
+        throw new IllegalArgumentException("Invalid host");
+    }
+    
+    // ProcessBuilder 사용 (인수 분리)
+    ProcessBuilder pb = new ProcessBuilder("ping", "-c", "4", host);
+    pb.start();
+    return "success";
+}
+
+주요 변경사항:
+- Runtime.exec() 제거
+- ProcessBuilder로 명령어와 인수 분리
+- 입력값 화이트리스트 검증
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WEB-010: 파일 전송 취약점
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+심각도: Critical
+CVSS 스코어: 9.8
+CWE: CWE-434
+발견 건수: 2개
+
+취약점 설명:
+실행 파일 업로드 가능, 경로 조작으로 설정 파일 접근
+
+영향받는 컴포넌트:
+/libs/upload, /download
+
+비즈니스 영향:
+웹쉘 업로드를 통한 서버 장악, 민감 파일 유출
+
+ISO 27001 관련 통제항목:
+A.8.8, A.8.16
+
+개선 방안:
+확장자 화이트리스트, 파일명 난수화, 경로 정규화
+
+구현 예시:
+
+Before (취약한 코드):
+
+// 취약한 코드 - 파일 업로드
+@PostMapping("/upload")
+public String upload(@RequestParam MultipartFile file) {
+    String filename = file.getOriginalFilename();
+    file.transferTo(new File("/uploads/" + filename));
+    return "success";
+}
+
+After (개선된 코드):
+// 안전한 코드 - 파일 업로드
+@PostMapping("/upload")
+public String upload(@RequestParam MultipartFile file) {
+    String originalName = file.getOriginalFilename();
+    String extension = originalName.substring(originalName.lastIndexOf("."));
+    
+    // 확장자 화이트리스트
+    List<String> allowed = Arrays.asList(".jpg", ".png", ".pdf");
+    if (!allowed.contains(extension.toLowerCase())) {
+        throw new IllegalArgumentException("Not allowed");
+    }
+    
+    // 파일명 난수화
+    String safeFilename = UUID.randomUUID().toString() + extension;
+    file.transferTo(new File("/uploads/" + safeFilename));
+    return safeFilename;
+}
+
+주요 변경사항:
+- 확장자 화이트리스트 검증
+- 파일명 UUID로 난수화
+- .exe, .sh 등 실행 파일 차단
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WEB-009: 쿠키 변조
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+심각도: Critical
+CVSS 스코어: 9.1
+CWE: CWE-565
+발견 건수: 3개
+
+취약점 설명:
+쿠키 값 변조로 관리자 권한 획득
+
+영향받는 컴포넌트:
+/admin/system, AdminController.java
+
+비즈니스 영향:
+관리자 권한 탈취, 시스템 전체 제어
+
+ISO 27001 관련 통제항목:
+A.5.15, A.8.3
+
+개선 방안:
+JWT 또는 서버 세션 기반 권한 관리, HMAC 서명
+
+구현 예시:
+
+Before (취약한 코드):
+
+// 취약한 코드 - 쿠키 기반 권한 관리
+if ("admin".equals(request.getCookie("role").getValue())) {
+    // 관리자 기능
+}
+
+After (개선된 코드):
+// 안전한 코드 - JWT 기반 권한 관리
+String token = request.getHeader("Authorization");
+Claims claims = Jwts.parser()
+    .setSigningKey(SECRET_KEY)
+    .parseClaimsJws(token)
+    .getBody();
+
+if ("ROLE_ADMIN".equals(claims.get("role"))) {
+    // 관리자 기능
+}
+
+주요 변경사항:
+- 쿠키 기반 권한 관리 → JWT 토큰 기반으로 전환
+- HMAC 서명으로 변조 방지
+- 서버 측 검증 강화
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+High 심각도 취약점 요약 (12개)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- WEB-001: XSS (Cross-Site Scripting)
+  CVSS 7.3, 개선방안: HTML 이스케이프 처리, CSP 헤더 설정
+
+- WEB-004: CSRF (Cross-Site Request Forgery)
+  CVSS 7.1, 개선방안: Spring Security CSRF 보호 활성화, 모든 POST 요청에 토큰 추가
+
+- WEB-006: 불충분한 접근 제어
+  CVSS 8.1, 개선방안: 모든 리소스 접근 시 소유권 및 권한 검증
+
+- WEB-007: 취약한 비밀번호 복구
+  CVSS 7.5, 개선방안: UUID 기반 시간 제한 토큰, 이메일 인증 필수
+
+- WEB-011: Path Traversal
+  CVSS 7.5, 개선방안: 경로 화이트리스트, .. 제거, 절대 경로 변환
+
+- WEB-013: Format String 취약점
+  CVSS 7.5, 개선방안: 포맷 문자열 하드코딩, 민감정보 분리
+
+- WEB-014: SSRF
+  CVSS 8.6, 개선방안: 내부 IP 대역 차단, URL 화이트리스트
+
+- OS-001: 비밀번호 관리정책 미흡
+  CVSS 7.8, 개선방안: minlen=8, dcredit=-1, ucredit=-1, lcredit=-1, ocredit=-1 설정
+
+- OS-002: 계정 잠금 임계값 미설정
+  CVSS 7.5, 개선방안: pam_tally2.so deny=5 unlock_time=600 설정
+
+- OS-005: /etc/shadow 권한 취약
+  CVSS 7.1, 개선방안: chmod 400 /etc/shadow
+
+- OS-009: 불필요한 NFS 서비스 활성화
+  CVSS 7.5, 개선방안: systemctl disable nfs-server rpcbind
+
+- OS-010: FTP 서비스 활성화
+  CVSS 7.5, 개선방안: FTP 비활성화, SFTP/FTPS 사용
+
+
+==============================================
+보고서 끝
+==============================================

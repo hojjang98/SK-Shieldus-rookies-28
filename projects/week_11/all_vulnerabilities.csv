@@ -1,0 +1,28 @@
+﻿id,category,severity,cvss_score,findings_count,description,affected_components,cwe,iso27001_controls,business_impact,remediation,type
+WEB-001,XSS (Cross-Site Scripting),High,7.3,2,Reflected XSS 취약점 및 CSP 헤더 미설정,"['/board/list', '/join']",CWE-79,"['A.8.16', 'A.8.8']","사용자 세션 탈취, 악성 스크립트 실행을 통한 개인정보 유출","HTML 이스케이프 처리, CSP 헤더 설정",Web Application
+WEB-002,SQL Injection,Critical,9.8,28,MyBatis에서 ${} 파라미터 바인딩 사용으로 인한 SQL Injection,"['UserMapper.xml', 'BoardMapper.xml', '/user/profile', 'login']",CWE-89,"['A.8.16', 'A.8.3']","전체 데이터베이스 유출, 인증 우회, 데이터 변조 가능","PreparedStatement 사용, MyBatis #{} 파라미터 바인딩 적용",Web Application
+WEB-003,OS Command Injection,Critical,9.8,4,Runtime.exec()에 사용자 입력이 직접 전달되어 임의 OS 명령어 실행 가능,"['AdminController.java:86', '/admin/system/ping']",CWE-78,"['A.8.8', 'A.8.16']","서버 전체 제어권 탈취, 시스템 파괴, 내부망 침투","Runtime.exec() 사용 금지, 화이트리스트 기반 입력 검증",Web Application
+WEB-004,CSRF (Cross-Site Request Forgery),High,7.1,5,CSRF 토큰 미적용으로 사용자 의도하지 않은 요청 실행 가능,"['/board/write', '/user/profile', '/update', '/user/family/delete']",CWE-352,['A.8.16'],"사용자 계정으로 임의 작업 수행, 데이터 변조","Spring Security CSRF 보호 활성화, 모든 POST 요청에 토큰 추가",Web Application
+WEB-005,약한 비밀번호 정책,Medium,5.3,1,4자리 숫자 비밀번호(1234) 허용,['회원가입 프로세스'],CWE-521,"['A.5.17', 'A.5.18']","무차별 대입 공격에 취약, 계정 탈취 위험","최소 8자, 대소문자/숫자/특수문자 조합 강제",Web Application
+WEB-006,불충분한 접근 제어,High,8.1,3,게시글 조회 시 소유권 검증 부재 (IDOR),['BoardController.java'],CWE-639,"['A.8.3', 'A.5.15']",타인의 개인정보 및 민감 데이터 무단 접근,모든 리소스 접근 시 소유권 및 권한 검증,Web Application
+WEB-007,취약한 비밀번호 복구,High,7.5,9,"토큰 생성 로직 부재, 보안 질문 기반 비밀번호 재설정","['AuthController.java', '/password/reset']",CWE-640,['A.5.17'],계정 탈취 경로 제공,"UUID 기반 시간 제한 토큰, 이메일 인증 필수",Web Application
+WEB-008,불충분한 세션 관리,Medium,5.9,1,HttpOnly 플래그 미설정,['세션 쿠키'],CWE-1004,['A.8.16'],XSS를 통한 세션 탈취 가능,"HttpOnly, Secure, SameSite 플래그 설정",Web Application
+WEB-009,쿠키 변조,Critical,9.1,3,쿠키 값 변조로 관리자 권한 획득,"['/admin/system', 'AdminController.java']",CWE-565,"['A.5.15', 'A.8.3']","관리자 권한 탈취, 시스템 전체 제어","JWT 또는 서버 세션 기반 권한 관리, HMAC 서명",Web Application
+WEB-010,파일 전송 취약점,Critical,9.8,2,"실행 파일 업로드 가능, 경로 조작으로 설정 파일 접근","['/libs/upload', '/download']",CWE-434,"['A.8.8', 'A.8.16']","웹쉘 업로드를 통한 서버 장악, 민감 파일 유출","확장자 화이트리스트, 파일명 난수화, 경로 정규화",Web Application
+WEB-011,Path Traversal,High,7.5,2,상위 디렉토리 접근으로 시스템 파일 조회,"['/file/download', '/file/view']",CWE-22,['A.8.3'],"/etc/passwd, application.properties 등 민감 파일 노출","경로 화이트리스트, .. 제거, 절대 경로 변환",Web Application
+WEB-012,에러 페이지 미흡,Low,3.7,3,"Soft-404, 스택 트레이스 노출",['에러 핸들링'],CWE-209,['A.8.16'],시스템 구조 및 취약점 정보 노출,"Custom Error Page, 상세 에러 메시지 차단",Web Application
+WEB-013,Format String 취약점,High,7.5,2,"String.format()에 사용자 입력 연결, 민감정보 유출",['SupportController.java:37'],CWE-134,"['A.8.8', 'A.8.11']",API 키 유출 (SK-SHIELDUS-ADMINKEY-2025),"포맷 문자열 하드코딩, 민감정보 분리",Web Application
+WEB-014,SSRF,High,8.6,3,"내부망 접근 가능, Loopback 주소 필터링 부재",['/admin/system/ping'],CWE-918,"['A.8.20', 'A.8.21']","내부 서비스 스캔, AWS 메타데이터 접근","내부 IP 대역 차단, URL 화이트리스트",Web Application
+OS-001,비밀번호 관리정책 미흡,High,7.8,10,"pam_pwquality 설정 부재, 복잡도 요구사항 미적용","['/etc/pam.d/common-password', '/etc/security/pwquality.conf']",CWE-521,"['A.5.17', 'A.9.4.3']",약한 비밀번호 허용으로 무차별 대입 공격 취약,"minlen=8, dcredit=-1, ucredit=-1, lcredit=-1, ocredit=-1 설정",OS/Infrastructure
+OS-002,계정 잠금 임계값 미설정,High,7.5,2,pam_tally2 설정 부재,['/etc/pam.d/common-auth'],CWE-307,['A.5.17'],무제한 로그인 시도 허용,pam_tally2.so deny=5 unlock_time=600 설정,OS/Infrastructure
+OS-003,su 명령어 제한 미흡,Medium,6.5,1,pam_wheel.so 미설정,['/etc/pam.d/su'],CWE-250,['A.8.3'],모든 사용자가 su 명령어 사용 가능,auth required pam_wheel.so 추가,OS/Infrastructure
+OS-004,세션 타임아웃 미설정,Medium,5.3,1,TMOUT 환경변수 미설정,"['/etc/profile', '/etc/bash.bashrc']",CWE-613,['A.8.5'],방치된 세션 악용 가능,TMOUT=600 설정 (10분),OS/Infrastructure
+OS-005,/etc/shadow 권한 취약,High,7.1,1,640 권한 설정 (그룹 읽기 가능),['/etc/shadow'],CWE-732,['A.8.3'],그룹 멤버가 해시된 비밀번호 접근 가능,chmod 400 /etc/shadow,OS/Infrastructure
+OS-006,rsyslog 설정파일 권한 취약,Medium,5.5,2,644 권한으로 일반 사용자 읽기 가능,"['/etc/rsyslog.conf', '/etc/rsyslog.d/50-default.conf']",CWE-732,['A.8.15'],로깅 정책 노출,chmod 640 설정,OS/Infrastructure
+OS-007,UMASK 미설정,Medium,5.3,1,/etc/profile에 umask 설정 부재,['/etc/profile'],CWE-732,['A.8.3'],생성되는 파일의 기본 권한 취약,umask 022 설정,OS/Infrastructure
+OS-008,crontab 권한 취약,Medium,6.2,1,/etc/crontab 644 권한,['/etc/crontab'],CWE-732,['A.8.3'],예약 작업 정보 노출,chmod 600 /etc/crontab,OS/Infrastructure
+OS-009,불필요한 NFS 서비스 활성화,High,7.5,4,"nfs-server, rpcbind 등 활성화",['NFS 관련 서비스'],CWE-1188,['A.8.9'],"공격 표면 증가, 원격 파일 공유 악용",systemctl disable nfs-server rpcbind,OS/Infrastructure
+OS-010,FTP 서비스 활성화,High,7.5,4,"vsftpd, proftpd 등 암호화되지 않은 FTP 실행",['FTP 서비스'],CWE-319,['A.8.24'],평문 전송으로 인한 자격증명 유출,"FTP 비활성화, SFTP/FTPS 사용",OS/Infrastructure
+OS-011,FTP 접근 제어 미흡,Medium,6.5,2,ftpusers 파일 부재,['/etc/ftpusers'],CWE-284,['A.8.3'],root 계정 FTP 접속 가능,ftpusers에 root 추가,OS/Infrastructure
+OS-012,SNMP 서비스 활성화,Medium,6.5,1,snmpd 실행 중,['snmpd'],CWE-1188,['A.8.9'],SNMP를 통한 시스템 정보 수집 가능,systemctl disable snmpd,OS/Infrastructure
+OS-013,로그 파일 권한 취약,Medium,5.5,4,"syslog 소유자, 640 권한","['/var/log/auth.log', '/var/log/syslog']",CWE-732,['A.8.15'],감사 로그 무단 접근,"chown root:root, chmod 600",OS/Infrastructure

@@ -1,0 +1,28 @@
+﻿id,category,severity,cvss,priority_score,phase,timeline,remediation
+WEB-002,SQL Injection,Critical,9.8,98.0,Quick Win (즉시),1주 이내,"PreparedStatement 사용, MyBatis #{} 파라미터 바인딩 적용"
+WEB-003,OS Command Injection,Critical,9.8,98.0,Quick Win (즉시),1주 이내,"Runtime.exec() 사용 금지, 화이트리스트 기반 입력 검증"
+WEB-010,파일 전송 취약점,Critical,9.8,98.0,Quick Win (즉시),1주 이내,"확장자 화이트리스트, 파일명 난수화, 경로 정규화"
+WEB-009,쿠키 변조,Critical,9.1,91.0,Quick Win (즉시),1주 이내,"JWT 또는 서버 세션 기반 권한 관리, HMAC 서명"
+WEB-014,SSRF,High,8.6,60.2,Short-term (단기),1-2개월,"내부 IP 대역 차단, URL 화이트리스트"
+WEB-006,불충분한 접근 제어,High,8.1,56.7,Short-term (단기),1-2개월,모든 리소스 접근 시 소유권 및 권한 검증
+OS-001,비밀번호 관리정책 미흡,High,7.8,54.6,Short-term (단기),1-2개월,"minlen=8, dcredit=-1, ucredit=-1, lcredit=-1, ocredit=-1 설정"
+OS-002,계정 잠금 임계값 미설정,High,7.5,52.5,Short-term (단기),1-2개월,pam_tally2.so deny=5 unlock_time=600 설정
+WEB-013,Format String 취약점,High,7.5,52.5,Short-term (단기),1-2개월,"포맷 문자열 하드코딩, 민감정보 분리"
+WEB-011,Path Traversal,High,7.5,52.5,Short-term (단기),1-2개월,"경로 화이트리스트, .. 제거, 절대 경로 변환"
+WEB-007,취약한 비밀번호 복구,High,7.5,52.5,Short-term (단기),1-2개월,"UUID 기반 시간 제한 토큰, 이메일 인증 필수"
+OS-010,FTP 서비스 활성화,High,7.5,52.5,Short-term (단기),1-2개월,"FTP 비활성화, SFTP/FTPS 사용"
+OS-009,불필요한 NFS 서비스 활성화,High,7.5,52.5,Short-term (단기),1-2개월,systemctl disable nfs-server rpcbind
+WEB-001,XSS (Cross-Site Scripting),High,7.3,51.1,Short-term (단기),1-2개월,"HTML 이스케이프 처리, CSP 헤더 설정"
+WEB-004,CSRF (Cross-Site Request Forgery),High,7.1,49.7,Short-term (단기),1-2개월,"Spring Security CSRF 보호 활성화, 모든 POST 요청에 토큰 추가"
+OS-005,/etc/shadow 권한 취약,High,7.1,49.7,Short-term (단기),1-2개월,chmod 400 /etc/shadow
+OS-012,SNMP 서비스 활성화,Medium,6.5,26.0,Mid-term (중기),2-4개월,systemctl disable snmpd
+OS-011,FTP 접근 제어 미흡,Medium,6.5,26.0,Mid-term (중기),2-4개월,ftpusers에 root 추가
+OS-003,su 명령어 제한 미흡,Medium,6.5,26.0,Mid-term (중기),2-4개월,auth required pam_wheel.so 추가
+OS-008,crontab 권한 취약,Medium,6.2,24.8,Mid-term (중기),2-4개월,chmod 600 /etc/crontab
+WEB-008,불충분한 세션 관리,Medium,5.9,23.6,Mid-term (중기),2-4개월,"HttpOnly, Secure, SameSite 플래그 설정"
+OS-013,로그 파일 권한 취약,Medium,5.5,22.0,Mid-term (중기),2-4개월,"chown root:root, chmod 600"
+OS-006,rsyslog 설정파일 권한 취약,Medium,5.5,22.0,Mid-term (중기),2-4개월,chmod 640 설정
+WEB-005,약한 비밀번호 정책,Medium,5.3,21.2,Mid-term (중기),2-4개월,"최소 8자, 대소문자/숫자/특수문자 조합 강제"
+OS-004,세션 타임아웃 미설정,Medium,5.3,21.2,Mid-term (중기),2-4개월,TMOUT=600 설정 (10분)
+OS-007,UMASK 미설정,Medium,5.3,21.2,Mid-term (중기),2-4개월,umask 022 설정
+WEB-012,에러 페이지 미흡,Low,3.7,7.4,Long-term (장기),4-6개월,"Custom Error Page, 상세 에러 메시지 차단"

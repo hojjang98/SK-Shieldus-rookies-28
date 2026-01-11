@@ -1,0 +1,15 @@
+﻿control_id,control_name,category,total_vulns,critical_high,status,gap_level
+A.8.3,정보 접근 제한,기술적 통제,9,5,Critical Gap,High
+A.8.16,모니터링 활동,기술적 통제,7,5,Critical Gap,High
+A.8.8,기술적 취약점 관리,기술적 통제,4,4,Non-Compliant,Medium
+A.5.17,인증 정보,조직적 통제,4,3,Non-Compliant,Medium
+A.8.9,구성 관리,기술적 통제,2,1,Partially Compliant,Low
+A.5.15,접근 제어,조직적 통제,2,2,Partially Compliant,Low
+A.8.15,로깅,기술적 통제,2,0,Partially Compliant,Low
+A.5.18,접근 권한,조직적 통제,1,0,Partially Compliant,Low
+A.8.5,안전한 인증,기술적 통제,1,0,Partially Compliant,Low
+A.8.11,데이터 마스킹,기술적 통제,1,1,Partially Compliant,Low
+A.8.20,네트워크 보안,기술적 통제,1,1,Partially Compliant,Low
+A.8.21,네트워크 서비스 보안,기술적 통제,1,1,Partially Compliant,Low
+A.8.24,암호화 사용,기술적 통제,1,1,Partially Compliant,Low
+A.9.4.3,권한 있는 액세스 권한 관리,기술적 통제,1,1,Partially Compliant,Low
