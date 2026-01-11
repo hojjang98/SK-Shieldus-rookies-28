@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/default :: layout(~{::section})}" lang="ko">
+<section>
+    <div class="d-flex justify-content-between align-items-end mb-3">
+        <div>
+            <h3 class="mb-1">자료실</h3>
+            <div class="text-muted small">파일 조회 및 업로드</div>
+        </div>
+    </div>
+
+    <div class="card p-3 mb-3">
+        <form action="/libs/upload" method="post" enctype="multipart/form-data" class="row g-2 align-items-end">
+            <div class="col-12 col-md-6">
+                <label class="form-label mb-1">업로드 파일</label>
+                <input type="file" name="file" class="form-control" required>
+            </div>
+            <div class="col-12 col-md-4">
+                <label class="form-label mb-1">업로드 위치</label>
+                <input type="text" name="path" class="form-control" placeholder="./"
+                    th:value="${currentPath == null || currentPath == '' ? './' : currentPath}">
+            </div>
+            <div class="col-12 col-md-2 d-grid">
+                <button class="btn btn-danger">업로드</button>
+            </div>
+        </form>
+
+        <div class="mt-3" th:if="${message != null && message != ''}">
+            <div class="alert alert-info mb-0" th:text="${message}"></div>
+        </div>
+    </div>
+
+    <div class="card p-0 overflow-hidden">
+        <div class="p-3 border-bottom">
+            <div class="d-flex flex-wrap gap-2 align-items-center">
+                <div class="fw-semibold">현재 경로</div>
+                <span class="badge text-bg-light border"
+                    th:text="${currentPath == null || currentPath == '' ? './' : currentPath}"></span>
+            </div>
+        </div>
+
+        <div class="px-3 py-3 border-bottom">
+            <a class="btn btn-outline-secondary btn-sm" th:href="@{/libs/archive(path=${parentPath})}">
+                상위 폴더
+            </a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover mb-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width:40%">이름</th>
+                        <th style="width:15%">종류</th>
+                        <th style="width:15%">크기</th>
+                        <th style="width:30%">동작</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${items == null || #lists.isEmpty(items)}">
+                        <td colspan="4" class="text-muted p-4">표시할 항목이 없습니다.</td>
+                    </tr>
+
+                    <tr th:each="it : ${items}">
+                        <td class="p-3">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge text-bg-secondary" th:if="${it.directory}">폴더</span>
+                                <span class="badge text-bg-primary" th:if="${!it.directory}">파일</span>
+
+                                <a th:if="${it.directory}"
+                                    th:href="@{/libs/archive(path=${(currentPath == null || currentPath == '' ? './' : currentPath) + '/' + it.name})}"
+                                    class="text-decoration-none fw-semibold" th:text="${it.name}">
+                                </a>
+
+                                <a th:if="${!it.directory}"
+                                    th:href="@{/libs/archive(path=${currentPath == null || currentPath == '' ? './' : currentPath}, filename=${it.name})}"
+                                    class="text-decoration-none fw-semibold" th:text="${it.name}">
+                                </a>
+                            </div>
+                        </td>
+
+                        <td class="p-3">
+                            <span th:text="${it.directory ? '디렉터리' : '파일'}"></span>
+                        </td>
+
+                        <td class="p-3">
+                            <span th:text="${it.size}"></span>
+                        </td>
+
+                        <td class="p-3">
+                            <div class="d-flex gap-2 flex-nowrap">
+                                <a th:if="${!it.directory}" class="btn btn-outline-secondary btn-sm text-nowrap"
+                                    th:href="@{/libs/download(path=${currentPath == null || currentPath == '' ? './' : currentPath}, filename=${it.name})}">
+                                    다운로드
+                                </a>
+
+                                <a class="btn btn-outline-danger btn-sm text-nowrap"
+                                    th:href="@{/libs/delete(path=${currentPath == null || currentPath == '' ? './' : currentPath}, filename=${it.name})}">
+                                    삭제
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mt-3" th:if="${fileContent != null && fileContent != ''}">
+        <div class="card p-3">
+            <div class="fw-semibold mb-2">파일 내용</div>
+            <pre class="bg-dark text-white p-3 rounded mb-0" th:text="${fileContent}"></pre>
+        </div>
+    </div>
+</section>
+
+</html>

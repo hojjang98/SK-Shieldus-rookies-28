@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.rookies.mapper.FamilyRelationMapper">
+
+    <select id="findByUserId" resultType="com.project.rookies.dto.FamilyRelationDto">
+        SELECT id,
+               user_id AS userId,
+               relation_type AS relationType,
+               name,
+               birth_date AS birthDate,
+               created_at AS createdAt
+        FROM tb_family_relations
+        WHERE user_id = #{userId}
+        ORDER BY id DESC
+    </select>
+
+    <select id="searchByUserIdAndName" resultType="com.project.rookies.dto.FamilyRelationDto">
+        SELECT id,
+               user_id AS userId,
+               relation_type AS relationType,
+               name,
+               birth_date AS birthDate,
+               created_at AS createdAt
+        FROM tb_family_relations
+        WHERE user_id = #{userId}
+          AND name LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY id DESC
+    </select>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tb_family_relations (user_id, relation_type, name, birth_date)
+        VALUES (#{userId}, #{relationType}, #{name}, #{birthDate})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM tb_family_relations WHERE id = #{id} AND user_id = #{userId}
+    </delete>
+
+    <delete id="deleteByUserId">
+        DELETE FROM tb_family_relations WHERE user_id = #{userId}
+    </delete>
+
+</mapper>

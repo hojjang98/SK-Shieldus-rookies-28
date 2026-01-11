@@ -1,0 +1,19 @@
+{
+    "target_url": "http://localhost:8080",
+    "project_path": "C:/Users/ghwns/project",
+
+    "login": {                    
+        "username": "guest",
+        "password": "guest"
+    },
+    
+    "admin_login": {              
+        "username": "admin",
+        "password": "actual_admin_password"
+    },
+    
+    "guest_login": {             
+        "username": "guest",
+        "password": "guest"
+    }
+}

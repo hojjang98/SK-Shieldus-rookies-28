@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/default :: layout(~{::section})}" lang="ko">
+<head><title>협력사 포털</title></head>
+<body>
+<section>
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Business Partners</h2>
+        <p class="text-muted">업무와 연동된 주요 협력사 및 솔루션 포털입니다.</p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <a href="/employee/partner-link?url=https://www.google.com" class="text-decoration-none">
+                <div class="surface h-100 p-4 text-center hover-card transition-all">
+                    <div class="mb-3">
+                        <i class="bi bi-google fs-1 text-danger"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark">Google Workspace</h5>
+                    <p class="text-muted small mb-0">메일, 드라이브, 캘린더 연동</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/employee/partner-link?url=https://www.naver.com" class="text-decoration-none">
+                <div class="surface h-100 p-4 text-center hover-card transition-all">
+                    <div class="mb-3">
+                        <span class="fw-bold fs-1 text-success">N</span>
+                    </div>
+                    <h5 class="fw-bold text-dark">Naver Works</h5>
+                    <p class="text-muted small mb-0">국내 업무 협업툴 및 메신저</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/employee/partner-link?url=https://github.com" class="text-decoration-none">
+                <div class="surface h-100 p-4 text-center hover-card transition-all">
+                    <div class="mb-3">
+                        <i class="bi bi-github fs-1 text-dark"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark">Github Enterprise</h5>
+                    <p class="text-muted small mb-0">소스코드 형상 관리 및 배포</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="mt-5 p-4 bg-light rounded border border-warning d-flex align-items-start gap-3">
+        <i class="bi bi-bug-fill text-warning fs-3"></i>
+        <div>
+            <h5 class="fw-bold text-dark">⚠ Security Mission: Open Redirect</h5>
+            <p class="text-muted mb-0 small">
+                위 링크들의 URL 파라미터는 검증되지 않았습니다. <br>
+                <code>?url=http://hacker-site.com</code> 등으로 조작하여 사용자를 피싱 사이트로 유도해보세요.
+            </p>
+        </div>
+    </div>
+
+    <style>
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+        }
+        .transition-all { transition: all 0.3s ease; }
+    </style>
+</section>
+</body>
+</html>

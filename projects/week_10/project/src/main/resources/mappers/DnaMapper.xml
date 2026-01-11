@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.rookies.mapper.DnaMapper">
+
+    <select id="findStatus" resultType="com.project.rookies.dto.DnaStatusDto">
+        SELECT board_id AS boardId,
+               status,
+               updated_at AS updatedAt
+        FROM tb_dna_app_status
+        WHERE board_id = #{boardId}
+    </select>
+
+    <insert id="ensureStatus">
+        INSERT IGNORE INTO tb_dna_app_status (board_id, status)
+        VALUES (#{boardId}, '접수')
+    </insert>
+
+    <update id="updateStatus">
+        UPDATE tb_dna_app_status
+        SET status = #{status}
+        WHERE board_id = #{boardId}
+    </update>
+
+    <select id="findResultsByBoardId" resultType="com.project.rookies.dto.DnaResultDto">
+        SELECT id,
+               board_id AS boardId,
+               category,
+               filename,
+               filepath,
+               uploaded_at AS uploadedAt
+        FROM tb_dna_results
+        WHERE board_id = #{boardId}
+        ORDER BY id DESC
+    </select>
+
+    <select id="findResultsForUser" resultType="com.project.rookies.dto.DnaResultDto">
+        SELECT r.id,
+               r.board_id AS boardId,
+               r.category,
+               r.filename,
+               r.filepath,
+               r.uploaded_at AS uploadedAt
+        FROM tb_dna_results r
+        JOIN tb_boards b ON b.id = r.board_id
+        WHERE b.writer = #{writer}
+        ORDER BY r.id DESC
+    </select>
+
+    <select id="findResultById" resultType="com.project.rookies.dto.DnaResultDto">
+        SELECT id,
+               board_id AS boardId,
+               category,
+               filename,
+               filepath,
+               uploaded_at AS uploadedAt
+        FROM tb_dna_results
+        WHERE id = #{id}
+    </select>
+
+    <insert id="saveResult" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tb_dna_results (board_id, category, filename, filepath)
+        VALUES (#{boardId}, #{category}, #{filename}, #{filepath})
+    </insert>
+
+    <delete id="deleteResultsByBoardId">
+        DELETE FROM tb_dna_results WHERE board_id = #{boardId}
+    </delete>
+
+    <delete id="deleteResultsByUserWriter">
+        DELETE r FROM tb_dna_results r
+        JOIN tb_boards b ON b.id = r.board_id
+        WHERE b.writer = #{writer}
+    </delete>
+
+    <delete id="deleteStatusByBoardId">
+        DELETE FROM tb_dna_app_status WHERE board_id = #{boardId}
+    </delete>
+
+</mapper>

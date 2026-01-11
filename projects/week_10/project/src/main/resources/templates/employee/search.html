@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/default :: layout(~{::section})}">
+
+<body>
+    <section>
+        <div class="mb-4">
+            <h3 class="fw-bold text-white mb-2">DNA 매칭</h3>
+            <p class="text-muted small">가족 구성원 및 유전적 연관성을 분석하고 확인할 수 있습니다.</p>
+        </div>
+
+        <div class="row g-4 mb-4">
+            <!-- Search Form -->
+            <div class="col-lg-12">
+                <div class="card p-4 border-0 shadow-sm">
+                    <h5 class="fw-bold text-white mb-3">혈연 관계 찾기</h5>
+                    <form action="/employee/search" method="post" class="row g-3 align-items-end">
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold small text-muted">대상 사용자 ID</label>
+                            <input type="number" name="targetUserId" class="form-control" placeholder="비워두면 내 ID"
+                                th:value="${targetUserId}">
+                        </div>
+                        <div class="col-md-7">
+                            <label class="form-label fw-bold small text-muted">유전자 매칭 키워드</label>
+                            <input type="text" name="name" class="form-control" placeholder="가족 이름 또는 키워드 입력"
+                                th:value="${keyword}">
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary w-100 fw-bold"><i class="bi bi-search me-1"></i> 검색</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div class="card p-4 mb-4 border-0 shadow-sm">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold text-white mb-0">매칭 결과</h5>
+                <a href="/user/mypage" class="btn btn-sm btn-outline-secondary">가족 관계 관리 이동</a>
+            </div>
+
+            <div th:if="${matches == null || #lists.isEmpty(matches)}"
+                class="text-center py-5 border rounded-3 border-dashed border-secondary border-opacity-25">
+                <i class="bi bi-people fs-1 text-muted opacity-50 mb-2 d-block"></i>
+                <span class="text-muted small">일치하는 결과가 없습니다.</span>
+            </div>
+
+            <div class="table-responsive" th:if="${matches != null && !#lists.isEmpty(matches)}">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="py-2 px-3">관계</th>
+                            <th class="py-2 px-3">이름</th>
+                            <th class="py-2 px-3">생년월일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="m : ${matches}">
+                            <td class="px-3">
+                                <span
+                                    class="badge bg-secondary bg-opacity-25 text-body border border-secondary border-opacity-25"
+                                    th:text="${m.relationType}"></span>
+                            </td>
+                            <td class="px-3 fw-bold" th:text="${m.name}"></td>
+                            <td class="px-3" th:text="${m.birthDate}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- DNA Info Search (Admin/Advanced) -->
+        <div class="card p-4 border-0 shadow-sm bg-opacity-10 border-primary border-opacity-25"
+            style="border: 1px dashed var(--dna-border) !important;">
+            <h5 class="fw-bold text-white mb-2">DNA 정보 조회</h5>
+            <p class="text-muted small mb-3">다른 사용자의 DNA 리포트를 조회할 수 있는 기능입니다.</p>
+
+            <form action="/employee/results" method="get" class="row g-2 align-items-center" style="max-width: 600px;">
+                <div class="col-8">
+                    <input type="text" name="writer" class="form-control" placeholder="작성자 아이디 입력 (예: guest)">
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-info text-white fw-bold w-100">조회</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/default :: layout(~{::section})}">
+
+<body>
+    <section>
+        <div class="d-flex justify-content-between align-items-end mb-4">
+            <div>
+                <h3 class="mb-1 fw-bold text-white">DNA 검사 신청 내역</h3>
+                <p class="text-muted small mb-0">진행 중인 유전자 분석 현황을 확인하세요.</p>
+            </div>
+            <a href="/board/write" class="btn btn-primary fw-bold"><i class="bi bi-plus-lg me-1"></i> 검사 신청</a>
+        </div>
+
+        <div class="card p-4 mb-4">
+            <form action="/board/list" method="get" class="row g-2 align-items-center">
+                <div class="col-auto">
+                    <label class="col-form-label fw-bold small text-muted">검색어</label>
+                </div>
+                <div class="col">
+                    <input type="text" name="keyword" class="form-control" placeholder="신청자 이름 또는 내용 검색"
+                        th:value="${param.keyword}">
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-outline-secondary"><i class="bi bi-search"></i> 검색</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card overflow-hidden border-0 shadow-sm">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0 align-middle text-nowrap">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="py-3 px-4" style="width: 10%;">번호</th>
+                            <th class="py-3 px-4" style="width: 40%;">신청자 이름 (제목)</th>
+                            <th class="py-3 px-4" style="width: 20%;">진행 상태</th>
+                            <th class="py-3 px-4" style="width: 15%;">작성자</th>
+                            <th class="py-3 px-4" style="width: 15%;">조회수</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${#lists.isEmpty(boardList)}">
+                            <td colspan="5" class="py-5 text-center text-muted">
+                                <i class="bi bi-inbox fs-1 d-block mb-3 opacity-50"></i>
+                                등록된 신청 내역이 없습니다.
+                            </td>
+                        </tr>
+                        <tr th:each="board : ${boardList}">
+                            <td class="px-4 text-muted small" th:text="${board.id}"></td>
+                            <td class="px-4">
+                                <a th:href="@{/board/view(id=${board.id})}" class="fw-semibold text-decoration-none"
+                                    th:text="${board.title}"></a>
+                            </td>
+                            <td class="px-4">
+                                <span
+                                    class="badge rounded-pill bg-opacity-10 text-primary border border-primary border-opacity-25 bg-primary"
+                                    th:text="${statusMap[board.id] != null ? statusMap[board.id].status : '접수'}"></span>
+                            </td>
+                            <td class="px-4 text-muted small" th:text="${board.writer}"></td>
+                            <td class="px-4 text-muted small" th:text="${board.readCount}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

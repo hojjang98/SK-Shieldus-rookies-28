@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/default :: layout(~{::section})}">
+
+<body>
+    <section>
+        <div class="mb-4">
+            <h3 class="fw-bold text-white mb-2">신청 상세</h3>
+            <p class="text-muted small">신청하신 유전자 검사의 상세 내용을 확인합니다.</p>
+        </div>
+
+        <div class="card p-4 p-lg-5 mb-4">
+            <div
+                class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-end gap-3 pb-3 border-bottom border-light border-opacity-10">
+                <div>
+                    <h2 class="h4 fw-bold text-white mb-2" th:text="${board.title}"></h2>
+                    <div class="text-muted small">
+                        <span class="me-3"><i class="bi bi-person me-1"></i> <span
+                                th:text="${board.writer}"></span></span>
+                        <span><i class="bi bi-eye me-1"></i> <span th:text="${board.readCount}"></span></span>
+                    </div>
+                </div>
+
+                <div class="text-md-end">
+                    <div class="fw-bold mb-1 small text-muted">진행 상태</div>
+                    <span
+                        class="badge rounded-pill bg-dark bg-opacity-50 text-info border border-info border-opacity-25 px-3 py-2"
+                        th:text="${status != null ? status.status : '접수'}"></span>
+                </div>
+            </div>
+
+            <div class="py-4 text-break lh-lg" th:utext="${board.content}" style="min-height: 200px;"></div>
+
+            <div class="p-3 bg-light rounded-3 bg-opacity-50 border border-secondary border-opacity-10 mb-4"
+                th:if="${board.filename}">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="feature-icon mb-0" style="width: 40px; height: 40px; font-size: 1.2rem;"><i
+                            class="bi bi-file-earmark-image"></i></div>
+                    <div class="flex-grow-1">
+                        <div class="fw-bold small text-white">신분증 사본</div>
+                        <small class="text-muted">제출된 신분증/증빙 서류입니다.</small>
+                    </div>
+                    <a th:href="@{/board/download(filename=${board.filename})}" class="btn btn-sm btn-outline-primary"
+                        th:classappend="${!fileExists} ? 'disabled'">
+                        <i class="bi bi-download me-1"></i> <span th:text="${fileExists} ? '다운로드' : '파일 없음'">다운로드</span>
+                    </a>
+                </div>
+            </div>
+
+            <hr class="border-secondary border-opacity-25 my-4">
+
+            <div class="mb-4">
+                <h5 class="fw-bold text-white mb-3">검사 결과 리포트</h5>
+
+                <div th:if="${results == null || #lists.isEmpty(results)}"
+                    class="text-center py-5 border rounded-3 border-dashed border-secondary border-opacity-25">
+                    <i class="bi bi-folder-x fs-1 text-muted opacity-50 mb-2 d-block"></i>
+                    <span class="text-muted small">아직 업로드된 결과 리포트가 없습니다.</span>
+                </div>
+
+                <div class="table-responsive" th:if="${results != null && !#lists.isEmpty(results)}">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="py-2 px-3">분석 항목</th>
+                                <th class="py-2 px-3">파일</th>
+                                <th class="py-2 px-3">업로드 일시</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="r : ${results}">
+                                <td class="px-3" th:text="${r.category}"></td>
+                                <td class="px-3">
+                                    <a th:href="@{/libs/report/download(id=${r.id})}"
+                                        class="text-decoration-none fw-semibold">
+                                        <i class="bi bi-file-earmark-pdf me-1"></i>
+                                        <span th:text="${r.filename}"></span>
+                                    </a>
+                                </td>
+                                <td class="px-3 text-muted small" th:text="${r.uploadedAt}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2 justify-content-end">
+                <a href="/board/list" class="btn btn-outline-secondary">목록으로</a>
+
+                <a th:href="@{/board/edit(id=${board.id})}" class="btn btn-success text-white fw-bold">수정</a>
+
+                <a th:href="@{/board/delete(id=${board.id})}" class="btn btn-outline-danger"
+                    onclick="return confirm('정말 삭제하시겠습니까? 복구할 수 없습니다.')">삭제</a>
+
+                <a href="/admin/dna/applications" class="btn btn-dark border-secondary"
+                    th:if="${session.loginUser != null and session.loginUser.role == 'admin'}">
+                    <i class="bi bi-shield-lock me-1"></i> 관리자 화면
+                </a>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

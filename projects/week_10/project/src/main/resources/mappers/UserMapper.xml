@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.rookies.mapper.UserMapper">
+
+    <select id="login" resultType="com.project.rookies.dto.UserDto">
+        SELECT * FROM tb_users
+        WHERE username = '${username}' AND password = '${password}'
+    </select>
+
+    <select id="findByUsername" resultType="com.project.rookies.dto.UserDto">
+        SELECT * FROM tb_users WHERE username = '${username}'
+    </select>
+
+    <select id="findByUsernameAndEmail" resultType="com.project.rookies.dto.UserDto">
+        SELECT * FROM tb_users WHERE username = '${username}' AND email = '${email}'
+    </select>
+
+    <insert id="save">
+        INSERT INTO tb_users (username, password, nickname, email, role)
+        VALUES ('${username}', '${password}', '${nickname}', '${email}', '${role}')
+    </insert>
+
+    <update id="update">
+        UPDATE tb_users
+        SET nickname = '${nickname}',
+        email = '${email}',
+        password = '${password}'
+        WHERE id = ${id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM tb_users WHERE id = ${id}
+    </delete>
+
+    <select id="findAllUsers" resultType="com.project.rookies.dto.UserDto">
+        SELECT id, username, password, nickname, email, role
+        FROM tb_users
+        ORDER BY id DESC
+    </select>
+
+</mapper>

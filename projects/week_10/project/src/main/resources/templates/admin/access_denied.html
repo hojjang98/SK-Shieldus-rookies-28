@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/default :: layout(~{::section})}" lang="ko">
+
+<head>
+    <title>접근 제한</title>
+</head>
+
+<body>
+    <section>
+        <div class="card p-5 mx-auto text-center border-0 shadow-sm" style="max-width: 600px;">
+            <i class="bi bi-shield-lock-fill text-danger mb-4" style="font-size: 4rem;"></i>
+            <h2 class="fw-bold text-white mb-3">접근이 제한되었습니다</h2>
+            <p class="text-muted mb-4" th:text="${msg}">해당 페이지에 접근할 수 있는 권한이 없습니다.</p>
+
+            <div class="d-flex justify-content-center gap-3">
+                <a href="/" class="btn btn-primary fw-bold text-white px-4">메인으로 이동</a>
+                <a href="/login?logout" class="btn btn-outline-secondary">다른 계정으로 로그인</a>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

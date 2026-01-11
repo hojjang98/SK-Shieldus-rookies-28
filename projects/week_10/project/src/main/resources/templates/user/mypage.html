@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/default :: layout(~{::section})}">
+
+<body>
+    <section>
+        <div class="mb-4">
+            <h3 class="fw-bold text-white mb-2">마이페이지</h3>
+            <p class="text-muted small">계정 정보 및 가족 관계를 관리합니다.</p>
+        </div>
+
+        <!-- Alert Messages -->
+        <div th:if="${param.updated}"
+            class="alert alert-success border-0 bg-opacity-25 bg-success text-success fw-bold"><i
+                class="bi bi-check-circle me-1"></i> 계정 정보가 수정되었습니다.</div>
+        <div th:if="${param.profileUpdated}"
+            class="alert alert-success border-0 bg-opacity-25 bg-success text-success fw-bold"><i
+                class="bi bi-check-circle me-1"></i> 개인정보가 수정되었습니다.</div>
+        <div th:if="${param.familyAdded}"
+            class="alert alert-success border-0 bg-opacity-25 bg-success text-success fw-bold"><i
+                class="bi bi-check-circle me-1"></i> 가족 관계가 추가되었습니다.</div>
+        <div th:if="${param.familyDeleted}"
+            class="alert alert-success border-0 bg-opacity-25 bg-success text-success fw-bold"><i
+                class="bi bi-check-circle me-1"></i> 가족 관계가 삭제되었습니다.</div>
+        <div th:if="${param.error}" class="alert alert-danger border-0 bg-opacity-25 bg-danger text-danger fw-bold"><i
+                class="bi bi-exclamation-triangle me-1"></i> 요청을 처리할 수 없습니다.</div>
+
+        <div class="row g-4">
+            <!-- Account Info -->
+            <div class="col-lg-6">
+                <div class="card p-4 h-100 border-0 shadow-sm">
+                    <h5 class="fw-bold text-white mb-3">계정 정보 수정</h5>
+                    <form action="/update" method="post">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small text-muted">닉네임</label>
+                            <input type="text" name="nickname" th:value="${user.nickname}" class="form-control"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small text-muted">이메일</label>
+                            <input type="email" name="email" th:value="${user.email}" class="form-control" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold small text-muted">새 비밀번호</label>
+                            <input type="password" name="password" class="form-control" placeholder="변경하지 않으려면 비워두세요">
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-primary fw-bold px-4">수정하기</button>
+
+                            <!-- Withdrawal form separate from update form -->
+                        </div>
+                    </form>
+                    <hr class="border-secondary border-opacity-25 my-4">
+                    <form action="/quit" method="post" class="text-end">
+                        <button class="btn btn-outline-danger btn-sm"
+                            onclick="return confirm('탈퇴 시 유전정보 및 검사 결과가 완전 삭제됩니다. 진행할까요?')">회원 탈퇴</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Personal Info -->
+            <div class="col-lg-6">
+                <div class="card p-4 h-100 border-0 shadow-sm">
+                    <h5 class="fw-bold text-white mb-3">개인정보 수정</h5>
+                    <form action="/user/profile" method="post">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small text-muted">생년월일</label>
+                            <input type="date" name="birthDate" class="form-control"
+                                th:value="${profile != null ? profile.birthDate : ''}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small text-muted">연락처</label>
+                            <input type="text" name="phone" class="form-control" placeholder="010-0000-0000"
+                                th:value="${profile != null ? profile.phone : ''}">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold small text-muted">주소</label>
+                            <input type="text" name="address" class="form-control"
+                                th:value="${profile != null ? profile.address : ''}">
+                        </div>
+
+                        <button class="btn btn-primary fw-bold px-4">저장하기</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Family Relations -->
+            <div class="col-12">
+                <div class="card p-4 border-0 shadow-sm">
+                    <h5 class="fw-bold text-white mb-3">가족 관계 관리</h5>
+
+                    <form action="/user/family/add" method="post" class="row g-3 align-items-end mb-4">
+                        <div class="col-md-2">
+                            <label class="form-label fw-bold small text-muted">관계</label>
+                            <select name="relationType" class="form-select">
+                                <option value="부모">부모</option>
+                                <option value="자녀">자녀</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold small text-muted">이름</label>
+                            <input type="text" name="name" class="form-control" required placeholder="이름 입력">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold small text-muted">생년월일</label>
+                            <input type="date" name="birthDate" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-success fw-bold w-100 text-white"><i class="bi bi-plus-lg me-1"></i>
+                                추가</button>
+                        </div>
+                    </form>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="py-2 px-3">관계</th>
+                                    <th class="py-2 px-3">이름</th>
+                                    <th class="py-2 px-3">생년월일</th>
+                                    <th class="py-2 px-3">관리</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:if="${family == null || #lists.isEmpty(family)}">
+                                    <td colspan="4" class="text-center py-4 text-muted small">등록된 가족 정보가 없습니다.</td>
+                                </tr>
+                                <tr th:each="f : ${family}">
+                                    <td class="px-3">
+                                        <span
+                                            class="badge bg-secondary bg-opacity-25 text-body border border-secondary border-opacity-25"
+                                            th:text="${f.relationType}"></span>
+                                    </td>
+                                    <td class="px-3 fw-bold" th:text="${f.name}"></td>
+                                    <td class="px-3" th:text="${f.birthDate}"></td>
+                                    <td class="px-3">
+                                        <form action="/user/family/delete" method="post" class="d-inline">
+                                            <input type="hidden" name="id" th:value="${f.id}">
+                                            <button class="btn btn-sm btn-outline-danger"
+                                                onclick="return confirm('삭제할까요?')"><i class="bi bi-trash"></i>
+                                                삭제</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

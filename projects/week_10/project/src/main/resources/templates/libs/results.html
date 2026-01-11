@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/default :: layout(~{::section})}">
+
+<body>
+    <section>
+        <div class="mb-4">
+            <h3 class="fw-bold text-white mb-2">검사 결과 조회</h3>
+            <p class="text-muted small">분석이 완료된 DNA 리포트를 확인 및 다운로드할 수 있습니다.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card p-4 h-100 border-0 shadow-sm">
+                    <h5 class="fw-bold text-white mb-3">리포트 가이드</h5>
+                    <ul class="list-unstyled text-muted small mb-0 d-flex flex-column gap-2">
+                        <li class="d-flex align-items-center"><i class="bi bi-diagram-2 me-2 text-primary"></i> 조상 분석
+                            (DNA Ancestry)</li>
+                        <li class="d-flex align-items-center"><i class="bi bi-heart-pulse me-2 text-primary"></i> 질병 위험도
+                            (Health Risk)</li>
+                        <li class="d-flex align-items-center"><i class="bi bi-bandaid me-2 text-primary"></i> 약물 반응성
+                            (Drug Response)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card p-4 h-100 border-0 shadow-sm">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold text-white mb-0">내 리포트</h5>
+                        <a href="/libs/archive" class="btn btn-sm btn-outline-secondary">
+                            <i class="bi bi-archive me-1"></i> 자료실 이동
+                        </a>
+                    </div>
+
+                    <div th:if="${reports == null || #lists.isEmpty(reports)}"
+                        class="text-center py-5 border rounded-3 border-dashed border-secondary border-opacity-25">
+                        <i class="bi bi-emoji-smile fs-1 text-muted opacity-50 mb-2 d-block"></i>
+                        <span class="text-muted small">아직 등록된 리포트가 없습니다.</span>
+                    </div>
+
+                    <div class="table-responsive" th:if="${reports != null && !#lists.isEmpty(reports)}">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="py-2 px-3">신청 번호</th>
+                                    <th class="py-2 px-3">분석 항목</th>
+                                    <th class="py-2 px-3">파일</th>
+                                    <th class="py-2 px-3">업로드 일시</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="r : ${reports}">
+                                    <td class="px-3" th:text="${r.boardId}"></td>
+                                    <td class="px-3" th:text="${r.category}"></td>
+                                    <td class="px-3">
+                                        <a th:href="@{/libs/report/download(id=${r.id})}"
+                                            class="text-decoration-none fw-semibold">
+                                            <i class="bi bi-file-earmark-pdf me-1"></i> <span
+                                                th:text="${r.filename}"></span>
+                                        </a>
+                                    </td>
+                                    <td class="px-3 text-muted small" th:text="${r.uploadedAt}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

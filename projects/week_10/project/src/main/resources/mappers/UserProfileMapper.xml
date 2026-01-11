@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.rookies.mapper.UserProfileMapper">
+
+    <select id="findByUserId" resultType="com.project.rookies.dto.UserProfileDto">
+        SELECT user_id AS userId,
+               birth_date AS birthDate,
+               phone,
+               address,
+               updated_at AS updatedAt
+        FROM tb_user_profile
+        WHERE user_id = #{userId}
+    </select>
+
+    <insert id="upsert">
+        INSERT INTO tb_user_profile (user_id, birth_date, phone, address)
+        VALUES (#{userId}, #{birthDate}, #{phone}, #{address})
+        ON DUPLICATE KEY UPDATE
+            birth_date = VALUES(birth_date),
+            phone = VALUES(phone),
+            address = VALUES(address)
+    </insert>
+
+    <delete id="deleteByUserId">
+        DELETE FROM tb_user_profile WHERE user_id = #{userId}
+    </delete>
+
+</mapper>

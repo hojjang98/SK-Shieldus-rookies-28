@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+    <!-- Shared User Menu Logic -->
+    <div th:fragment="user_menu" class="user-menu d-flex align-items-center gap-3">
+        <th:block th:if="${session.loginUser}">
+            <a href="/board/list" class="btn btn-outline-primary btn-sm rounded-pill px-3 fw-bold">대시보드</a>
+            <a href="/user/mypage" class="user-chip text-decoration-none d-flex align-items-center gap-2">
+                <i class="bi bi-person-circle fs-5"></i>
+                <span th:text="${session.loginUser.nickname}" class="fw-semibold">User</span>
+            </a>
+            <div class="vr opacity-25 text-secondary"></div>
+            <a href="/logout"
+                class="btn btn-outline-danger btn-sm fw-bold text-decoration-none px-3 py-1 d-flex align-items-center gap-1">
+                <i class="bi bi-box-arrow-right"></i> 로그아웃
+            </a>
+        </th:block>
+        <th:block th:unless="${session.loginUser}">
+            <a href="/login" class="btn btn-outline-secondary btn-sm rounded-pill px-4 fw-bold">로그인</a>
+            <a href="/agreement" class="btn btn-primary btn-sm rounded-pill px-4 fw-bold">회원가입</a>
+        </th:block>
+    </div>
+
+    <!-- Shared Navbar for Home/About/Services -->
+    <nav th:fragment="navbar" class="navbar navbar-expand-lg border-bottom border-secondary border-opacity-25"
+        style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px);">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+                <div class="rounded-3 d-inline-flex align-items-center justify-content-center"
+                    style="width:36px;height:36px;background:rgba(6, 182, 212, 0.1);">
+                    <i class="bi bi-dna text-primary fs-5"></i>
+                </div>
+                <span class="fs-5 fw-bold dna-logo-text">Rookies DNA</span>
+            </a>
+
+            <!-- Use the user_menu fragment -->
+            <div th:replace="~{layout/fragments :: user_menu}"></div>
+        </div>
+    </nav>
+
+</body>
+
+</html>

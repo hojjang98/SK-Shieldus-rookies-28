@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/default :: layout(~{::section})}">
+
+<body>
+    <section>
+        <div class="mb-4">
+            <h3 class="fw-bold text-white mb-2">DNA 검사 신청서</h3>
+            <p class="text-muted small">정확한 검사를 위해 필수 정보를 입력해주세요.</p>
+        </div>
+
+        <div class="card p-4 p-lg-5" style="max-width: 800px;">
+            <form action="/board/write" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label fw-bold small text-muted">신청자 이름</label>
+                    <input type="text" name="title" class="form-control" placeholder="이름을 입력하세요 (예: 홍길동)" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold small text-muted">검사 목적</label>
+                    <select id="purposePreset" class="form-select mb-2"
+                        onchange="document.getElementById('content').value=this.value;">
+                        <option value="">검사 목적 선택 (선택 시 내용이 자동 입력됩니다)</option>
+                        <option value="조상 찾기 (DNA Ancestry)">조상 찾기 (DNA Ancestry)</option>
+                        <option value="질병 위험도 (Health Risk)">질병 위험도 (Health Risk)</option>
+                        <option value="약물 반응성 (Drug Response)">약물 반응성 (Drug Response)</option>
+                        <option value="기타">기타</option>
+                    </select>
+                    <textarea id="content" name="content" class="form-control" rows="6" required
+                        placeholder="검사 목적 및 요청사항을 상세히 작성해주세요."></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-bold small text-muted">신분증 사본 첨부</label>
+                    <input type="file" name="file" class="form-control">
+                    <div class="form-text small text-muted"><i class="bi bi-info-circle me-1"></i> 검사 본인 확인을 위한 신분증 사본을
+                        업로드해주세요.</div>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary fw-bold text-white px-4">신청하기</button>
+                    <a href="/board/list" class="btn btn-outline-secondary">취소 및 목록</a>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>

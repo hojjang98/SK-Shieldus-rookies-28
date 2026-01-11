@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/default :: layout(~{::section})}">
+<section>
+    <div class="mb-4">
+        <h3 class="fw-bold text-white mb-2">지원 요청</h3>
+        <p class="text-muted small">서비스 이용 중 발생하는 문제나 문의사항을 접수해주세요.</p>
+    </div>
+
+    <div class="card p-4 p-lg-5 mb-4 border-0 shadow-sm">
+        <h5 class="fw-bold text-white mb-3">새로운 요청 접수</h5>
+        <form action="/support/ticket" method="post" class="row g-3 align-items-end">
+            <div class="col-md-9">
+                <label class="form-label fw-bold small text-muted">요청 제목</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-dark border-secondary text-secondary"><i
+                            class="bi bi-question-circle"></i></span>
+                    <input type="text" name="subject" class="form-control"
+                        placeholder="요청 사항을 간략히 입력하세요 (예: 검사 결과 재발급 요청)" required>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-primary w-100 fw-bold"><i class="bi bi-send me-1"></i> 요청 접수</button>
+            </div>
+        </form>
+
+        <div class="mt-4" th:if="${result != null && result != ''}">
+            <div class="alert alert-info d-flex align-items-start gap-3 fade show border-0 bg-opacity-10 bg-primary text-primary"
+                role="alert">
+                <i class="bi bi-info-circle-fill mt-1 fs-5"></i>
+                <div>
+                    <div class="fw-bold mb-1">처리 결과</div>
+                    <div th:text="${result}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card overflow-hidden border-0 shadow-sm">
+        <div class="p-3 border-bottom border-secondary border-opacity-10 bg-light bg-opacity-50">
+            <h6 class="fw-bold mb-0 text-white"><i class="bi bi-clock-history me-1"></i> 접수 및 처리 이력</h6>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover mb-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th class="py-2 px-3" style="width:10%">번호</th>
+                        <th class="py-2 px-3" style="width:40%">제목</th>
+                        <th class="py-2 px-3" style="width:35%">결과</th>
+                        <th class="py-2 px-3" style="width:15%">시간</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${logs == null || #lists.isEmpty(logs)}">
+                        <td colspan="4" class="text-center py-5">
+                            <span class="text-muted small">접수된 이력이 없습니다.</span>
+                        </td>
+                    </tr>
+
+                    <tr th:each="log : ${logs}">
+                        <td class="px-3 text-muted small" th:text="${log.id}"></td>
+                        <td class="px-3 fw-bold" th:text="${log.subject}"></td>
+                        <td class="px-3 text-break" th:text="${log.resultLog}"></td>
+                        <td class="px-3 text-muted small" th:text="${log.createdAt}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+</html>

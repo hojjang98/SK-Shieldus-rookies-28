@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>DNA Lab OS Security Scan Report</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f4f4f4; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; }
+        .header { border-bottom: 2px solid #333; padding-bottom: 20px; margin-bottom: 30px; }
+        .header h1 { margin: 0; color: #2c3e50; }
+        .meta { background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 30px; font-size: 0.9em; }
+        .summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 40px; text-align: center; }
+        .card { padding: 20px; border-radius: 4px; color: white; }
+        .card.total { background: #34495e; }
+        .card.vuln { background: #e74c3c; }
+        .card.safe { background: #27ae60; }
+        .card.findings { background: #3498db; }
+        .card h3 { margin: 0; font-size: 2em; }
+        .item { border: 1px solid #ddd; margin-bottom: 20px; border-radius: 4px; overflow: hidden; }
+        .item-head { padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; background: #eee; font-weight: bold; }
+        .item-head.vuln { background: #fadbd8; color: #c0392b; border-left: 5px solid #c0392b; }
+        .item-head.safe { background: #d5f5e3; color: #27ae60; border-left: 5px solid #27ae60; }
+        .item-body { padding: 20px; }
+        .section { margin-bottom: 15px; }
+        .section h4 { margin-bottom: 5px; color: #555; font-size: 0.9em; text-transform: uppercase; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        ul { padding-left: 20px; margin: 0; }
+        li { margin-bottom: 5px; font-size: 0.95em; word-break: break-all; }
+        .footer { margin-top: 50px; text-align: center; font-size: 0.8em; color: #888; border-top: 1px solid #eee; padding-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>DNA Lab OS Security Scan Report</h1>
+        </div>
+        
+        <div class="meta">
+            <p><strong>Date:</strong> 2026-01-04 15:33:40</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8080/</p>
+        </div>
+        
+        <div class="summary">
+            <div class="card total">
+                <h3>50</h3>
+                <p>Total Scans</p>
+            </div>
+            <div class="card vuln">
+                <h3>37</h3>
+                <p>Vulnerable</p>
+            </div>
+            <div class="card safe">
+                <h3>13</h3>
+                <p>Safe</p>
+            </div>
+            <div class="card findings">
+                <h3>182</h3>
+                <p>Total Findings</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-head safe">
+                <span>1. OS: Root 원격 로그인 제한</span>
+                <span>SAFE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] SSH가 실행되고 있지 않음</li><li>[OS] Telnet이 실행되고 있지 않음</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>안전 - Root 원격 로그인이 제한되어 있음</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>2. OS: 비밀번호 관리정책 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] PASS_MAX_DAYS 설정이 없음</li><li>[OS] PASS_MIN_DAYS 설정이 없음</li><li>[OS] minlen 설정이 없음</li><li>[OS] dcredit 설정이 없음</li><li>[OS] ucredit 설정이 없음</li><li>[OS] lcredit 설정이 없음</li><li>[OS] ocredit 설정이 없음</li><li>[OS] enforce_for_root 설정이 없음</li><li>[OS] pam_unix.so 모듈이 없음</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>/etc/pam.d/common-password 설정 확인 | pwquality.conf에 enforce_for_root 추가 | lcredit를 -1 이상으로 설정 | ocredit를 -1 이상으로 설정 | minlen를 8 이상으로 설정 | dcredit를 -1 이상으로 설정 | ucredit를 -1 이상으로 설정 | PASS_MAX_DAYS를 90 이상으로 설정 | PASS_MIN_DAYS를 0 이상으로 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>3. OS: 계정 잠금 임계값 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] pam_tally/pam_tally2 auth 설정이 없음</li><li>[OS] pam_tally/pam_tally2 account 설정이 없음</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>account required pam_tally(2).so no_magic_root reset 설정 추가 | common-auth에 pam_tally(2).so deny=10 unlock_time=120 no_magic_root 설정 추가</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>4. OS: 패스워드 파일 보호</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] 패스워드 파일 보호: 취약 (암호화되지 않은 패스워드 발견: 7개)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>shadow 파일 사용 및 /etc/passwd의 패스워드 필드를 'x'로 변경</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head safe">
+                <span>5. OS: root 이외 UID 0 금지</span>
+                <span>SAFE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] root 이외 UID 0 계정 없음 (양호)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>안전 - root 이외 UID 0 계정이 없음</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>6. OS: 사용자 계정 su 기능 제한</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] pam_wheel.so 설정이 없음</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>/etc/pam.d/su에 pam_wheel.so 설정 추가</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head safe">
+                <span>7. OS: 계정이 존재하지 않는 GID</span>
+                <span>SAFE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] 존재하지 않는 GID 사용 계정 없음 (양호)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>안전 - GID 설정이 유효함</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head safe">
+                <span>8. OS: 동일한 UID 금지</span>
+                <span>SAFE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] 동일한 UID 없음 (양호)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>안전 - 동일한 UID가 없음</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head safe">
+                <span>9. OS: 사용자 shell 점검</span>
+                <span>SAFE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] 로그인 불필요 계정 쉘 설정: 양호</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>안전 - 로그인 불필요 계정의 쉘이 제한됨</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>10. OS: 세션 종료 시간 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] TMOUT 설정이 없음</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>TMOUT을 600 이하로 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>11. OS: 안전한 비밀번호 암호화 알고리즘 사용</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] ENCRYPT_METHOD 설정이 미흡함</li><li>[OS] pam_unix.so SHA-2/YESCRYPT 설정이 없음</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>pam_unix.so에 SHA-2 이상 알고리즘 설정 추가 | ENCRYPT_METHOD를 SHA-2 이상으로 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head safe">
+                <span>12. OS: Root 홈, PATH 설정</span>
+                <span>SAFE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] PATH에 현재 디렉터리가 포함되지 않음 (양호)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>안전 - PATH 설정이 적절함</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>13. OS: 파일 및 디렉터리 소유자 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] 소유자 또는 그룹이 없는 파일/디렉터리 발견</li><li>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;Login - Rookies DNA&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"&gt;
+    &lt;link href="/css/style.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+
+&lt;body class="d-flex align-items-center justify-content-center min-vh-100 bg-black"&gt;
+
+    &lt;div class="card shadow-lg border-0" style="width: 100%; max-width: 400px; background-color: var(--dna-surface);"&gt;
+        &lt;div class="card-body p-5"&gt;
+            &lt;div class="text-center mb-4"&gt;
+                &lt;a href="/" class="d-inline-flex align-items-center gap-2 text-decoration-none mb-3"&gt;
+                    &lt;div class="rounded-3 d-inline-flex align-items-center justify-content-center"
+                        style="width:48px;height:48px;background:rgba(6, 182, 212, 0.1);"&gt;
+                        &lt;i class="bi bi-dna text-primary fs-3"&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;span class="fs-4 fw-bold text-white"&gt;Rookies DNA&lt;/span&gt;
+                &lt;/a&gt;
+                &lt;h4 class="fw-bold text-white"&gt;Welcome Back&lt;/h4&gt;
+                &lt;p class="text-muted small"&gt;DNA Portal Login&lt;/p&gt;
+            &lt;/div&gt;
+
+            
+
+            &lt;form action="/login" method="post"&gt;
+                &lt;div class="mb-3"&gt;
+                    &lt;label class="form-label text-muted small fw-bold"&gt;ID&lt;/label&gt;
+                    &lt;div class="input-group"&gt;
+                        &lt;span class="input-group-text bg-dark border-secondary text-secondary"&gt;&lt;i
+                                class="bi bi-person"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;input type="text" name="username" class="form-control" placeholder="아이디를 입력하세요" required&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="mb-4"&gt;
+                    &lt;label class="form-label text-muted small fw-bold"&gt;PASSWORD&lt;/label&gt;
+                    &lt;div class="input-group"&gt;
+                        &lt;span class="input-group-text bg-dark border-secondary text-secondary"&gt;&lt;i
+                                class="bi bi-lock"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;input type="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요" required&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="d-flex justify-content-end mb-3"&gt;
+                    &lt;a href="/find-password" class="text-secondary small text-decoration-none"&gt;비밀번호를 잊으셨나요?&lt;/a&gt;
+                &lt;/div&gt;
+
+                &lt;button type="submit" class="btn btn-primary w-100 mb-3 fw-bold py-2"&gt;LOG IN&lt;/button&gt;
+
+                &lt;div class="text-center"&gt;
+                    &lt;a href="/agreement" class="text-secondary small text-decoration-none"&gt;계정이 없으신가요? &lt;span
+                            class="text-primary"&gt;회원가입&lt;/span&gt;&lt;/a&gt;
+                &lt;/div&gt;
+
+                &lt;div class="mt-4 pt-3 border-top border-secondary border-opacity-25 text-center"&gt;
+                    &lt;small class="text-muted" style="font-size: 0.75rem;"&gt;
+                        Test Account: guest / guest
+                    &lt;/small&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>소유자 및 그룹이 없는 파일/디렉터리 정리</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>14. OS: /etc/passwd 파일 소유자 및 권한 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] /etc/passwd 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/passwd 권한 확인 실패 (&lt;html)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>/etc/passwd 권한을 644 이하로 설정 | /etc/passwd 소유자를 root로 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>15. OS: 시스템 시작 스크립트 권한 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] 시스템 시작 스크립트 권한 취약</li><li>  - &lt;!DOCTYPE html&gt; (owner=&lt;!DOCTYPE, perm=&lt;html)</li><li>  - &lt;/a&gt; (owner=&lt;!DOCTYPE, perm=&lt;html)</li><li>  - &lt;/body&gt; (owner=&lt;!DOCTYPE, perm=&lt;html)</li><li>  - &lt;/div&gt; (owner=&lt;!DOCTYPE, perm=&lt;html)</li><li>  - &lt;/form&gt; (owner=&lt;!DOCTYPE, perm=&lt;html)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>시작 스크립트 소유자를 root로 설정하고 쓰기 권한 제거</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>16. OS: /etc/shadow 파일 소유자 및 권한 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] /etc/shadow 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/shadow 권한 확인 실패 (&lt;html)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>/etc/shadow 권한을 400 이하로 설정 | /etc/shadow 소유자를 root로 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>17. OS: /etc/hosts 파일 소유자 및 권한 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] /etc/hosts 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/hosts 권한 확인 실패 (&lt;html)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>/etc/hosts 소유자를 root로 설정 | /etc/hosts 권한을 644 이하로 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>18. OS: /etc/inetd.conf 파일 소유자 및 권한 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] /etc/inetd.conf 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/inetd.conf 권한 확인 실패 (&lt;html)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>/etc/inetd.conf 소유자를 root로 설정 | /etc/inetd.conf 권한을 600 이하로 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>19. OS: /etc/(r)syslog.conf 파일 소유자 및 권한 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] /etc/syslog.conf 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/syslog.conf 권한 확인 실패 (&lt;html)</li><li>[OS] /etc/rsyslog.conf 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/rsyslog.conf 권한 확인 실패 (&lt;html)</li><li>[OS] /etc/rsyslog.d/default.conf 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/rsyslog.d/default.conf 권한 확인 실패 (&lt;html)</li><li>[OS] /etc/rsyslog.d/50-default.conf 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/rsyslog.d/50-default.conf 권한 확인 실패 (&lt;html)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>/etc/rsyslog.d/default.conf 소유자를 root로 설정 | /etc/rsyslog.conf 권한을 640 이하로 설정 | /etc/rsyslog.conf 소유자를 root로 설정 | /etc/rsyslog.d/50-default.conf 소유자를 root로 설정 | /etc/rsyslog.d/50-default.conf 권한을 640 이하로 설정 | /etc/rsyslog.d/default.conf 권한을 640 이하로 설정 | /etc/syslog.conf 권한을 640 이하로 설정 | /etc/syslog.conf 소유자를 root로 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>20. OS: /etc/services 파일 소유자 및 권한 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] /etc/services 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/services 권한 확인 실패 (&lt;html)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>/etc/services 소유자를 root로 설정 | /etc/services 권한을 644 이하로 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>21. OS: SUID, SGID 설정 파일 점검</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] SUID/SGID 설정 파일 발견 (점검 필요)</li><li>&lt;!DOCTYPE html&gt;</li><li>&lt;html lang="ko"&gt;</li><li>&lt;head&gt;</li><li>&lt;meta charset="UTF-8"&gt;</li><li>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</li><li>&lt;title&gt;Login - Rookies DNA&lt;/title&gt;</li><li>&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;</li><li>&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"&gt;</li><li>&lt;link href="/css/style.css" rel="stylesheet"&gt;</li><li>&lt;/head&gt;</li><li>&lt;body class="d-flex align-items-center justify-content-center min-vh-100 bg-black"&gt;</li><li>&lt;div class="card shadow-lg border-0" style="width: 100%; max-width: 400px; background-color: var(--dna-surface);"&gt;</li><li>&lt;div class="card-body p-5"&gt;</li><li>&lt;div class="text-center mb-4"&gt;</li><li>&lt;a href="/" class="d-inline-flex align-items-center gap-2 text-decoration-none mb-3"&gt;</li><li>&lt;div class="rounded-3 d-inline-flex align-items-center justify-content-center"</li><li>style="width:48px;height:48px;background:rgba(6, 182, 212, 0.1);"&gt;</li><li>&lt;i class="bi bi-dna text-primary fs-3"&gt;&lt;/i&gt;</li><li>&lt;/div&gt;</li><li>&lt;span class="fs-4 fw-bold text-white"&gt;Rookies DNA&lt;/span&gt;</li><li>&lt;/a&gt;</li><li>&lt;h4 class="fw-bold text-white"&gt;Welcome Back&lt;/h4&gt;</li><li>&lt;p class="text-muted small"&gt;DNA Portal Login&lt;/p&gt;</li><li>&lt;form action="/login" method="post"&gt;</li><li>&lt;div class="mb-3"&gt;</li><li>&lt;label class="form-label text-muted small fw-bold"&gt;ID&lt;/label&gt;</li><li>&lt;div class="input-group"&gt;</li><li>&lt;span class="input-group-text bg-dark border-secondary text-secondary"&gt;&lt;i</li><li>class="bi bi-person"&gt;&lt;/i&gt;&lt;/span&gt;</li><li>&lt;input type="text" name="username" class="form-control" placeholder="아이디를 입력하세요" required&gt;</li><li>&lt;div class="mb-4"&gt;</li><li>&lt;label class="form-label text-muted small fw-bold"&gt;PASSWORD&lt;/label&gt;</li><li>class="bi bi-lock"&gt;&lt;/i&gt;&lt;/span&gt;</li><li>&lt;input type="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요" required&gt;</li><li>&lt;div class="d-flex justify-content-end mb-3"&gt;</li><li>&lt;a href="/find-password" class="text-secondary small text-decoration-none"&gt;비밀번호를 잊으셨나요?&lt;/a&gt;</li><li>&lt;button type="submit" class="btn btn-primary w-100 mb-3 fw-bold py-2"&gt;LOG IN&lt;/button&gt;</li><li>&lt;div class="text-center"&gt;</li><li>&lt;a href="/agreement" class="text-secondary small text-decoration-none"&gt;계정이 없으신가요? &lt;span</li><li>class="text-primary"&gt;회원가입&lt;/span&gt;&lt;/a&gt;</li><li>&lt;div class="mt-4 pt-3 border-top border-secondary border-opacity-25 text-center"&gt;</li><li>&lt;small class="text-muted" style="font-size: 0.75rem;"&gt;</li><li>Test Account: guest / guest</li><li>&lt;/small&gt;</li><li>&lt;/form&gt;</li><li>&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</li><li>&lt;/body&gt;</li><li>&lt;/html&gt;</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>불필요한 SUID/SGID 파일 권한 제거</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>22. OS: 사용자 환경변수 파일 소유자 및 권한 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] 사용자 환경파일 권한/소유자 문제 발견</li><li>  - &lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;Login - Rookies DNA&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"&gt;
+    &lt;link href="/css/style.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+
+&lt;body class="d-flex align-items-center justify-content-center min-vh-100 bg-black"&gt;
+
+    &lt;div class="card shadow-lg border-0" style="width: 100%; max-width: 400px; background-color: var(--dna-surface);"&gt;
+        &lt;div class="card-body p-5"&gt;
+            &lt;div class="text-center mb-4"&gt;
+                &lt;a href="/" class="d-inline-flex align-items-center gap-2 text-decoration-none mb-3"&gt;
+                    &lt;div class="rounded-3 d-inline-flex align-items-center justify-content-center"
+                        style="width:48px;height:48px;background:rgba(6, 182, 212, 0.1);"&gt;
+                        &lt;i class="bi bi-dna text-primary fs-3"&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;span class="fs-4 fw-bold text-white"&gt;Rookies DNA&lt;/span&gt;
+                &lt;/a&gt;
+                &lt;h4 class="fw-bold text-white"&gt;Welcome Back&lt;/h4&gt;
+                &lt;p class="text-muted small"&gt;DNA Portal Login&lt;/p&gt;
+            &lt;/div&gt;
+
+            
+
+            &lt;form action="/login" method="post"&gt;
+                &lt;div class="mb-3"&gt;
+                    &lt;label class="form-label text-muted small fw-bold"&gt;ID&lt;/label&gt;
+                    &lt;div class="input-group"&gt;
+                        &lt;span class="input-group-text bg-dark border-secondary text-secondary"&gt;&lt;i
+                                class="bi bi-person"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;input type="text" name="username" class="form-control" placeholder="아이디를 입력하세요" required&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="mb-4"&gt;
+                    &lt;label class="form-label text-muted small fw-bold"&gt;PASSWORD&lt;/label&gt;
+                    &lt;div class="input-group"&gt;
+                        &lt;span class="input-group-text bg-dark border-secondary text-secondary"&gt;&lt;i
+                                class="bi bi-lock"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;input type="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요" required&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="d-flex justify-content-end mb-3"&gt;
+                    &lt;a href="/find-password" class="text-secondary small text-decoration-none"&gt;비밀번호를 잊으셨나요?&lt;/a&gt;
+                &lt;/div&gt;
+
+                &lt;button type="submit" class="btn btn-primary w-100 mb-3 fw-bold py-2"&gt;LOG IN&lt;/button&gt;
+
+                &lt;div class="text-center"&gt;
+                    &lt;a href="/agreement" class="text-secondary small text-decoration-none"&gt;계정이 없으신가요? &lt;span
+                            class="text-primary"&gt;회원가입&lt;/span&gt;&lt;/a&gt;
+                &lt;/div&gt;
+
+                &lt;div class="mt-4 pt-3 border-top border-secondary border-opacity-25 text-center"&gt;
+                    &lt;small class="text-muted" style="font-size: 0.75rem;"&gt;
+                        Test Account: guest / guest
+                    &lt;/small&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;/.profile (owner=&lt;!DOCTYPE)</li><li>  - &lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;Login - Rookies DNA&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"&gt;
+    &lt;link href="/css/style.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+
+&lt;body class="d-flex align-items-center justify-content-center min-vh-100 bg-black"&gt;
+
+    &lt;div class="card shadow-lg border-0" style="width: 100%; max-width: 400px; background-color: var(--dna-surface);"&gt;
+        &lt;div class="card-body p-5"&gt;
+            &lt;div class="text-center mb-4"&gt;
+                &lt;a href="/" class="d-inline-flex align-items-center gap-2 text-decoration-none mb-3"&gt;
+                    &lt;div class="rounded-3 d-inline-flex align-items-center justify-content-center"
+                        style="width:48px;height:48px;background:rgba(6, 182, 212, 0.1);"&gt;
+                        &lt;i class="bi bi-dna text-primary fs-3"&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;span class="fs-4 fw-bold text-white"&gt;Rookies DNA&lt;/span&gt;
+                &lt;/a&gt;
+                &lt;h4 class="fw-bold text-white"&gt;Welcome Back&lt;/h4&gt;
+                &lt;p class="text-muted small"&gt;DNA Portal Login&lt;/p&gt;
+            &lt;/div&gt;
+
+            
+
+            &lt;form action="/login" method="post"&gt;
+                &lt;div class="mb-3"&gt;
+                    &lt;label class="form-label text-muted small fw-bold"&gt;ID&lt;/label&gt;
+                    &lt;div class="input-group"&gt;
+                        &lt;span class="input-group-text bg-dark border-secondary text-secondary"&gt;&lt;i
+                                class="bi bi-person"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;input type="text" name="username" class="form-control" placeholder="아이디를 입력하세요" required&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="mb-4"&gt;
+                    &lt;label class="form-label text-muted small fw-bold"&gt;PASSWORD&lt;/label&gt;
+                    &lt;div class="input-group"&gt;
+                        &lt;span class="input-group-text bg-dark border-secondary text-secondary"&gt;&lt;i
+                                class="bi bi-lock"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;input type="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요" required&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="d-flex justify-content-end mb-3"&gt;
+                    &lt;a href="/find-password" class="text-secondary small text-decoration-none"&gt;비밀번호를 잊으셨나요?&lt;/a&gt;
+                &lt;/div&gt;
+
+                &lt;button type="submit" class="btn btn-primary w-100 mb-3 fw-bold py-2"&gt;LOG IN&lt;/button&gt;
+
+                &lt;div class="text-center"&gt;
+                    &lt;a href="/agreement" class="text-secondary small text-decoration-none"&gt;계정이 없으신가요? &lt;span
+                            class="text-primary"&gt;회원가입&lt;/span&gt;&lt;/a&gt;
+                &lt;/div&gt;
+
+                &lt;div class="mt-4 pt-3 border-top border-secondary border-opacity-25 text-center"&gt;
+                    &lt;small class="text-muted" style="font-size: 0.75rem;"&gt;
+                        Test Account: guest / guest
+                    &lt;/small&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;/.kshrc (owner=&lt;!DOCTYPE)</li><li>  - &lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;Login - Rookies DNA&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"&gt;
+    &lt;link href="/css/style.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+
+&lt;body class="d-flex align-items-center justify-content-center min-vh-100 bg-black"&gt;
+
+    &lt;div class="card shadow-lg border-0" style="width: 100%; max-width: 400px; background-color: var(--dna-surface);"&gt;
+        &lt;div class="card-body p-5"&gt;
+            &lt;div class="text-center mb-4"&gt;
+                &lt;a href="/" class="d-inline-flex align-items-center gap-2 text-decoration-none mb-3"&gt;
+                    &lt;div class="rounded-3 d-inline-flex align-items-center justify-content-center"
+                        style="width:48px;height:48px;background:rgba(6, 182, 212, 0.1);"&gt;
+                        &lt;i class="bi bi-dna text-primary fs-3"&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;span class="fs-4 fw-bold text-white"&gt;Rookies DNA&lt;/span&gt;
+                &lt;/a&gt;
+                &lt;h4 class="fw-bold text-white"&gt;Welcome Back&lt;/h4&gt;
+                &lt;p class="text-muted small"&gt;DNA Portal Login&lt;/p&gt;
+            &lt;/div&gt;
+
+            
+
+            &lt;form action="/login" method="post"&gt;
+                &lt;div class="mb-3"&gt;
+                    &lt;label class="form-label text-muted small fw-bold"&gt;ID&lt;/label&gt;
+                    &lt;div class="input-group"&gt;
+                        &lt;span class="input-group-text bg-dark border-secondary text-secondary"&gt;&lt;i
+                                class="bi bi-person"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;input type="text" name="username" class="form-control" placeholder="아이디를 입력하세요" required&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="mb-4"&gt;
+                    &lt;label class="form-label text-muted small fw-bold"&gt;PASSWORD&lt;/label&gt;
+                    &lt;div class="input-group"&gt;
+                        &lt;span class="input-group-text bg-dark border-secondary text-secondary"&gt;&lt;i
+                                class="bi bi-lock"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;input type="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요" required&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="d-flex justify-content-end mb-3"&gt;
+                    &lt;a href="/find-password" class="text-secondary small text-decoration-none"&gt;비밀번호를 잊으셨나요?&lt;/a&gt;
+                &lt;/div&gt;
+
+                &lt;button type="submit" class="btn btn-primary w-100 mb-3 fw-bold py-2"&gt;LOG IN&lt;/button&gt;
+
+                &lt;div class="text-center"&gt;
+                    &lt;a href="/agreement" class="text-secondary small text-decoration-none"&gt;계정이 없으신가요? &lt;span
+                            class="text-primary"&gt;회원가입&lt;/span&gt;&lt;/a&gt;
+                &lt;/div&gt;
+
+                &lt;div class="mt-4 pt-3 border-top border-secondary border-opacity-25 text-center"&gt;
+                    &lt;small class="text-muted" style="font-size: 0.75rem;"&gt;
+                        Test Account: guest / guest
+                    &lt;/small&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;/.cshrc (owner=&lt;!DOCTYPE)</li><li>  - &lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;Login - Rookies DNA&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"&gt;
+    &lt;link href="/css/style.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+
+&lt;body class="d-flex align-items-center justify-content-center min-vh-100 bg-black"&gt;
+
+    &lt;div class="card shadow-lg border-0" style="width: 100%; max-width: 400px; background-color: var(--dna-surface);"&gt;
+        &lt;div class="card-body p-5"&gt;
+            &lt;div class="text-center mb-4"&gt;
+                &lt;a href="/" class="d-inline-flex align-items-center gap-2 text-decoration-none mb-3"&gt;
+                    &lt;div class="rounded-3 d-inline-flex align-items-center justify-content-center"
+                        style="width:48px;height:48px;background:rgba(6, 182, 212, 0.1);"&gt;
+                        &lt;i class="bi bi-dna text-primary fs-3"&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;span class="fs-4 fw-bold text-white"&gt;Rookies DNA&lt;/span&gt;
+                &lt;/a&gt;
+                &lt;h4 class="fw-bold text-white"&gt;Welcome Back&lt;/h4&gt;
+                &lt;p class="text-muted small"&gt;DNA Portal Login&lt;/p&gt;
+            &lt;/div&gt;
+
+            
+
+            &lt;form action="/login" method="post"&gt;
+                &lt;div class="mb-3"&gt;
+                    &lt;label class="form-label text-muted small fw-bold"&gt;ID&lt;/label&gt;
+                    &lt;div class="input-group"&gt;
+                        &lt;span class="input-group-text bg-dark border-secondary text-secondary"&gt;&lt;i
+                                class="bi bi-person"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;input type="text" name="username" class="form-control" placeholder="아이디를 입력하세요" required&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="mb-4"&gt;
+                    &lt;label class="form-label text-muted small fw-bold"&gt;PASSWORD&lt;/label&gt;
+                    &lt;div class="input-group"&gt;
+                        &lt;span class="input-group-text bg-dark border-secondary text-secondary"&gt;&lt;i
+                                class="bi bi-lock"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;input type="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요" required&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="d-flex justify-content-end mb-3"&gt;
+                    &lt;a href="/find-password" class="text-secondary small text-decoration-none"&gt;비밀번호를 잊으셨나요?&lt;/a&gt;
+                &lt;/div&gt;
+
+                &lt;button type="submit" class="btn btn-primary w-100 mb-3 fw-bold py-2"&gt;LOG IN&lt;/button&gt;
+
+                &lt;div class="text-center"&gt;
+                    &lt;a href="/agreement" class="text-secondary small text-decoration-none"&gt;계정이 없으신가요? &lt;span
+                            class="text-primary"&gt;회원가입&lt;/span&gt;&lt;/a&gt;
+                &lt;/div&gt;
+
+                &lt;div class="mt-4 pt-3 border-top border-secondary border-opacity-25 text-center"&gt;
+                    &lt;small class="text-muted" style="font-size: 0.75rem;"&gt;
+                        Test Account: guest / guest
+                    &lt;/small&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;/.bashrc (owner=&lt;!DOCTYPE)</li><li>  - &lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;Login - Rookies DNA&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"&gt;
+    &lt;link href="/css/style.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+
+&lt;body class="d-flex align-items-center justify-content-center min-vh-100 bg-black"&gt;
+
+    &lt;div class="card shadow-lg border-0" style="width: 100%; max-width: 400px; background-color: var(--dna-surface);"&gt;
+        &lt;div class="card-body p-5"&gt;
+            &lt;div class="text-center mb-4"&gt;
+                &lt;a href="/" class="d-inline-flex align-items-center gap-2 text-decoration-none mb-3"&gt;
+                    &lt;div class="rounded-3 d-inline-flex align-items-center justify-content-center"
+                        style="width:48px;height:48px;background:rgba(6, 182, 212, 0.1);"&gt;
+                        &lt;i class="bi bi-dna text-primary fs-3"&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;span class="fs-4 fw-bold text-white"&gt;Rookies DNA&lt;/span&gt;
+                &lt;/a&gt;
+                &lt;h4 class="fw-bold text-white"&gt;Welcome Back&lt;/h4&gt;
+                &lt;p class="text-muted small"&gt;DNA Portal Login&lt;/p&gt;
+            &lt;/div&gt;
+
+            
+
+            &lt;form action="/login" method="post"&gt;
+                &lt;div class="mb-3"&gt;
+                    &lt;label class="form-label text-muted small fw-bold"&gt;ID&lt;/label&gt;
+                    &lt;div class="input-group"&gt;
+                        &lt;span class="input-group-text bg-dark border-secondary text-secondary"&gt;&lt;i
+                                class="bi bi-person"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;input type="text" name="username" class="form-control" placeholder="아이디를 입력하세요" required&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="mb-4"&gt;
+                    &lt;label class="form-label text-muted small fw-bold"&gt;PASSWORD&lt;/label&gt;
+                    &lt;div class="input-group"&gt;
+                        &lt;span class="input-group-text bg-dark border-secondary text-secondary"&gt;&lt;i
+                                class="bi bi-lock"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;input type="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요" required&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="d-flex justify-content-end mb-3"&gt;
+                    &lt;a href="/find-password" class="text-secondary small text-decoration-none"&gt;비밀번호를 잊으셨나요?&lt;/a&gt;
+                &lt;/div&gt;
+
+                &lt;button type="submit" class="btn btn-primary w-100 mb-3 fw-bold py-2"&gt;LOG IN&lt;/button&gt;
+
+                &lt;div class="text-center"&gt;
+                    &lt;a href="/agreement" class="text-secondary small text-decoration-none"&gt;계정이 없으신가요? &lt;span
+                            class="text-primary"&gt;회원가입&lt;/span&gt;&lt;/a&gt;
+                &lt;/div&gt;
+
+                &lt;div class="mt-4 pt-3 border-top border-secondary border-opacity-25 text-center"&gt;
+                    &lt;small class="text-muted" style="font-size: 0.75rem;"&gt;
+                        Test Account: guest / guest
+                    &lt;/small&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;/.bash_profile (owner=&lt;!DOCTYPE)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>환경파일 소유자 및 권한을 적절히 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>23. OS: .rhosts/hosts.equiv 사용 금지</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] /etc/hosts.equiv 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/hosts.equiv 권한 확인 실패 (&lt;html)</li><li>[OS] .rhosts 파일 발견</li><li>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;Login - Rookies DNA&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"&gt;
+    &lt;link href="/css/style.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+
+&lt;body class="d-flex align-items-center justify-content-center min-vh-100 bg-black"&gt;
+
+    &lt;div class="card shadow-lg border-0" style="width: 100%; max-width: 400px; background-color: var(--dna-surface);"&gt;
+        &lt;div class="card-body p-5"&gt;
+            &lt;div class="text-center mb-4"&gt;
+                &lt;a href="/" class="d-inline-flex align-items-center gap-2 text-decoration-none mb-3"&gt;
+                    &lt;div class="rounded-3 d-inline-flex align-items-center justify-content-center"
+                        style="width:48px;height:48px;background:rgba(6, 182, 212, 0.1);"&gt;
+                        &lt;i class="bi bi-dna text-primary fs-3"&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;span class="fs-4 fw-bold text-white"&gt;Rookies DNA&lt;/span&gt;
+                &lt;/a&gt;
+                &lt;h4 class="fw-bold text-white"&gt;Welcome Back&lt;/h4&gt;
+                &lt;p class="text-muted small"&gt;DNA Portal Login&lt;/p&gt;
+            &lt;/div&gt;
+
+            
+
+            &lt;form action="/login" method="post"&gt;
+                &lt;div class="mb-3"&gt;
+                    &lt;label class="form-label text-muted small fw-bold"&gt;ID&lt;/label&gt;
+                    &lt;div class="input-group"&gt;
+                        &lt;span class="input-group-text bg-dark border-secondary text-secondary"&gt;&lt;i
+                                class="bi bi-person"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;input type="text" name="username" class="form-control" placeholder="아이디를 입력하세요" required&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="mb-4"&gt;
+                    &lt;label class="form-label text-muted small fw-bold"&gt;PASSWORD&lt;/label&gt;
+                    &lt;div class="input-group"&gt;
+                        &lt;span class="input-group-text bg-dark border-secondary text-secondary"&gt;&lt;i
+                                class="bi bi-lock"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;input type="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요" required&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="d-flex justify-content-end mb-3"&gt;
+                    &lt;a href="/find-password" class="text-secondary small text-decoration-none"&gt;비밀번호를 잊으셨나요?&lt;/a&gt;
+                &lt;/div&gt;
+
+                &lt;button type="submit" class="btn btn-primary w-100 mb-3 fw-bold py-2"&gt;LOG IN&lt;/button&gt;
+
+                &lt;div class="text-center"&gt;
+                    &lt;a href="/agreement" class="text-secondary small text-decoration-none"&gt;계정이 없으신가요? &lt;span
+                            class="text-primary"&gt;회원가입&lt;/span&gt;&lt;/a&gt;
+                &lt;/div&gt;
+
+                &lt;div class="mt-4 pt-3 border-top border-secondary border-opacity-25 text-center"&gt;
+                    &lt;small class="text-muted" style="font-size: 0.75rem;"&gt;
+                        Test Account: guest / guest
+                    &lt;/small&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>/etc/hosts.equiv 소유자를 root로 설정 | .rhosts 파일 제거 | /etc/hosts.equiv 권한을 600 이하로 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>24. OS: 접속 IP 및 포트 제한</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] 접속 IP/포트 제한 설정 미흡</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>hosts.deny/allow 설정 또는 방화벽 활성화 필요</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>25. OS: hosts.lpd 파일 소유자 및 권한 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] /etc/hosts.lpd 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/hosts.lpd 권한 확인 실패 (&lt;html)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>/etc/hosts.lpd 권한을 600 이하로 설정 | /etc/hosts.lpd 소유자를 root로 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>26. OS: UMASK 설정 관리</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] /etc/profile umask 설정 없음</li><li>[OS] /etc/login.defs UMASK 설정 없음</li><li>[OS] vsftpd local_umask 설정 없음</li><li>[OS] proftpd Umask 설정 없음</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>proftpd Umask 022 이상 설정 | /etc/login.defs에 UMASK 022 이상 설정 | /etc/profile에 umask 022 이상 설정 | vsftpd local_umask 022 이상 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head safe">
+                <span>27. OS: 홈디렉토리 소유자 및 권한 설정</span>
+                <span>SAFE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] 홈디렉토리 소유자 및 권한: 양호</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>안전 - 홈디렉토리 권한이 적절함</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head safe">
+                <span>28. OS: 홈 디렉토리 존재 여부</span>
+                <span>SAFE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] 홈 디렉토리 존재 여부: 양호</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>안전 - 홈 디렉토리가 모두 존재함</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head safe">
+                <span>29. OS: Finger 서비스 비활성화</span>
+                <span>SAFE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] Finger 서비스 비활성화: 양호</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>안전 - Finger 서비스가 비활성화됨</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head safe">
+                <span>30. OS: 공유 서비스 익명 접근 제한</span>
+                <span>SAFE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] 익명 접근 설정 없음 (양호)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>안전 - 공유 서비스 익명 접근이 제한됨</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>31. OS: r 계열 서비스 비활성화</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] r 계열 서비스가 활성화되어 있음</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>r 계열 서비스 비활성화 필요</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>32. OS: crontab 설정파일 권한 설정 미흡</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] cron/at 관련 파일 권한 취약</li><li>  - /etc/crontab (owner=&lt;!DOCTYPE, perm=&lt;html)</li><li>  - /etc/cron.allow (owner=&lt;!DOCTYPE, perm=&lt;html)</li><li>  - /etc/cron.deny (owner=&lt;!DOCTYPE, perm=&lt;html)</li><li>  - /etc/at.allow (owner=&lt;!DOCTYPE, perm=&lt;html)</li><li>  - /etc/at.deny (owner=&lt;!DOCTYPE, perm=&lt;html)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>cron/at 관련 파일 소유자 root 및 권한 640 이하 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>33. OS: DoS 서비스 비활성화</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] DoS 취약 서비스가 활성화되어 있음</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>echo/discard/daytime/chargen 서비스 비활성화</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head safe">
+                <span>34. OS: 불필요한 NFS 서비스 비활성화</span>
+                <span>SAFE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] NFS 관련 서비스 비활성화: 양호</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>안전 - NFS 서비스가 비활성화됨</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>35. OS: NFS 접근 통제</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] /etc/exports 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/exports 권한 확인 실패 (&lt;html)</li><li>오류: missing ), unterminated subpattern at position 22</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>검사 실패</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>36. OS: 불필요한 automountd 제거</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] automount/autofs 서비스 활성화됨</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>불필요한 automount/autofs 서비스 비활성화</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>37. OS: RPC 서비스 비활성화</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] RPC 서비스가 활성화되어 있음</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>불필요한 RPC 서비스 비활성화</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>38. OS: NIS/NIS+ 점검</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] NIS/NIS+ 서비스 활성화됨</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>NIS/NIS+ 서비스 비활성화</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>39. OS: tftp/talk 서비스 비활성화</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] tftp/talk 서비스 활성화됨</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>tftp/talk 서비스 비활성화</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>40. OS: Telnet 서비스 비활성화</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] Telnet 서비스가 활성화되어 있음</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>Telnet 서비스 비활성화</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>41. OS: FTP 배너 정보 노출 제한</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] ftpd_banner 설정이 없음</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>ftpd_banner를 일반 문구로 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>42. OS: 암호화되지 않는 FTP 서비스 비활성화</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] FTP 서비스가 활성화되어 있음</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>암호화되지 않는 FTP 서비스 비활성화</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head safe">
+                <span>43. OS: FTP 계정 shell 제한</span>
+                <span>SAFE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] FTP 계정 쉘 제한: 양호</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>안전 - FTP 계정 쉘이 제한됨</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>44. OS: FTP 접근 제어 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] /etc/ftpusers 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/ftpusers 권한 확인 실패 (&lt;html)</li><li>[OS] /etc/ftpd/ftpusers 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/ftpd/ftpusers 권한 확인 실패 (&lt;html)</li><li>[OS] /etc/vsftpd/ftpusers 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/vsftpd/ftpusers 권한 확인 실패 (&lt;html)</li><li>[OS] /etc/vsftpd.ftpusers 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/vsftpd.ftpusers 권한 확인 실패 (&lt;html)</li><li>[OS] vsftpd userlist_enable 설정이 YES가 아님</li><li>[OS] vsftpd userlist_deny 설정이 없음</li><li>[OS] /etc/vsftpd.user_list 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/vsftpd.user_list 권한 확인 실패 (&lt;html)</li><li>[OS] /etc/vsftpd/user_list 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/vsftpd/user_list 권한 확인 실패 (&lt;html)</li><li>[OS] proftpd UseFtpUsers 설정이 없음</li><li>[OS] /etc/proftpd.conf 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/proftpd.conf 권한 확인 실패 (&lt;html)</li><li>[OS] /etc/proftpd/proftpd.conf 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/proftpd/proftpd.conf 권한 확인 실패 (&lt;html)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>user_list 소유자를 root로 설정 | proftpd.conf 소유자를 root로 설정 | proftpd UseFtpUsers 설정 확인 | ftpusers 권한을 640 이하로 설정 | ftpusers 소유자를 root로 설정 | vsftpd userlist_enable=YES 설정 | user_list 권한을 640 이하로 설정 | vsftpd userlist_deny 옵션 설정 | proftpd.conf 권한을 640 이하로 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>45. OS: Ftpusers 파일 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] root 차단 설정 없음: /etc/ftpusers, /etc/ftpd/ftpusers, /etc/vsftpd/ftpusers, /etc/vsftpd.ftpusers</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>ftpusers에 root 계정 추가</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head safe">
+                <span>46. OS: 불필요한 SNMP 서비스 구동 점검</span>
+                <span>SAFE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] snmpd 서비스 비활성화: 양호</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>안전 - SNMP 서비스가 비활성화됨</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>47. OS: sudo 명령어 접근 관리</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] /etc/sudoers 소유자 취약 (현재: &lt;!DOCTYPE)</li><li>[OS] /etc/sudoers 권한 확인 실패 (&lt;html)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>/etc/sudoers 권한을 640 이하로 설정 | /etc/sudoers 소유자를 root로 설정</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>48. OS: NTP 및 시각 동기화 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] NTP 동기화 서비스 비활성화</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>NTP 또는 시각 동기화 서비스 활성화</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>49. OS: 정책에 따른 시스템 로깅 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] 로깅 정책 설정 미흡</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>로깅 정책 설정 확인</p>
+                </div></div></div>
+        <div class="item">
+            <div class="item-head vuln">
+                <span>50. OS: 로그 디렉터리 소유자 및 권한 설정</span>
+                <span>VULNERABLE</span>
+            </div>
+            <div class="item-body">
+
+                <div class="section">
+                    <h4>Details</h4>
+                    <ul><li>[OS] 로그 파일 소유자/권한 문제 발견</li><li>  - &lt;head&gt; (owner=&lt;!DOCTYPE html&gt;, perm=)</li><li>  - &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt; (owner=&lt;meta charset="UTF-8"&gt;, perm=&lt;title&gt;Login - Rookies DNA&lt;/title&gt;)</li><li>  - &lt;div class="card-body p-5"&gt; (owner=&lt;body class="d-flex align-items-center justify-content-center min-vh-100 bg-black"&gt;, perm=&lt;div class="card shadow-lg border-0" style="width: 100%; max-width: 400px; background-color: var(--dna-surface);"&gt;)</li><li>  - style="width:48px;height:48px;background:rgba(6, 182, 212, 0.1);"&gt; (owner=&lt;div class="text-center mb-4"&gt;, perm=&lt;div class="rounded-3 d-inline-flex align-items-center justify-content-center")</li><li>  - &lt;/a&gt; (owner=&lt;i class="bi bi-dna text-primary fs-3"&gt;&lt;/i&gt;, perm=&lt;span class="fs-4 fw-bold text-white"&gt;Rookies DNA&lt;/span&gt;)</li></ul>
+                </div>
+                <div class="section">
+                    <h4>Recommendation</h4>
+                    <p>로그 파일 소유자를 root로, 권한을 644 이하로 설정</p>
+                </div></div></div>
+        <div class="footer">
+            Generated by DNA Lab OS Security Scanner
+        </div>
+    </div>
+</body>
+</html>

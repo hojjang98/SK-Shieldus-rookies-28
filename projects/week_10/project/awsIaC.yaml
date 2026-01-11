@@ -1,0 +1,377 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  Oregon(us-west-2) single-AZ VPC with Public(Nginx) + Private(App+DB Docker) EC2.
+  Session Manager enabled. Public Nginx allows inbound HTTP(80) only,
+  proxies to Private App(8080). MariaDB runs in Docker on the App instance.
+  Ubuntu Server 24.04 LTS (noble) AMI is used.
+
+Parameters:
+  VpcCidr:
+    Type: String
+    Default: 10.20.0.0/16
+    AllowedValues: [10.20.0.0/16]
+
+  PublicSubnetCidr:
+    Type: String
+    Default: 10.20.11.0/24
+    AllowedValues: [10.20.11.0/24]
+
+  PrivateSubnetCidr:
+    Type: String
+    Default: 10.20.21.0/24
+    AllowedValues: [10.20.21.0/24]
+
+  AvailabilityZone:
+    Type: String
+    Default: us-west-2a
+    AllowedValues: [us-west-2a]
+
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    AllowedValues: [t3.micro, t2.micro, t3.medium]
+
+  AppJarUrl:
+    Description: "HTTP(S) URL to your Spring Boot jar (downloaded at boot)."
+    Type: String
+    Default: ""
+
+Resources:
+  # -----------------
+  # VPC / Networking
+  # -----------------
+  LabVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCidr
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: LabVPC
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: Lab-IGW
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref LabVPC
+      InternetGatewayId: !Ref InternetGateway
+
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref LabVPC
+      CidrBlock: !Ref PublicSubnetCidr
+      AvailabilityZone: !Ref AvailabilityZone
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: PublicSubnet
+
+  PrivateSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref LabVPC
+      CidrBlock: !Ref PrivateSubnetCidr
+      AvailabilityZone: !Ref AvailabilityZone
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: PrivateSubnet
+
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref LabVPC
+      Tags:
+        - Key: Name
+          Value: PublicRT
+
+  PublicDefaultRoute:
+    Type: AWS::EC2::Route
+    DependsOn: AttachGateway
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+
+  PublicSubnetRTA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnet
+      RouteTableId: !Ref PublicRouteTable
+
+  # NAT (private outbound + SSM)
+  NatEip:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+
+  NatGateway:
+    Type: AWS::EC2::NatGateway
+    DependsOn: AttachGateway
+    Properties:
+      AllocationId: !GetAtt NatEip.AllocationId
+      SubnetId: !Ref PublicSubnet
+      Tags:
+        - Key: Name
+          Value: Lab-NAT
+
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref LabVPC
+      Tags:
+        - Key: Name
+          Value: PrivateRT
+
+  PrivateDefaultRoute:
+    Type: AWS::EC2::Route
+    DependsOn: NatGateway
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NatGateway
+
+  PrivateSubnetRTA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PrivateSubnet
+      RouteTableId: !Ref PrivateRouteTable
+
+  # -----------------
+  # Security Groups
+  # -----------------
+  NginxSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow HTTP from internet; proxy to App:8080
+      VpcId: !Ref LabVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: NginxSG
+
+  AppSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow 8080 only from NginxSG
+      VpcId: !Ref LabVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          SourceSecurityGroupId: !Ref NginxSG
+      Tags:
+        - Key: Name
+          Value: AppSG
+
+  # -----------------
+  # IAM (SSM)
+  # -----------------
+  SsmRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "Lab-SSMRole-${AWS::StackName}"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+
+  SsmInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      InstanceProfileName: !Sub "Lab-SSMProfile-${AWS::StackName}"
+      Roles: [!Ref SsmRole]
+
+  # -----------------
+  # EC2: Private App + DB (Docker MariaDB) + OpenJDK21
+  # -----------------
+  AppInstance:
+    Type: AWS::EC2::Instance
+    DependsOn:
+      - PrivateDefaultRoute
+      - PrivateSubnetRTA
+    Properties:
+      ImageId: ami-00f46ccd1cbfb363e   # Ubuntu Server 24.04 LTS (noble)
+      InstanceType: !Ref InstanceType
+      IamInstanceProfile: !Ref SsmInstanceProfile
+      SubnetId: !Ref PrivateSubnet
+      SecurityGroupIds: [!Ref AppSG]
+      Tags:
+        - Key: Name
+          Value: Private-App-With-DB
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          set -e
+          export DEBIAN_FRONTEND=noninteractive
+
+          apt-get update -y
+          apt-get install -y ca-certificates curl gnupg lsb-release
+
+          # Docker
+          install -m 0755 -d /etc/apt/keyrings
+          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+          chmod a+r /etc/apt/keyrings/docker.gpg
+          echo \
+            "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+            $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
+            > /etc/apt/sources.list.d/docker.list
+          apt-get update -y
+          apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+          systemctl enable --now docker
+          usermod -aG docker ubuntu || true
+
+          # DB init.sql
+          mkdir -p /opt/rookies-db
+          cat > /opt/rookies-db/init.sql <<'SQL'
+          CREATE DATABASE IF NOT EXISTS web;
+          USE web;
+          CREATE TABLE IF NOT EXISTS tb_user_profile (
+            user_id BIGINT PRIMARY KEY,
+            birth_date DATE,
+            phone VARCHAR(30),
+            address VARCHAR(255),
+            updated_at TIMESTAMP DEFAULT NOW() ON UPDATE NOW()
+          );
+          CREATE TABLE IF NOT EXISTS tb_family_relations (
+            id BIGINT AUTO_INCREMENT PRIMARY KEY,
+            user_id BIGINT NOT NULL,
+            relation_type VARCHAR(20) NOT NULL,
+            name VARCHAR(100) NOT NULL,
+            birth_date DATE,
+            created_at TIMESTAMP DEFAULT NOW()
+          );
+          CREATE TABLE IF NOT EXISTS tb_dna_app_status (
+            board_id BIGINT PRIMARY KEY,
+            status VARCHAR(20) NOT NULL DEFAULT '접수',
+            updated_at TIMESTAMP DEFAULT NOW() ON UPDATE NOW()
+          );
+          CREATE TABLE IF NOT EXISTS tb_dna_results (
+            id BIGINT AUTO_INCREMENT PRIMARY KEY,
+            board_id BIGINT NOT NULL,
+            category VARCHAR(30),
+            filename VARCHAR(255),
+            filepath VARCHAR(500),
+            uploaded_at TIMESTAMP DEFAULT NOW()
+          );
+          SQL
+
+          docker rm -f rookies-db || true
+          docker run -d --name rookies-db \
+            -p 3306:3306 \
+            -e MARIADB_ROOT_PASSWORD=9999 \
+            -e MARIADB_DATABASE=web \
+            -e TZ=Asia/Seoul \
+            -v /opt/rookies-db/init.sql:/docker-entrypoint-initdb.d/init.sql \
+            mariadb:latest \
+            --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+          # OpenJDK 21 (Temurin)
+          mkdir -p /etc/apt/keyrings
+          curl -fsSL https://packages.adoptium.net/artifactory/api/gpg/key/public | gpg --dearmor -o /etc/apt/keyrings/adoptium.gpg
+          echo "deb [signed-by=/etc/apt/keyrings/adoptium.gpg] https://packages.adoptium.net/artifactory/deb noble main" \
+            > /etc/apt/sources.list.d/adoptium.list
+          apt-get update -y
+          apt-get install -y temurin-21-jdk
+
+          # Spring config
+          mkdir -p /opt/rookies-app
+          cat > /opt/rookies-app/application.yaml <<EOF
+          server:
+            port: 8080
+          spring:
+            datasource:
+              url: jdbc:mariadb://127.0.0.1:3306/web
+              username: root
+              password: 9999
+          EOF
+
+          if [ -n "${AppJarUrl}" ]; then
+            curl -fL "${AppJarUrl}" -o /opt/rookies-app/app.jar
+          fi
+
+          cat > /etc/systemd/system/rookies-app.service <<'UNIT'
+          [Unit]
+          Description=Rookies Spring Boot App
+          After=network-online.target docker.service
+          Requires=docker.service
+
+          [Service]
+          WorkingDirectory=/opt/rookies-app
+          ExecStart=/usr/bin/java -jar /opt/rookies-app/app.jar --spring.config.location=/opt/rookies-app/application.yaml
+          Restart=always
+
+          [Install]
+          WantedBy=multi-user.target
+          UNIT
+
+          systemctl daemon-reload
+          systemctl enable rookies-app
+          if [ -f /opt/rookies-app/app.jar ]; then systemctl start rookies-app; fi
+
+  # -----------------
+  # EC2: Public Nginx
+  # -----------------
+  NginxInstance:
+    Type: AWS::EC2::Instance
+    DependsOn: AppInstance
+    Properties:
+      ImageId: ami-00f46ccd1cbfb363e   # Ubuntu Server 24.04 LTS (noble)
+      InstanceType: !Ref InstanceType
+      IamInstanceProfile: !Ref SsmInstanceProfile
+      SubnetId: !Ref PublicSubnet
+      SecurityGroupIds: [!Ref NginxSG]
+      Tags:
+        - Key: Name
+          Value: Public-Nginx
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          set -e
+          apt-get update -y
+          apt-get install -y nginx
+
+          rm -f /etc/nginx/sites-enabled/default
+          cat > /etc/nginx/sites-available/rookies.conf <<EOF
+          server {
+            listen 80 default_server;
+            server_name _;
+            location / {
+              proxy_pass http://${AppInstance.PrivateIp}:8080;
+              proxy_set_header Host \$host;
+              proxy_set_header X-Real-IP \$remote_addr;
+              proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto \$scheme;
+            }
+          }
+          EOF
+
+          ln -s /etc/nginx/sites-available/rookies.conf /etc/nginx/sites-enabled/rookies.conf
+          nginx -t
+          systemctl enable --now nginx
+
+Outputs:
+  NginxPublicIP:
+    Value: !GetAtt NginxInstance.PublicIp
+    Description: Public entry (HTTP)
+
+  AppPrivateIP:
+    Value: !GetAtt AppInstance.PrivateIp
+    Description: Private App (8080 + MariaDB Docker)

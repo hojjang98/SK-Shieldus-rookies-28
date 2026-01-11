@@ -1,0 +1,80 @@
+import sys
+import os
+import re
+try:
+    from .utils import get_session_with_admin_auth, detect_os, execute_command
+except ImportError:
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from scanners.os_scan.utils import get_session_with_admin_auth, detect_os, execute_command
+
+def _inetd_enabled(content, service_name):
+    for line in content.splitlines():
+        line = line.strip()
+        if not line or line.startswith('#'):
+            continue
+        if re.match(r'^' + service_name + r'\\b', line):
+            return True
+    return False
+
+def _xinetd_enabled(content):
+    has_disable = False
+    for line in content.splitlines():
+        line = line.strip()
+        if not line or line.startswith('#'):
+            continue
+        if line.startswith("disable"):
+            has_disable = True
+            if "no" in line:
+                return True
+    return not has_disable
+
+def scan(target_url, login_info=None):
+    result = {
+        'name': 'OS: 암호화되지 않는 FTP 서비스 비활성화',
+        'vulnerable': False,
+        'details': [],
+        'recommendations': []
+    }
+
+    try:
+        session = get_session_with_admin_auth(target_url, login_info)
+        os_type = detect_os(target_url, session)
+
+        if os_type == "Windows":
+            result['details'].append("[OS] Windows는 지원하지 않습니다")
+            result['recommendation'] = 'Windows는 지원하지 않습니다'
+            return result
+
+        if os_type == "Linux":
+            inetd_conf = execute_command(target_url, session, "cat /etc/inetd.conf 2>/dev/null")
+            inetd_on = _inetd_enabled(inetd_conf, "ftp")
+
+            xinetd_conf = execute_command(target_url, session, "cat /etc/xinetd.d/ftp 2>/dev/null")
+            xinetd_on = _xinetd_enabled(xinetd_conf) if xinetd_conf.strip() else False
+
+            services = ["vsftpd", "proftpd", "pure-ftpd", "ftp"]
+            active_services = []
+            for svc in services:
+                status = execute_command(target_url, session, f"systemctl is-active {svc} 2>&1")
+                if "active" in status.lower():
+                    active_services.append(svc)
+
+            if inetd_on or xinetd_on or active_services:
+                result['vulnerable'] = True
+                result['details'].append("[OS] FTP 서비스가 활성화되어 있음")
+                if active_services:
+                    result['details'].append(f"[OS] 활성 서비스: {', '.join(active_services)}")
+                result['recommendations'].append("암호화되지 않는 FTP 서비스 비활성화")
+            else:
+                result['details'].append("[OS] FTP 서비스 비활성화: 양호")
+
+        if not result['recommendations']:
+            result['recommendation'] = '안전 - FTP 서비스가 비활성화됨'
+        else:
+            result['recommendation'] = ' | '.join(list(set(result['recommendations'])))
+
+    except Exception as e:
+        result['details'].append(f"오류: {str(e)}")
+        result['recommendation'] = '검사 실패'
+
+    return result
