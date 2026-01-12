@@ -1,5 +1,5 @@
 # Research Review: Practical Comprehensive Bounds on Surreptitious Communication Over DNS
-> **Analyzed Date:** 2025.01.13 - 2025.01.17  
+> **Analyzed Date:** 2025.01.12 - 2025.01.16
 > **Keywords:** DNS Tunneling, Data Exfiltration, Information Theory, Upper Bound Detection, Enterprise Security  
 > **Source:** USENIX Security Symposium, 2013, Pages 17-32  
 > **Link:** https://www.usenix.org/conference/usenixsecurity13/technical-sessions/presentation/paxson
@@ -147,3 +147,340 @@ DNS 터널링 탐지를 "의심스러운 패턴 찾기"가 아니라 "수학적�
 - 도메인별 정보량 집계를 실시간으로 처리하는 구체적인 알고리즘은?
 - 230억 개 쿼리를 분석하는 시스템 아키텍처는 어떻게 설계했는가?
 - 쿼리 타입(A, AAAA, TXT 등)에 따라 정보량 계산이 어떻게 달라지는가?
+
+# Research Review: Practical Comprehensive Bounds on Surreptitious Communication Over DNS
+> **Analyzed Date:** 2025.01.12 - 2025.01.16 
+> **Keywords:** DNS Tunneling, Data Exfiltration, Information Theory, Upper Bound Detection, Enterprise Security  
+> **Source:** USENIX Security Symposium, 2013, Pages 17-32  
+> **Link:** https://www.usenix.org/conference/usenixsecurity13/technical-sessions/presentation/paxson
+
+---
+
+## Day 2 – Research Model, Hypotheses, and Methodology
+*(정보량 측정을 통한 포괄적 탐지 메커니즘)*
+
+### 1. 연구 모델 개요
+
+```
+[DNS 쿼리 수집]
+    ↓
+[쿼리별 정보량 계산]
+- Kolmogorov Complexity 근사
+- 압축 기반 측정 (gzip)
+- 쿼리 타입별 가중치
+    ↓
+[도메인별 누적 정보량 집계]
+- 시간 윈도우 설정 (예: 24시간)
+- 클라이언트별 / 도메인별 그룹화
+    ↓
+[정책 기반 상한선(Upper Bound)과 비교]
+- 조직 정책: 4KB/day, 20KB/day 등
+- 쿼리 타입별 임계값 차등화
+    ↓
+[의심 도메인 플래그]
+- 초과량 계산
+- 우선순위 점수 산정
+    ↓
+[분석가 검증]
+- 컨텍스트 제공
+- 티켓 생성
+```
+
+**설계 철학:**
+
+이 논문의 핵심 철학은 **완전성(Comprehensiveness)**과 **실용성(Practicality)**의 균형이다. 
+
+완전성 측면에서, 저자들은 특정 터널링 도구의 시그니처나 알려진 패턴에 의존하지 않는다. 대신 정보 이론의 기본 원리를 사용하여 "어떤 도메인이 DNS를 통해 받을 수 있는 정보량의 이론적 상한"을 계산한다. 이는 공격자가 어떤 인코딩 방식이나 도구를 사용하든, 전송한 정보의 양 자체는 숨길 수 없다는 통찰에 기반한다.
+
+실용성 측면에서, 저자들은 계산 불가능한 Kolmogorov Complexity를 실제 시스템에서 측정 가능한 압축 비율로 근사한다. 또한 조직이 보안 정책에 따라 상한선을 조정할 수 있게 하여, 오탐률과 탐지율 사이의 tradeoff를 스스로 결정하게 한다.
+
+### 2. 핵심 가정
+
+| 가정 | 내용 | 근거 |
+|------|------|------|
+| **A1: 압축성의 차이** | 정상 도메인은 압축 가능하고, 터널링 도메인은 압축 불가능하다 | 정상 도메인은 의미 있는 단어(www, mail, api 등)로 구성되어 패턴이 있지만, 인코딩된 데이터는 무작위에 가까워 압축이 어렵다 |
+| **A2: 정보량의 측정 가능성** | Kolmogorov Complexity를 gzip 같은 실용적 압축 알고리즘으로 상한 근사할 수 있다 | 압축 알고리즘이 최적은 아니지만 일관된 상한을 제공하며, 상대적 비교에는 충분하다 |
+| **A3: 시간 윈도우 충분성** | 24시간 또는 일정 기간의 누적 정보량으로 터널링을 탐지할 수 있다 | 공격자는 탐지를 피하기 위해 느리게 데이터를 유출할 수 있지만, 충분히 긴 관찰 기간이면 누적량이 임계값을 초과한다 |
+| **A4: 쿼리 타입별 정보 밀도** | NULL, TXT 레코드가 A, AAAA 레코드보다 높은 정보 밀도를 가진다 | NULL과 TXT는 임의의 바이너리 데이터를 담을 수 있어 비트당 정보량이 높지만, A 레코드는 IPv4 주소(32비트)로 제한된다 |
+| **A5: 정책 조정 가능성** | 조직마다 다른 위험 감수 수준을 반영한 임계값 설정이 가능하다 | 금융기관은 4KB/day로 엄격히 설정하고, 일반 기업은 20KB/day로 여유롭게 설정하는 등 상황에 맞는 운영 가능 |
+
+### 3. 연구 방법론
+
+#### A. 데이터 수집
+
+**데이터 소스:**
+
+| 소스 | 수집 정보 | 용도 | 규모 |
+|------|-----------|------|------|
+| **Enterprise Network A** | 개별 클라이언트의 DNS 쿼리 | 클라이언트별 행위 패턴 분석 | 수십억 건 |
+| **Enterprise Network B** | 개별 클라이언트의 DNS 쿼리 | 다양한 조직 환경 검증 | 수십억 건 |
+| **ISP DNS Resolver** | 집계된 DNS 쿼리 (클라이언트 식별 불가) | 대규모 트래픽에서의 탐지 성능 평가 | 2천억+ 건 |
+| **Known Tunneling Tools** | Iodine, dns2tcp 등의 실험 트래픽 | Ground truth 생성 및 검증 | 통제된 실험 |
+
+**데이터 규모:**
+- 총 230억 개의 실제 DNS 쿼리 분석
+- 관찰 기간: 수 개월 (논문에서 정확한 기간 명시 안 함)
+- 기업 네트워크: 수천~수만 명의 사용자
+- ISP 데이터: 수백만 명의 사용자 트래픽
+
+**데이터 특성 및 문제점:**
+
+실제 프로덕션 네트워크의 DNS 트래픽은 매우 시끄럽다(noisy). CDN은 무작위처럼 보이는 서브도메인을 사용하고, 모바일 앱은 높은 엔트로피의 세션 ID를 포함하며, 클라우드 서비스는 자동 생성된 도메인을 쿼리한다. 이러한 정당한 고엔트로피 트래픽을 터널링과 구분하는 것이 핵심 과제다.
+
+또한 Ground truth 문제가 있다. 어떤 도메인이 실제로 터널링인지 확실히 아는 것은 어렵다. 저자들은 알려진 터널링 도구로 생성한 트래픽을 포함시키고, 의심스러운 도메인은 수동으로 조사하여 검증했다.
+
+#### B. 핵심 알고리즘: 정보량 계산 및 상한 설정
+
+**알고리즘 1: Kolmogorov Complexity 근사 (압축 기반)**
+
+목적: 각 DNS 쿼리에 포함된 정보량을 정량화
+
+방법:
+```
+1. DNS 쿼리에서 서브도메인 추출
+   예: "a7f3b2c8.attacker.com" → "a7f3b2c8"
+
+2. 서브도메인을 바이너리 데이터로 변환
+   - Base32, Base64 등의 인코딩 스킴 고려
+   - 디코딩 불가능하면 원본 문자열 사용
+
+3. gzip 압축 적용
+   compressed_size = gzip_compress(subdomain)
+
+4. 정보량 계산
+   Information_Content = original_size - compressed_size
+   
+   또는 압축 비율 사용:
+   Information_Content = original_size * (1 - compression_ratio)
+
+5. 쿼리 타입별 가중치 적용
+   - NULL, TXT: 가중치 1.0 (높은 정보 밀도)
+   - A, AAAA: 가중치 0.3 (제한된 정보)
+   - CNAME: 가중치 0.5 (중간)
+
+최종 정보량 = Information_Content × type_weight
+```
+
+**왜 gzip인가?**
+
+Kolmogorov Complexity는 이론적으로는 완벽하지만 계산 불가능하다. gzip은 실용적인 상한을 제공한다. gzip이 최적의 압축을 보장하지는 않지만, 일관성 있게 작동하며 정상 도메인과 터널링 도메인 사이의 상대적 차이를 잘 포착한다.
+
+**알고리즘 2: 도메인별 누적 및 상한 비교**
+
+목적: 시간에 따른 정보 전송량을 추적하고 정책 위반 탐지
+
+방법:
+```
+1. 시간 윈도우 설정 (예: 24시간)
+
+2. 각 도메인에 대해:
+   domain_info_accumulator[domain] = 0
+   
+3. 새 DNS 쿼리 도착 시:
+   info = calculate_information_content(query)
+   domain = extract_domain(query)
+   client = extract_client_ip(query)
+   
+   domain_info_accumulator[domain] += info
+   client_domain_pair[(client, domain)] += info
+
+4. 윈도우 종료 시 (매 24시간):
+   FOR each domain in domain_info_accumulator:
+       IF domain_info_accumulator[domain] > UPPER_BOUND:
+           flag_suspicious(domain, 
+                          accumulated_info=domain_info_accumulator[domain],
+                          excess=domain_info_accumulator[domain] - UPPER_BOUND)
+       
+   윈도우 리셋: domain_info_accumulator.clear()
+
+5. 우선순위 점수 계산:
+   priority_score = excess_amount × log(query_frequency)
+   
+   - 많이 초과할수록 높은 점수
+   - 쿼리가 자주 발생할수록 높은 점수
+```
+
+**알고리즘 3: 쿼리 간 상관관계 분석 (선택적)**
+
+목적: 단순 누적을 넘어 쿼리 패턴의 구조적 특성 분석
+
+방법:
+```
+1. 같은 클라이언트가 같은 도메인에 보낸 쿼리들의 시퀀스 수집
+   query_sequence = [q1, q2, q3, ..., qn]
+
+2. 시퀀스 간 유사도 계산
+   - 서브도메인의 편집 거리(Edit Distance)
+   - 쿼리 간 시간 간격의 규칙성
+   - 페이로드 크기의 일관성
+
+3. 터널링 특징:
+   - 편집 거리가 큼 (매번 다른 데이터)
+   - 시간 간격이 규칙적 (자동화된 전송)
+   - 페이로드 크기가 일정 (최대 전송량 활용)
+
+4. 정상 트래픽 특징:
+   - 편집 거리가 작음 (비슷한 서브도메인 재사용)
+   - 시간 간격이 불규칙 (사람의 사용 패턴)
+   - 페이로드 크기 다양 (다양한 요청)
+```
+
+#### C. 피처 설계
+
+**피처 설계 원칙:**
+
+저자들은 복잡한 머신러닝 피처를 설계하는 대신, 정보 이론에서 직접 도출되는 명확한 피처에 집중했다. 이는 설명 가능성을 높이고, 공격자의 회피를 어렵게 만든다.
+
+**주요 피처:**
+
+| 피처 | 설명 | 계산 방법 | 터널링에서의 특징 |
+|------|------|-----------|-------------------|
+| **Compressed Size** | gzip 압축 후 크기 | len(gzip.compress(subdomain)) | 작음 (압축 효과 없음) |
+| **Compression Ratio** | 압축률 | compressed_size / original_size | 높음 (~0.9-1.0) |
+| **Entropy** | Shannon Entropy | -Σ(p(x) × log₂(p(x))) | 높음 (>7 bits) |
+| **Character Distribution** | 문자 종류의 분포 | {digits, letters, special} | 균등 분포 |
+| **Query Frequency** | 단위 시간당 쿼리 수 | count per hour | 높음 (지속적 전송) |
+| **Subdomain Length** | 서브도메인 길이 | len(subdomain) | 길음 (>30 chars) |
+| **Record Type** | DNS 레코드 타입 | categorical | NULL, TXT 편중 |
+| **Accumulated Info** | 누적 정보량 | Σ(info per query) | 정책 상한 초과 |
+
+**압축 비율 vs 엔트로피:**
+
+두 피처는 상관관계가 높지만 미묘한 차이가 있다. 엔트로피는 단일 문자열의 무작위성을 측정하지만, 압축은 반복 패턴까지 고려한다. 예를 들어 "aaabbbccc"는 낮은 엔트로피지만 압축이 잘 되고, "a7f3b2c8"은 높은 엔트로피와 낮은 압축률을 모두 가진다.
+
+#### D. 평가 방법
+
+**평가 지표:**
+
+1. **탐지율 (Detection Rate)**: 실제 터널의 몇 %를 탐지했는가
+2. **오탐률 (False Positive Rate)**: 정상 도메인을 터널로 오인한 비율
+3. **분석 부담 (Analyst Burden)**: 주당 검토해야 하는 의심 도메인 수
+4. **정책 유연성**: 다양한 상한선 설정에서의 성능 변화
+
+**비교 대상:**
+
+- **시그니처 기반 탐지**: Snort, Suricata 같은 IDS의 DNS 터널링 룰
+- **엔트로피 기반 임계값**: 단순히 높은 엔트로피만 보는 방법
+- **머신러닝 분류기**: 논문 발표 당시의 최신 ML 기법
+- **수동 분석**: 숙련된 분석가의 육안 검토 (Ground truth)
+
+**평가 시나리오:**
+
+1. **알려진 터널링 도구**: Iodine, dns2tcp로 생성한 트래픽 탐지
+2. **변형된 터널링**: 도구를 수정하여 탐지 회피 시도
+3. **느린 터널링**: 하루 1KB씩 전송하는 저속 유출
+4. **정당한 고엔트로피**: CDN, API 엔드포인트 등 오탐 여부
+5. **대규모 환경**: ISP 규모 (230억 쿼리)에서의 확장성
+
+### 4. SOC 관점 인사이트
+
+#### 방법론의 실무 적용성
+
+**장점:**
+
+1. **도구 독립적 탐지**: 새로운 터널링 도구나 변형에도 효과적. 공격자가 인코딩 방식을 바꿔도 정보량은 숨길 수 없다
+2. **명확한 탐지 근거**: "엔트로피가 높아서 의심"이 아니라 "24시간 동안 47KB의 정보를 수신했는데 정책 상한은 4KB"라는 구체적 증거
+3. **정책 기반 유연성**: 조직의 위험 감수 수준에 따라 4KB/day부터 100KB/day까지 조정 가능. 스타트업과 은행은 다른 정책 사용
+4. **계산 효율성**: gzip 압축은 빠르며, 실시간 스트림 처리에 적합. 병렬화도 쉬움
+5. **화이트리스트 호환**: 정당한 고엔트로피 도메인(CDN 등)을 예외 처리 가능
+
+**한계:**
+
+1. **암호화 DNS 미지원**: DNS over HTTPS (DoH)가 보편화되면서 쿼리 내용을 볼 수 없는 경우 증가. TLS 지문 분석 같은 보완 필요
+2. **느린 터널링 탐지 지연**: 공격자가 하루 3KB씩만 전송하면 4KB 정책에서는 오래 걸림. 더 긴 관찰 기간이나 낮은 임계값 필요
+3. **초기 튜닝 필요**: 조직마다 정상 트래픽 패턴이 다르므로, 첫 몇 주간 오탐률 조정 기간 필요
+4. **정당한 고엔트로피 처리**: CDN, 로드밸런서, API 게이트웨이 등을 수동으로 화이트리스트에 추가해야 함
+5. **컨텍스트 부족**: 단순히 정보량만 보므로, "왜 이 클라이언트가 이 도메인에 접속했는가"는 별도 분석 필요
+
+#### 기존 SOC 툴과의 차별점
+
+| 도구/방법 | 탐지 방식 | 강점 | 약점 | 적합한 시나리오 |
+|-----------|-----------|------|------|-----------------|
+| **Snort/Suricata** | 시그니처 매칭 | 알려진 도구 즉시 탐지 | 변형/신규 도구 탐지 불가 | 대량의 기본 위협 차단 |
+| **엔트로피 기반 (단순)** | 임계값 비교 | 구현 간단 | 정당한 고엔트로피 오탐 많음 | 초기 스크리닝 |
+| **ML 분류기 (2013년 기준)** | Random Forest 등 | 패턴 학습 가능 | 블랙박스, 설명 어려움 | 대규모 데이터 분석 |
+| **Paxson 방법** | 정보 이론 상한 | 포괄적, 설명 가능 | DoH 미지원, 초기 튜닝 | 엔터프라이즈 정책 기반 운영 |
+| **수동 분석** | 전문가 판단 | 컨텍스트 이해 | 확장 불가, 느림 | 의심 도메인 최종 검증 |
+
+**통합 전략:**
+
+현실에서는 이들을 계층적으로 사용하는 것이 최적이다.
+
+```
+[1단계: 실시간 필터링]
+Snort/Suricata로 알려진 시그니처 차단
+
+[2단계: 정보 이론 기반 탐지]
+Paxson 방법으로 상한 초과 도메인 플래그
+
+[3단계: 머신러닝 보강]
+ML 분류기로 플래그된 도메인 우선순위화
+
+[4단계: 수동 검증]
+분석가가 컨텍스트 포함 최종 판단
+```
+
+#### SOC Workflow 통합 전략
+
+**기존 SOC에 통합하는 방법:**
+
+```
+[DNS 로그 수집]
+- Passive DNS 센서
+- SIEM (Splunk, ELK)
+- DNS 서버 로그
+
+    ↓
+
+[실시간 스트림 처리]
+- Apache Kafka / Flink
+- 각 쿼리의 정보량 계산
+- 도메인별 누적 (Redis/MemcacheD)
+
+    ↓
+
+[상한 위반 탐지]
+- 정책 엔진에서 임계값 비교
+- 위반 시 이벤트 생성
+
+    ↓
+
+[SIEM 통합]
+- 이벤트를 SIEM으로 전송
+- 다른 보안 이벤트와 상관분석
+- 예: 같은 클라이언트의 악성코드 탐지 이벤트
+
+    ↓
+
+[티켓 생성 및 분석]
+- SOAR (Phantom, Demisto)로 자동 티켓
+- 도메인 평판, WHOIS 정보 자동 수집
+- 분석가에게 컨텍스트와 함께 제공
+
+    ↓
+
+[대응 및 차단]
+- 확인 시 DNS Firewall에서 차단
+- 엔드포인트에 격리 명령
+- 네트워크 단에서 해당 도메인 블랙홀
+```
+
+**실제 구현 고려사항:**
+
+1. **데이터 볼륨**: 대기업은 하루 수억~수십억 DNS 쿼리. 샘플링이나 분산 처리 필수
+2. **상태 관리**: 도메인별 누적량을 메모리에 유지. Redis Cluster 같은 인메모리 DB 활용
+3. **화이트리스트 관리**: 정당한 도메인 목록 자동 학습 또는 수동 관리. 주기적 리뷰
+4. **정책 버전 관리**: 다양한 부서나 사용자 그룹에 다른 정책 적용 가능
+5. **성능 최적화**: gzip 압축은 CPU 사용량 높음. GPU 가속이나 경량 압축 알고리즘 고려
+
+**다음 학습 방향 (Day 3 Preview):**
+
+Day 2에서 방법론을 배웠으니, Day 3에서는 실제로 230억 개 쿼리를 분석한 결과를 보고 싶다. 
+
+- 59개의 실제 터널을 어떻게 찾았는가?
+- 4KB/day 정책에서 분석 부담이 주당 1-2건이라는데, 오탐은 얼마나 됐는가?
+- 알려진 도구(Iodine, dns2tcp) vs 실제 공격 트래픽의 차이는?
+- 느린 터널링(low-throughput)은 얼마나 탐지했는가?
+- ISP 규모 데이터에서의 확장성 문제는 없었는가?
+
+이러한 실증 결과가 이 방법론의 실전 적용 가능성을 보여줄 것이다.
