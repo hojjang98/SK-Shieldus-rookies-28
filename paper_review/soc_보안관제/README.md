@@ -38,6 +38,11 @@ SOC 관련 논문을 집중적으로 읽으며 **SOC가 무엇인지, 어떻게 
 
 - **UNICORN: Runtime Provenance-Based Detector for Advanced Persistent Threats** (NDSS 2020)  
   [Paper Link](https://www.ndss-symposium.org/ndss-paper/unicorn-runtime-provenance-based-detector-for-advanced-persistent-threats/)
+
+- **Practical Comprehensive Bounds on Surreptitious Communication Over DNS** (USENIX Security 2013)  
+  [Paper Link](https://www.usenix.org/conference/usenixsecurity13/technical-sessions/presentation/paxson)
+
+
 ---
 
 ## 학습 원칙
