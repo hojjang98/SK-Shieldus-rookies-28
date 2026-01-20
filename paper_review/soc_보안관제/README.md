@@ -42,6 +42,9 @@ SOC 관련 논문을 집중적으로 읽으며 **SOC가 무엇인지, 어떻게 
 - **Practical Comprehensive Bounds on Surreptitious Communication Over DNS** (USENIX Security 2013)  
   [Paper Link](https://www.usenix.org/conference/usenixsecurity13/technical-sessions/presentation/paxson)
 
+- **Outside the Closed World: On Using Machine Learning For Network Intrusion Detection** (IEEE S&P 2010)  
+  [Paper Link](https://doi.org/10.1109/SP.2010.25)
+
 
 ---
 
