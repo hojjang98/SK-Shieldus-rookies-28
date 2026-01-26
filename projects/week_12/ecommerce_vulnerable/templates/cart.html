@@ -30,7 +30,7 @@
                     <p>수량: {{ item.quantity }}개</p>
                 </div>
                 <div class="item-price">
-                    <p>{{ "{:,}".format(item.price * item.quantity) }}원</p>
+                    <p>{{ "{:,.0f}".format(item.price * item.quantity) }}원</p>
                 </div>
             </div>
             {% endfor %}

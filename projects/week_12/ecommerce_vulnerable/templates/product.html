@@ -28,7 +28,7 @@
         <div class="product-detail">
             <h2>{{ product.name }}</h2>
             <p class="description">{{ product.description }}</p>
-            <p class="price">{{ "{:,}".format(product.price) }}원</p>
+            <p class="price">{{ "{:,.0f}".format(product.price) }}원</p>
             <p class="stock">재고: {{ product.stock }}개</p>
             <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-primary">장바구니 담기</a>
         </div>
