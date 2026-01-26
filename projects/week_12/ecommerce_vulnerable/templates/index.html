@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쇼핑몰</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <h1>Tech Shop</h1>
+            <div class="nav-links">
+                {% if session.username %}
+                    <span>{{ session.username }}님 환영합니다</span>
+                    <a href="{{ url_for('cart') }}">장바구니</a>
+                    <a href="{{ url_for('profile') }}">프로필</a>
+                    <a href="{{ url_for('logout') }}">로그아웃</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">로그인</a>
+                    <a href="{{ url_for('register') }}">회원가입</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="search-box">
+            <form method="GET" action="{{ url_for('index') }}">
+                <input type="text" name="search" placeholder="상품 검색..." value="{{ request.args.get('search', '') }}">
+                <button type="submit">검색</button>
+            </form>
+        </div>
+
+        <h2>상품 목록</h2>
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <h3>{{ product.name }}</h3>
+                <p class="description">{{ product.description }}</p>
+                <p class="price">{{ "{:,}".format(product.price) }}원</p>
+                <p class="stock">재고: {{ product.stock }}개</p>
+                <div class="product-actions">
+                    <a href="{{ url_for('product', product_id=product.id) }}" class="btn">상세보기</a>
+                    <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-primary">장바구니</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

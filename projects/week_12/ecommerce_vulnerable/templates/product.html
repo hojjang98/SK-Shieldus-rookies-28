@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <h1><a href="{{ url_for('index') }}">Tech Shop</a></h1>
+            <div class="nav-links">
+                {% if session.username %}
+                    <span>{{ session.username }}님</span>
+                    <a href="{{ url_for('cart') }}">장바구니</a>
+                    <a href="{{ url_for('profile') }}">프로필</a>
+                    <a href="{{ url_for('logout') }}">로그아웃</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">로그인</a>
+                    <a href="{{ url_for('register') }}">회원가입</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="product-detail">
+            <h2>{{ product.name }}</h2>
+            <p class="description">{{ product.description }}</p>
+            <p class="price">{{ "{:,}".format(product.price) }}원</p>
+            <p class="stock">재고: {{ product.stock }}개</p>
+            <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-primary">장바구니 담기</a>
+        </div>
+
+        <div class="comments-section">
+            <h3>상품 후기</h3>
+            
+            {% if session.user_id %}
+            <form method="POST" action="{{ url_for('add_comment', product_id=product.id) }}" class="comment-form">
+                <textarea name="comment" placeholder="후기를 작성해주세요..." required></textarea>
+                <button type="submit" class="btn btn-primary">등록</button>
+            </form>
+            {% else %}
+            <p><a href="{{ url_for('login') }}">로그인</a>하여 후기를 작성해보세요.</p>
+            {% endif %}
+
+            <div class="comments-list">
+                {% for comment in comments %}
+                <div class="comment">
+                    <strong>{{ comment.username }}</strong>
+                    <p>{{ comment.comment|safe }}</p>
+                    <small>{{ comment.created_at }}</small>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
