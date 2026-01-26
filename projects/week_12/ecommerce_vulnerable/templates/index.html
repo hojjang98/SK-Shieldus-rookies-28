@@ -38,7 +38,7 @@
             <div class="product-card">
                 <h3>{{ product.name }}</h3>
                 <p class="description">{{ product.description }}</p>
-                <p class="price">{{ "{:,}".format(product.price) }}원</p>
+                <p class="price">{{ "{:,.0f}".format(product.price) }}원</p>
                 <p class="stock">재고: {{ product.stock }}개</p>
                 <div class="product-actions">
                     <a href="{{ url_for('product', product_id=product.id) }}" class="btn">상세보기</a>
