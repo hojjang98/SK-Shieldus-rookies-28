@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장바구니</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <h1><a href="{{ url_for('index') }}">Tech Shop</a></h1>
+            <div class="nav-links">
+                <span>{{ session.username }}님</span>
+                <a href="{{ url_for('profile') }}">프로필</a>
+                <a href="{{ url_for('logout') }}">로그아웃</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>장바구니</h2>
+        
+        {% if cart_items %}
+        <div class="cart-items">
+            {% for item in cart_items %}
+            <div class="cart-item">
+                <div class="item-info">
+                    <h3>{{ item.name }}</h3>
+                    <p>수량: {{ item.quantity }}개</p>
+                </div>
+                <div class="item-price">
+                    <p>{{ "{:,.0f}".format(item.price * item.quantity) }}원</p>
+                </div>
+            </div>
+            {% endfor %}
+            
+            <div class="cart-total">
+                <h3>총 금액: {{ "{:,.0f}".format(total) }}원</h3>
+                <button class="btn btn-primary btn-large">주문하기</button>
+            </div>
+        </div>
+        {% else %}
+        <p>장바구니가 비어있습니다.</p>
+        <a href="{{ url_for('index') }}" class="btn">쇼핑 계속하기</a>
+        {% endif %}
+    </div>
+</body>
+</html>
