@@ -1,7 +1,3 @@
-감사합니다! 이제 논문 전문을 받았으니 **제대로** Day 1을 다시 작성하겠습니다.
-
----
-
 # Research Review: A Framework for Organizational Compliance Management Tactics
 
 > **Analyzed Date:** 2025.02.03 - 2025.02.07  
