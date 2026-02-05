@@ -1,157 +1,155 @@
-# Security Consulting Study
+# 보안법 학습 저장소
 
-> SK쉴더스 루키즈 28기 출신 보안 컨설턴트 지망생의 체계적인 보안 학습 여정
-
-## About This Repository
-
-이 레포지토리는 보안 컨설팅 실무에 필요한 핵심 지식을 체계적으로 정리하는 공간입니다.
-매일 조금씩, 꾸준히 학습하며 이론과 실무를 연결하는 것을 목표로 합니다.
-
----
+SK쉴더스 보안 컨설팅 팀 준비를 위한 보안 관련 법률 및 실무 지식 학습 자료
 
 ## 학습 목표
 
-- [ ] ISMS-P 인증기준 104개 통제항목 완전 이해
-- [ ] OWASP Top 10 취약점 분석 및 대응 방안 마스터
-- [ ] 정보보안 관련 법령(개인정보보호법, 정보통신망법) 실무 적용 능력
-- [ ] 실제 컨설팅 프로젝트 수행 능력 함양
-- [ ] 보안 사고 사례 분석 및 개선 제안 역량
+- 보안 컨설팅에 필요한 핵심 법률 지식 습득
+- 매일 30분씩 꾸준한 학습
+- 체계적인 법률 이해를 통한 실무 역량 강화
+- 산업별 보안 규제 및 최신 트렌드 파악
 
----
+## 학습 주제
 
-## 학습 로드맵
+### 01. 기본 법률
 
-### Phase 1: Foundation (Week 1-2)
-**목표:** 전체 프레임워크 이해 및 기초 다지기
+- 개인정보보호법
+- 정보통신망 이용촉진 및 정보보호 등에 관한 법률
+- 정보보호산업의 진흥에 관한 법률
+- 클라우드컴퓨팅 발전 및 이용자 보호에 관한 법률
+- 전자금융거래법
+- 신용정보의 이용 및 보호에 관한 법률
+- 산업기술보호법
+- 부정경쟁방지 및 영업비밀보호에 관한 법률
 
-- **ISMS-P 인증기준 개요**
-  - 관리체계 수립 및 운영 (12개 통제항목)
-  - 보호대책 요구사항 (64개 통제항목)
-  - 개인정보 처리단계별 요구사항 (28개 통제항목)
+### 02. 산업별 규제 및 컴플라이언스
 
-- **OWASP Top 10 (2021)**
-  - A01: Broken Access Control
-  - A02: Cryptographic Failures
-  - A03: Injection
-  - A04: Insecure Design
-  - A05: Security Misconfiguration
-  - A06: Vulnerable and Outdated Components
-  - A07: Identification and Authentication Failures
-  - A08: Software and Data Integrity Failures
-  - A09: Security Logging and Monitoring Failures
-  - A10: Server-Side Request Forgery (SSRF)
+- 전자금융감독규정
+- 금융보안원 보안 가이드라인
+- 전자서명법
+- 의료법 및 생명윤리법 (의료정보 보호)
+- 위치정보의 보호 및 이용 등에 관한 법률
+- 전자정부법
+- 공공기관 개인정보보호 지침
+- 국가정보보안 기본지침
 
-### Phase 2: Legal Framework (Week 3-4)
-**목표:** 법령 이해 및 ISMS-P 연계
+### 03. 인증 및 국제 표준
 
-- **개인정보보호법**
-  - 개인정보 생명주기별 의무사항
-  - 안전조치 의무
-  - 침해사고 대응 및 신고
-  - 주요 과징금 사례
+- ISMS-P (정보보호 및 개인정보보호 관리체계) 인증 기준
+- ISO/IEC 27001 정보보호 관리체계
+- ISO/IEC 27002 정보보호 통제
+- ISO/IEC 27701 개인정보보호 관리체계
+- PCI-DSS (Payment Card Industry Data Security Standard)
+- GDPR (EU 개인정보보호법)
+- SOC 2 (Service Organization Control)
+- NIST Cybersecurity Framework
+- NIST SP 800 시리즈
 
-- **정보통신망법**
-  - 개보법과의 차이점
-  - 암호화 의무
-  - 정보통신서비스 제공자 의무
+### 04. 보안 프레임워크 및 방법론
 
-- **법령-ISMS-P 매핑**
-  - 통제항목별 법적 근거
-  - Compliance 체크리스트
+- 위험 평가 방법론 (ISO 27005, NIST 800-30)
+- 보안 아키텍처 설계 원칙
+- COBIT (정보 및 관련 기술에 대한 통제 목표)
+- TOGAF Security Architecture
+- SABSA (Sherwood Applied Business Security Architecture)
+- 침해사고 대응 프로세스 (NIST SP 800-61)
+- 비즈니스 연속성 계획 (BCP/DRP)
 
-### Phase 3: Practical Application (Week 5-6)
-**목표:** 실전 프로젝트 및 사례 분석
+### 05. 기술적 보안 이해
 
-- **가상 컨설팅 프로젝트**
-  - 회사 시나리오 설정
-  - 현황 진단 (Gap Analysis)
-  - 위험 평가 (Risk Assessment)
-  - 개선 계획 수립
-  - 컨설팅 보고서 작성
-
-- **실제 보안 사고 사례 분석**
-  - 사고 원인 분석 (기술적/관리적)
-  - ISMS-P 관점 미흡 사항 도출
-  - 예방 대책 제시
-  - 컨설팅 제안서 작성
-
-### Phase 4: Advanced Topics (Ongoing)
-**목표:** 심화 학습 및 최신 트렌드
-
+- 네트워크 보안 기초 (방화벽, IDS/IPS, VPN)
+- 시스템 보안 (Windows/Linux 보안 강화)
+- 애플리케이션 보안 (OWASP Top 10)
+- 데이터베이스 보안
+- 암호화 기술 (대칭/비대칭, 해시, PKI)
 - 클라우드 보안 (AWS, Azure, GCP)
+- 컨테이너 및 쿠버네티스 보안
 - 제로트러스트 아키텍처
+- IAM (Identity and Access Management)
+- SIEM 및 로그 관리
+
+### 06. 최신 보안 트렌드
+
+- AI/ML 보안 이슈 및 대응
+- 공급망 보안 (Supply Chain Security)
+- 랜섬웨어 대응 전략
 - DevSecOps
-- AI/ML 보안
-- 공급망 보안
+- OT/ICS 보안 (산업제어시스템)
+- IoT 보안
+- 5G 네트워크 보안
+- 블록체인 보안
+- 양자 컴퓨팅과 암호화
+- 버그바운티 프로그램
 
----
+### 07. 실무 스킬
 
-## Repository Structure
+- 보안 컨설팅 방법론
+- 취약점 진단 및 모의해킹
+- 보안 감사 (Audit) 수행
+- 보안 정책 수립
+- 보안 아키텍처 리뷰
+- 침해사고 분석 및 포렌식 기초
+- 보안 ROI 산정
+- 경영진 보고서 작성
+- 보안 인식 교육 설계
+
+## 학습 방법
+
+1. 매일 하나의 주제를 30분 내외로 학습
+2. 학습한 내용을 이 저장소에 정리
+3. 복습 및 실무 적용 방안 고민
+4. 단계를 순차적으로 진행하되, 관심 분야는 유연하게 조정
+
+## 폴더 구조
 ```
-security-consulting-study/
-├── README.md                          # 이 파일
-├── 01-ISMS-P/                         # ISMS-P 인증기준
-│   ├── README.md
-│   ├── 01-관리체계-수립-운영/
-│   ├── 02-보호대책-요구사항/
-│   ├── 03-개인정보-처리단계별-요구사항/
-│   ├── 법령-매핑.md
-│   └── 실습-프로젝트/
-├── 02-OWASP-Top10/                    # OWASP Top 10 취약점
-│   ├── README.md
-│   ├── A01-Broken-Access-Control.md
-│   ├── A02-Cryptographic-Failures.md
-│   ├── ...
-│   └── 실습-시나리오/
-├── 03-Laws/                           # 정보보안 법령
-│   ├── README.md
-│   ├── 개인정보보호법.md
-│   ├── 정보통신망법.md
-│   ├── 법령-비교표.md
-│   └── 주요-판례-사례/
-├── 04-Case-Studies/                   # 실제 사례 분석
-│   ├── README.md
-│   └── [회사명]-사고-분석.md
-├── 05-Practical-Projects/             # 실습 프로젝트
-│   ├── README.md
-│   └── [프로젝트명]/
-└── 06-Resources/                      # 참고 자료
-    ├── 추천-도서.md
-    ├── 유용한-링크.md
-    └── 용어-정리.md
+/
+├── README.md
+├── 01_기본법률/
+│   ├── 01_개인정보보호법/
+│   ├── 02_정보통신망법/
+│   └── ...
+├── 02_산업별규제/
+│   ├── 01_금융권규제/
+│   ├── 02_의료분야/
+│   └── ...
+├── 03_인증및표준/
+│   ├── 01_ISMS-P/
+│   ├── 02_ISO27001/
+│   └── ...
+├── 04_프레임워크/
+├── 05_기술보안/
+├── 06_최신트렌드/
+└── 07_실무스킬/
 ```
----
 
-## 학습 원칙
+## 참고 자료
 
-1. **매일 조금씩** - 하루 1-2시간, 꾸준히
-2. **이해 우선** - 암기보다 개념 이해와 실무 연결
-3. **문서화 습관** - 배운 내용은 반드시 문서로 정리
-4. **실습 병행** - 이론만이 아닌 실제 적용 경험
-5. **컨설팅 관점** - 항상 "고객사에 어떻게 설명할까?" 고민
+### 법률 및 규제
+- [법제처 국가법령정보센터](https://www.law.go.kr/)
+- [개인정보보호위원회](https://www.pipc.go.kr/)
+- [한국인터넷진흥원 ISMS-P](https://isms.kisa.or.kr/)
+- [금융보안원](https://www.fsec.or.kr/)
+- [금융감독원 전자금융감독규정](https://www.fss.or.kr/)
 
----
+### 국제 표준 및 프레임워크
+- [ISO/IEC 27000 시리즈](https://www.iso.org/)
+- [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)
+- [OWASP](https://owasp.org/)
+- [CIS Controls](https://www.cisecurity.org/)
 
-## 주요 참고 자료
+### 기술 및 실무
+- [한국인터넷진흥원 보호나라](https://www.boho.or.kr/)
+- [KISA 인터넷 보안 위협 분석](https://www.krcert.or.kr/)
+- [CVE (Common Vulnerabilities and Exposures)](https://cve.mitre.org/)
+- [AWS Security Best Practices](https://aws.amazon.com/security/)
 
-### 공식 문서
-- [ISMS-P 인증기준 (한국인터넷진흥원)](https://isms.kisa.or.kr)
-- [OWASP Top 10 (2021)](https://owasp.org/Top10/)
-- [개인정보보호위원회](https://www.pipc.go.kr)
-- [법제처 국가법령정보센터](https://www.law.go.kr)
-
-### 가이드라인
-- KISA 정보보호 및 개인정보보호 관리체계 인증 안내서
-- KISA 개인정보의 기술적·관리적 보호조치 기준 해설서
-- 개인정보보호위원회 각종 가이드라인
-
-### 커뮤니티
-- [보안프로젝트](https://www.boannews.com)
-- [KISA 보안공지](https://www.boho.or.kr)
-
+### 커뮤니티 및 뉴스
+- [보안뉴스](https://www.boannews.com/)
+- [데일리시큐](https://www.dailysecu.com/)
+- [Krebs on Security](https://krebsonsecurity.com/)
 
 ---
 
-## License
-
-이 레포지토리의 모든 내용은 학습 목적으로 작성되었으며, 출처가 명시된 자료는 해당 저작권자에게 권리가 있습니다.
+**시작일**: 2026년 2월 5일  
+**목표**: SK쉴더스 보안 컨설팅 전문가  
+**학습 원칙**: 꾸준함이 완벽함을 이긴다
