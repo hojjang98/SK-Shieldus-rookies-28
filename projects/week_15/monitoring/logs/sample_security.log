@@ -1,0 +1,9 @@
+2026-02-01 10:15:23 - INFO - User login attempt: admin
+2026-02-01 10:15:25 - WARNING - Invalid credentials for user: admin' OR '1'='1
+2026-02-01 10:16:01 - INFO - Search query: laptop
+2026-02-01 10:17:32 - WARNING - Suspicious search: ' OR 1=1--
+2026-02-01 10:18:45 - INFO - Comment posted: Great product!
+2026-02-01 10:19:12 - WARNING - XSS attempt detected: <script>alert('XSS')</script>
+2026-02-01 10:20:33 - INFO - File upload attempt: image.png
+2026-02-01 10:21:05 - WARNING - Invalid file type: shell.php
+2026-02-01 10:22:18 - INFO - User logout: admin
