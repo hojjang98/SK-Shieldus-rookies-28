@@ -9,7 +9,7 @@
 
 ### 선정 배경
 **도메인 탐색 결과:**  
-8주간 보안 컨설팅, OT/ICS, 클라우드 등 8개 도메인 논문을 읽은 결과, 보안 컨설팅이 나의 강점과 흥미에 가장 부합함을 확인. 이제부터는 보안 컨설팅 전문성 심화를 위한 체계적 학습 단계.
+8주간 보안 컨설팅, OT/ICS, 클라우드 등 8개 도메인 논문을 읽은 결과, 보안 컨설팅과 보안 관제가 나의 강점과 흥미에 가장 부합함을 확인. 이제부터는 보안 컨설팅 전문성 심화를 위한 체계적 학습 단계.
 
 **이 논문을 선택한 이유:**  
 - 이전 논문들과의 연결고리: Foorthuis(2011) 컴플라이언스 전술, Integrated Risk Framework(2024), Bulgurcu(2010) 정책 준수를 통합하는 상위 거버넌스 체계 학습
@@ -92,3 +92,174 @@
 프레임워크가 지역별 조직 구조와 문화에 맞게 조정되어야 한다는 한계를 명시했다. 한국 기업에 적용 시 ISMS-P, 전자금융감독규정 등 국내 규제 요구사항을 CSF#5에 통합해야 하며, 수직적 조직 문화에서 Direct-Control Cycle이 실제로 작동하는지 검증이 필요하다.
 
 ---
+
+*Day 1 완료 - 2025.02.09*
+
+---
+
+## Day 2 – Research Model, Hypotheses, and Methodology
+*(ISO 27014와 COBIT 5를 어떻게 통합하여 프레임워크를 구축했는가)*
+
+### 1. 연구 모델 개요
+
+```
+[입력 1: ISO 27014 원칙 6개]     [입력 2: COBIT 5 for IS 원칙 12개]
+          ↓                                    ↓
+     [Stage 1: 통합 지침 원칙 도출 (14개)]
+     - 중복 제거, 의미적 유사성 통합, 논리적 조화
+                    ↓
+     [Stage 2: 17개 CSF 식별]
+     - 학술 및 실무 문헌 13편 분석
+     - 지침 원칙에 CSF 매핑
+                    ↓
+     [Stage 3: 5대 ISG 영역에 CSF 배치]
+     - Strategic Alignment (CSF 1-5)
+     - Performance Measurement (CSF 6-8)
+     - Value Delivery (CSF 9-10)
+     - Risk Management (CSF 11-15)
+     - Resource Management (CSF 16-17)
+                    ↓
+     [출력: 보안 거버넌스 최우수 실무 프레임워크]
+```
+
+**설계 철학:**
+이 연구는 새로운 이론을 창출하기보다, 이미 국제적으로 검증된 두 프레임워크(ISO 27014, COBIT 5)의 원칙을 통합하고 기존 문헌에서 검증된 CSF를 체계적으로 도출하는 방식을 채택했다. 실무 적용 가능성을 최우선으로 고려하여 모든 조직 규모와 유형에 적용 가능한 보편적 프레임워크를 지향했다.
+
+### 2. 연구 가설 (핵심 가정)
+
+| 가정 | 내용 | 근거 |
+|------|------|------|
+| **A1** | ISO 27014와 COBIT 5 for IS의 원칙을 통합하면 전 조직 레벨에 적용 가능한 포괄적 거버넌스 지침을 도출할 수 있다 | ISO 27014는 이사회/경영진 수준, COBIT 5는 전 조직 수준의 보안 전문가를 대상으로 하여 상호 보완적이기 때문 |
+| **A2** | 문헌에서 식별된 CSF를 5대 거버넌스 영역에 매핑하면 효과적인 보안 거버넌스에 영향을 미치는 핵심 실무를 도출할 수 있다 | ITGI(2006)가 제시한 5대 영역이 IT 거버넌스 생명주기의 구성 요소이기도 하므로 ISG에도 동일하게 적용 가능 |
+| **A3** | 도출된 프레임워크는 조직의 장기적 성공에 영향을 미치는 보안 거버넌스 실무의 포괄적 지침이 될 수 있다 | CSF가 지침 원칙에 매핑됨으로써 포괄성이 확보되고, 각 원칙에 가장 영향력 있는 실무가 대응되기 때문 |
+
+### 3. 연구 방법론
+
+#### A. 데이터 수집
+
+**데이터 소스:**
+
+| 소스 | 수집 정보 | 용도 |
+|------|-----------|------|
+| ISO/IEC 27014 (2013) | 보안 거버넌스 6개 고수준 원칙 | Stage 1 통합 지침 원칙 도출의 입력 |
+| COBIT 5 for IS (ISACA, 2012) | 보안 거버넌스 12개 고수준 원칙 | Stage 1 통합 지침 원칙 도출의 입력 |
+| 학술 및 실무 문헌 13편 | ISG 효과성 논의 문헌 | Stage 2 CSF 식별의 근거 |
+
+**문헌 범위:**
+보안 거버넌스 구현과 관련된 학술 및 실무 지향 문헌을 대상으로 하며, 기업 보안, 비즈니스 ISG, 정보 보안 등 관련 분야를 포함한다. 총 13편의 문헌이 ISG 효과성을 직접적으로 다루고 있어 CSF 도출의 근거로 활용되었다.
+
+#### B. 3단계 프레임워크 구축 방법론
+
+**Stage 1: 지침 원칙 형성**
+
+목적: 전 조직 레벨 ISG 구현을 안내하는 기반 마련
+
+방법:
+```
+1. ISO 27014의 6개 원칙 추출
+   - Establish organisation-wide IS
+   - Adopt a risk-based approach
+   - Foster a security-positive environment
+   - Ensure conformance with internal/external requirements
+   - Set the direction of investment decisions
+   - Review performance in relation to business outcomes
+
+2. COBIT 5 for IS의 12개 원칙 추출
+   - Focus on Business
+   - Adopt risk-based approach
+   - Foster an IS-positive culture
+   - Comply with legal and regulatory requirement
+   - Evaluate current and future information threats
+   - Promote continuous improvement in IS
+   - Deliver quality and value to stakeholders
+   - Protect classified information
+   - Concentrate in critical business application
+   - Develop systems securely
+   - Act in a professional and ethical manner
+   - Provide timely and accurate information on IS performance
+
+3. 중복 제거 및 의미적 유사성 통합
+4. 논리적 조화 및 종합
+→ 14개 통합 지침 원칙 도출
+```
+
+**Stage 2: CSF 식별**
+
+목적: 효과적 거버넌스에 가장 큰 영향을 미치는 핵심 실무 식별
+
+방법:
+```
+1. 학술 및 실무 문헌 13편 철저 분석
+   - ISG 관련 분야: 기업 보안, 비즈니스 ISG, ISG, 정보 보안
+2. Stage 1 지침 원칙 기반으로 핵심/성공/효과 요인 추출
+3. 중복 및 의미적 유사 개념 제거
+4. 논리적 조화 및 종합
+5. CSF를 지침 원칙에 매핑하여 포괄성 확인
+→ 17개 CSF 도출
+```
+
+**Stage 3: CSF를 5대 ISG 영역에 배치**
+
+목적: CSF가 효과적 거버넌스에 영향을 미침을 검증하고 실행 지침 완성
+
+방법:
+```
+1. ITGI(2006)의 5대 ISG 필수 영역 기준 적용
+   - Strategic Alignment, Value Delivery,
+     Performance Measurement, Risk Management,
+     Resource Management
+2. 17개 CSF를 각 영역에 배치
+3. 두 번의 매핑 프로세스(원칙→CSF, CSF→영역)를
+   통해 CSF가 효과적 거버넌스에 영향을 미침을 확인
+```
+
+#### C. 핵심 결과물: 통합 지침 원칙 14개
+
+| 번호 | 통합 지침 원칙 |
+|------|---------------|
+| 1 | Consider IS as an organization-wide issue |
+| 2 | Adopt risk-based approach |
+| 3 | Set the direction of investment decisions |
+| 4 | Conform & comply with IS requirements |
+| 5 | Deliver quality and value to stakeholders |
+| 6 | Provide timely and accurate information on IS |
+| 7 | Evaluate current and future information threats |
+| 8 | Promote continuous improvement in IS |
+| 9 | Act in a professional and ethical manner |
+| 10 | Foster an IS-positive culture |
+| 11 | Review IS performance in relation to business outcomes |
+| 12 | Protect classified information |
+| 13 | Concentrate in critical business application |
+| 14 | Develop systems securely |
+
+#### D. 평가 방법
+
+이 연구는 정량적 실험 기반 검증이 아닌 문헌 기반 개념 프레임워크 연구다. 따라서 별도의 통계적 평가 지표는 사용되지 않았으며, 프레임워크의 타당성은 두 가지 방식으로 확보된다. 첫째, 국제 표준(ISO 27014, COBIT 5)을 기반으로 함으로써 학술적 및 실무적 신뢰성을 확보했다. 둘째, 13편의 문헌에서 반복적으로 등장하는 요인들을 CSF로 채택함으로써 다중 출처 검증의 효과를 얻었다. 저자들은 이 프레임워크가 향후 특정 지역 및 조직을 대상으로 전문가 패널 검토와 사례 연구를 통해 추가 검증이 필요함을 명시했다.
+
+### 4. 컨설팅 관점 인사이트
+
+**방법론의 실무 적용성:**
+
+장점:
+- 국제 표준 기반이므로 고객사에 프레임워크를 제안할 때 근거로 ISO 27014, COBIT 5를 직접 인용 가능
+- 3단계 구축 방법론 자체가 컨설팅 방법론으로 활용 가능: 표준 수집 → CSF 도출 → 영역별 매핑
+- 모든 조직 규모에 적용 가능하다는 점에서 대기업부터 중소기업까지 다양한 고객사에 활용 가능
+
+한계:
+- 실증적으로 검증되지 않은 개념 프레임워크이므로 고객사에 적용 시 추가적인 맞춤화 작업이 필요
+- 문화적 맥락이 반영되지 않아 한국 조직 환경에서의 적용 가능성을 별도로 검토해야 함
+
+**기존 보안 프레임워크와의 차별점:**
+
+| 프레임워크 | 접근 방식 | 강점 | 약점 |
+|-----------|-----------|------|------|
+| ISO 27014 단독 | 이사회/경영진 대상 6개 원칙 | 국제 표준, 권위 있음 | 전 조직 레벨 지침 부족 |
+| COBIT 5 단독 | 전 조직 레벨 12개 원칙 | 상세한 실무 지침 | IT 거버넌스 중심으로 IS에 특화 부족 |
+| Gashgari et al. (2017) | 두 프레임워크 통합 + 17개 CSF + 5대 영역 매핑 | 포괄성, 실무 적용 가능성 | 실증 검증 미완료 |
+
+**Day 3 Preview:**
+이 논문은 실증 결과가 없는 개념 프레임워크 연구다. Day 3에서는 논문이 제시한 최종 프레임워크(Table 2)의 구조를 상세히 분석하고, 17개 CSF와 5대 영역의 매핑 결과가 갖는 의미를 컨설팅 관점에서 해석할 예정이다.
+
+---
+
+*Day 2 완료 - 2025.02.10*
