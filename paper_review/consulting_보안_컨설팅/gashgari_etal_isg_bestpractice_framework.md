@@ -9,7 +9,7 @@
 
 ### 선정 배경
 **도메인 탐색 결과:**  
-8주간 보안 컨설팅, OT/ICS, 클라우드 등 8개 도메인 논문을 읽은 결과, 보안 컨설팅과 보안 관제가 나의 강점과 흥미에 가장 부합함을 확인. 이제부터는 보안 컨설팅 전문성 심화를 위한 체계적 학습 단계.
+8주간 보안 컨설팅, OT/ICS, 클라우드 등 8개 도메인 논문을 읽은 결과, 보안 컨설팅이 나의 강점과 흥미에 가장 부합함을 확인. 이제부터는 보안 컨설팅 전문성 심화를 위한 체계적 학습 단계.
 
 **이 논문을 선택한 이유:**  
 - 이전 논문들과의 연결고리: Foorthuis(2011) 컴플라이언스 전술, Integrated Risk Framework(2024), Bulgurcu(2010) 정책 준수를 통합하는 상위 거버넌스 체계 학습
@@ -263,3 +263,133 @@
 ---
 
 *Day 2 완료 - 2025.02.10*
+
+---
+
+## Day 3 – Empirical Results and Hypothesis Testing
+*(실증 검증 없이도 프레임워크가 말하는 것: Table 2 구조 분석)*
+
+### 1. 이 논문의 결과 구조에 대한 선이해
+
+이 논문은 실험 데이터나 설문 기반의 실증 연구가 아닌 문헌 기반 개념 프레임워크 연구다. 따라서 통계적 가설 검증 결과는 존재하지 않는다. 대신 연구의 핵심 결과물은 Table 2로 제시된 최종 프레임워크이며, 이것이 3단계 방법론의 산출물이자 논문 전체의 주장을 담은 결론이다. Day 3에서는 이 프레임워크의 구조와 각 구성 요소가 갖는 의미를 상세히 분석한다.
+
+### 2. 최종 프레임워크 전체 구조 (Table 2)
+
+| ISG 영역 | 지침 원칙 | CSF 번호 | CSF 내용 |
+|---------|-----------|---------|---------|
+| **Strategic Alignment** | Consider IS as an organization-wide issue | 1 | Integrate IS with business activities |
+| | | 2 | On-going strategic alignment |
+| | | 3 | Determine clear IS roles & responsibilities and be held accountable |
+| | Act in professional and ethical manner | 4 | Visible involvement & leadership |
+| | Conform & comply with internal & external IS requirements | 5 | Ensure IS policies and practices comply with law & regulations |
+| **Performance Measurement** | Provide timely & accurate information on IS performance | 6 | Ensure timely and transparent reporting of IS performance and issues |
+| | Review IS performance in relation to business outcomes | 7 | Constant review of IS performance |
+| | Promote continuous improvement in IS | 8 | Improve IS on an on-going basis |
+| **Value Delivery** | Deliver quality & value to stakeholders | 9 | Effective communication |
+| | | 10 | Effective business continuity/disaster recovery plan |
+| **Risk Management** | Adopt risk-based approach | 11 | Determine risk appetite |
+| | Evaluate current & future information threats | 12 | Ensure regular risk & threats assessment |
+| | Protect classified information | 13 | Protect critical and sensitive assets |
+| | Concentrate on critical business applications | 14 | Identify critical applications & information systems |
+| | Develop systems securely | 15 | Integrate IS with systems development lifecycle |
+| **Resource Management** | Foster an IS-positive culture | 16 | Effective IS awareness and training |
+| | Set the direction of investment decisions | 17 | Adequate investment & resource commitment of IS |
+
+### 3. 5대 영역별 상세 분석
+
+#### A. Strategic Alignment (전략적 정렬) - CSF 1~5
+
+**구조:**
+5개의 CSF가 배치된 가장 많은 CSF를 보유한 영역이다. 이는 보안 거버넌스에서 전략적 정렬이 가장 복잡하고 다차원적인 영역임을 의미한다.
+
+**관찰:**
+CSF 1~3은 모두 동일한 지침 원칙인 IS를 조직 전체 이슈로 간주하라는 원칙에서 파생되었다. 이 세 가지가 별도의 CSF로 분리된 이유는 비즈니스와의 통합(CSF1), 전략과의 지속적 정렬(CSF2), 명확한 역할과 책임 정의(CSF3)가 각각 독립적으로 실패할 수 있는 영역이기 때문이다.
+
+CSF4 경영진의 가시적 리더십은 별도 지침 원칙(전문적이고 윤리적으로 행동하라)에 매핑되어 있다. 거버넌스에서 경영진의 실질적 참여가 단순한 전략 정렬과는 별개의 독립적 성공 요인임을 강조하는 설계다.
+
+**컨설팅 시사점:**
+고객사 보안 거버넌스 진단 시 전략적 정렬 영역에서 가장 많은 질문을 던져야 한다. 보안 전략이 비즈니스 전략 문서에 명시되어 있는지(CSF1, 2), CISO 또는 보안 책임자의 역할 정의서가 존재하는지(CSF3), 경영진이 보안 회의에 실질적으로 참여하는지(CSF4), 보안 정책이 ISMS-P 등 규제와 연계되어 있는지(CSF5)를 확인하는 것이 핵심이다.
+
+#### B. Performance Measurement (성과 측정) - CSF 6~8
+
+**구조:**
+3개의 CSF가 배치되며, 세 개의 독립적인 지침 원칙에 각각 하나씩 매핑된다. 보고, 검토, 개선이라는 순환 구조를 형성한다.
+
+**관찰:**
+CSF6 적시적이고 투명한 성과 보고, CSF7 지속적 성과 검토, CSF8 지속적 개선은 사실상 PDCA 사이클의 Check-Act 단계와 동일한 구조다. 이 세 CSF가 성과 측정 영역에 묶인 것은 보안 활동의 결과를 경영진에게 가시화하고 지속적으로 개선하는 메커니즘이 거버넌스의 핵심이라는 인식을 반영한다.
+
+**컨설팅 시사점:**
+많은 조직에서 보안 활동은 수행되지만 그 결과가 경영진에게 적시에 보고되지 않는 문제가 발생한다. CSF6은 단순히 보고서를 만드는 것이 아니라 적시성과 투명성을 요구한다. 고객사에 월간 보안 대시보드, 분기별 이사회 보안 보고 체계 구축을 제안할 수 있는 근거가 된다.
+
+#### C. Value Delivery (가치 제공) - CSF 9~10
+
+**구조:**
+2개의 CSF만 배치된 가장 작은 영역이다. 두 CSF 모두 하나의 지침 원칙(이해관계자에게 품질과 가치를 제공하라)에서 파생된다.
+
+**관찰:**
+효과적인 커뮤니케이션(CSF9)과 업무 연속성/재해복구 계획(CSF10)이 같은 가치 제공 영역에 묶인 점이 주목할 만하다. 이는 보안이 제공하는 가치가 단순한 위협 차단이 아니라 이해관계자와의 신뢰 구축(CSF9)과 비즈니스 연속성 보장(CSF10)으로 구성된다는 관점을 담고 있다.
+
+**컨설팅 시사점:**
+고객사에 보안 투자의 ROI를 설명할 때 가치 제공 관점이 유효하다. 보안 사고 발생 시 고객, 파트너, 규제기관과의 커뮤니케이션 체계(CSF9)와 서비스 중단 없이 비즈니스를 유지하는 능력(CSF10)을 보안이 제공하는 구체적 가치로 제시할 수 있다.
+
+#### D. Risk Management (리스크 관리) - CSF 11~15
+
+**구조:**
+5개의 CSF가 배치된 Strategic Alignment와 함께 가장 많은 CSF를 보유한 영역이다. 5개의 지침 원칙에 각각 하나씩 매핑된다.
+
+**관찰:**
+리스크 관리 영역의 CSF 범위가 매우 넓다. 리스크 허용 수준 결정(CSF11)이라는 전략적 의사결정부터 중요 자산 보호(CSF13), 핵심 애플리케이션 식별(CSF14), 시스템 개발 생명주기와의 통합(CSF15)까지 포함한다. 이는 리스크 관리가 단순한 위험 평가를 넘어 조직 전체의 자산 식별, 우선순위 결정, 개발 프로세스까지 관통하는 영역임을 보여준다.
+
+**컨설팅 시사점:**
+이전에 학습한 Integrated Risk Framework(2024)와 직접 연결된다. 리스크 관리는 보안 거버넌스의 5대 영역 중 하나이며, 거버넌스 없는 리스크 관리는 전략적 방향성을 잃을 수 있다. 고객사 리스크 관리 체계 진단 시 리스크 허용 수준이 이사회 수준에서 정의되어 있는지(CSF11)를 먼저 확인해야 하는 이유가 여기에 있다.
+
+#### E. Resource Management (자원 관리) - CSF 16~17
+
+**구조:**
+2개의 CSF만 배치된 영역으로 보안 인식 교육(CSF16)과 투자 및 자원 할당(CSF17)으로 구성된다.
+
+**관찰:**
+자원 관리가 사람(CSF16)과 예산(CSF17)이라는 두 가지 축으로 단순화된 점이 흥미롭다. 보안 거버넌스에서 자원이란 결국 사람을 교육하고 예산을 배분하는 것으로 귀결된다는 관점이다.
+
+**컨설팅 시사점:**
+고객사 보안 예산 편성 자문 시 CSF17을 근거로 보안 투자를 비용이 아닌 거버넌스 필수 자원으로 재정의할 수 있다. CSF16 보안 인식 교육은 Bulgurcu(2010)에서 학습한 정책 준수의 선행 조건이기도 하다.
+
+### 4. 프레임워크 전체 구조의 특성 분석
+
+**CSF 분포 패턴:**
+
+| ISG 영역 | CSF 수 | 비율 |
+|---------|--------|------|
+| Strategic Alignment | 5 | 29% |
+| Performance Measurement | 3 | 18% |
+| Value Delivery | 2 | 12% |
+| Risk Management | 5 | 29% |
+| Resource Management | 2 | 12% |
+
+Strategic Alignment와 Risk Management에 전체 CSF의 58%가 집중되어 있다. 이는 보안 거버넌스의 핵심이 전략과 리스크라는 두 축임을 수치로 보여준다.
+
+**지침 원칙과 CSF의 매핑 구조:**
+14개 지침 원칙이 17개 CSF로 확장되는 과정에서, Strategic Alignment 영역의 하나의 원칙(Consider IS as an organization-wide issue)이 3개의 CSF(1, 2, 3)를 생성했다. 이는 조직 전체적 보안 관점이 실제 실행 수준에서는 비즈니스 통합, 전략 정렬, 역할 정의라는 세 가지 독립적 활동으로 분해되어야 함을 의미한다.
+
+### 5. 컨설팅 관점 인사이트
+
+**프레임워크 활용 전략:**
+5대 영역과 17개 CSF는 고객사 보안 거버넌스 성숙도 진단을 위한 체크리스트로 직접 활용 가능하다. 각 CSF에 대해 현재 수준(없음/부분/완전)을 평가하고, 영역별 성숙도 점수를 산출하여 개선 로드맵을 제시하는 방식으로 응용할 수 있다.
+
+**고객 환경 적용 시 고려사항:**
+프레임워크가 실증 검증을 거치지 않았다는 점에서, 고객사 적용 시 해당 산업의 특성과 규제 환경을 반영한 맞춤화가 필요하다. 특히 금융 고객사의 경우 CSF5에 전자금융감독규정, CSF11에 금융 리스크 허용 기준을 추가하는 방식으로 확장해야 한다. 의료 고객사의 경우 CSF13에 개인정보보호법 상 민감정보 처리 기준을 통합해야 한다.
+
+### 6. 개인 인사이트
+
+**프레임워크 연구의 가치:**
+실증 데이터가 없음에도 이 논문이 학술적으로 인용되는 이유는 두 국제 표준의 원칙을 체계적으로 통합하고 실행 가능한 수준으로 구체화했기 때문이다. 컨설팅 관점에서도 표준 기반의 프레임워크는 고객사를 설득하는 권위 있는 근거가 된다.
+
+**5대 영역의 상호의존성:**
+5대 영역은 독립적이지 않다. 전략적 정렬 없이는 리스크 관리의 방향이 없고, 성과 측정 없이는 가치 제공을 입증할 수 없으며, 자원 관리 없이는 모든 영역이 실행 불가능하다. 이 상호의존성을 이해하는 것이 보안 거버넌스 컨설팅의 핵심이다.
+
+**Day 4 Preview:**
+Day 4에서는 이 연구의 한계점과 이후 후속 연구 동향, 그리고 이 프레임워크가 산업계에 미친 영향을 분석할 예정이다. 특히 실증 검증 미완료라는 한계가 컨설팅 실무에서 어떻게 보완될 수 있는지를 중점적으로 다룬다.
+
+---
+
+*Day 3 완료 - 2025.02.11*
