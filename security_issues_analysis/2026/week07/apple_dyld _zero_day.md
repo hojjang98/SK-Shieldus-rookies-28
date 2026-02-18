@@ -1,3 +1,10 @@
+---
+title: "보안 시사 분석: Ivanti EPMM 제로데이 취약점"
+date: 2026-02-15 17:57:00 +0900
+categories: [보안 시사 분석, "2026"]
+tags: [Ivanti, Zero-day]
+---
+
 # Apple dyld 제로데이 취약점 사건 분석
 
 ## 사건 개요

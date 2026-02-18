@@ -1,3 +1,12 @@
+---
+title: "Microsoft Edge 브라우저 보안 취약점 (CVE-2025-14372, CVE-2025-14373)"
+date: 2025-12-21
+categories: ["issues-analysis"]
+tags: ["브라우저보안", "취약점", "UseAfterFree", "XSS", "패치관리", "Chromium"]
+draft: false
+summary: "Microsoft Edge V8 엔진의 Use-After-Free 및 XSS 취약점 발견 및 패치 분석"
+---
+
 # Microsoft Edge 브라우저 보안 취약점 (CVE-2025-14372, CVE-2025-14373)
 
 ## 기사 정보
