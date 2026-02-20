@@ -1,5 +1,5 @@
 # Research Review: Effectiveness of cybersecurity audit
-> **Analyzed Date:** 2026.02.18 - 2026.02.22
+> **Analyzed Date:** 2026.02.16 - 2026.02.20
 > **Keywords:** Cybersecurity Audit, Internal Audit, Audit Effectiveness, Cybersecurity Audit Index, Risk Maturity
 > **Source:** International Journal of Accounting Information Systems, 2022, Vol. 44, Article 100548 https://doi.org/10.1016/j.accinf.2021.100548
 

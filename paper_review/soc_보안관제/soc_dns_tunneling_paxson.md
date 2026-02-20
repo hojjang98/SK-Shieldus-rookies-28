@@ -1,5 +1,5 @@
 # Research Review: Practical Comprehensive Bounds on Surreptitious Communication Over DNS
-> **Analyzed Date:** 2025.01.12 - 2025.01.16
+> **Analyzed Date:** 2026.01.12 - 2026.01.16
 > **Keywords:** DNS Tunneling, Data Exfiltration, Information Theory, Upper Bound Detection, Enterprise Security  
 > **Source:** USENIX Security Symposium, 2013, Pages 17-32  
 > **Link:** https://www.usenix.org/conference/usenixsecurity13/technical-sessions/presentation/paxson

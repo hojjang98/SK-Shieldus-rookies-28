@@ -1,5 +1,5 @@
 # Research Review: UNICORN: Runtime Provenance-Based Detector for Advanced Persistent Threats
-> **Analyzed Date:** 2025.01.08 - 2025.01.12  
+> **Analyzed Date:** 2026.01.08 - 2026.01.12  
 > **Keywords:** APT Detection, Provenance Graphs, Anomaly Detection, Graph Sketching, Evolutionary Modeling  
 > **Source:** Network and Distributed System Security Symposium (NDSS), 2020, pp. 1-18  
 > **Link:** https://www.ndss-symposium.org/ndss-paper/unicorn-runtime-provenance-based-detector-for-advanced-persistent-threats/

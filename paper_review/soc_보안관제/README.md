@@ -1,60 +1,41 @@
 # SOC (보안관제) — 논문 리뷰
 
-이 폴더는 **보안관제(Security Operation Center)** 분야의 주요 논문을 읽고 정리하기 위한 공간이다.  
-실습보다는 개념 이해와 사고 확장을 목표로 하며,  
-로그 기반 이상탐지, SIEM 자동화, 지능형 관제 기술의 발전 흐름을 중심으로 다룬다.
+이 공간은 **보안관제(Security Operations Center)** 분야의 핵심 학술 논문을 분석하고 정리하기 위한 기록소입니다. 실습 위주의 학습보다는 이론적 개념 정립과 사고 확장을 목표로 하며, 로그 기반 이상 탐지, SIEM 자동화, 지능형 관제 기술의 발전 흐름을 중점적으로 다룹니다.
 
 ---
 
-## 왜 SOC인가
+## 도메인 선정 배경
 
-**Week 1-8 도메인 탐색 결과:**  
-보안 컨설팅, OT/ICS, 클라우드 등 8개 분야의 대표 논문을 읽으며 나에게 맞는 분야를 탐색한 결과,  
-**SOC(Security Operations Center)** 가 가장 적합하다고 판단했다.
-
-**Week 9 이후:**  
-SOC 관련 논문을 집중적으로 읽으며 **SOC가 무엇인지, 어떻게 운영되는지** 근본부터 이해한다.
+**분야 탐색 및 결정**
+보안 컨설팅, OT/ICS, 클라우드 등 보안의 주요 8개 도메인을 탐색한 결과, 데이터 기반의 분석과 대응이 중심이 되는 **SOC(Security Operations Center)** 분야가 가장 적합하다고 판단하였습니다. 이에 따라 관련 연구를 집중적으로 분석하여 SOC의 본질과 운영 원리를 근본적으로 이해하고자 합니다.
 
 ---
 
 ## 목적
 
-- 로그 기반 이상탐지(Log Anomaly Detection) 연구의 핵심 아이디어를 이해한다.  
-- 관제 자동화 및 AI 기반 이상탐지 기술의 흐름을 파악한다.  
-- SOC의 기술적 진화 방향을 논문 관점에서 체계적으로 정리한다.
-
----
-
-## 논문 목록
-
-- **DeepLog: Anomaly Detection and Diagnosis from System Logs** (CCS 2017)  
-  [Paper Link](https://users.cs.utah.edu/~lifeifei/papers/deeplog.pdf)
-
-- **Mining Invariants from Console Logs for System Problem Detection** (USENIX ATC 2010)  
-  [Paper Link](https://www.usenix.org/legacy/events/atc10/tech/full_papers/Lou.pdf)
-
-- **Beehive: Large-Scale Log Analysis for Detecting Suspicious Activity in Enterprise Networks** (ACSAC 2013)  
-  [Paper Link](https://doi.org/10.1145/2523649.2523670)
-
-- **UNICORN: Runtime Provenance-Based Detector for Advanced Persistent Threats** (NDSS 2020)  
-  [Paper Link](https://www.ndss-symposium.org/ndss-paper/unicorn-runtime-provenance-based-detector-for-advanced-persistent-threats/)
-
-- **Practical Comprehensive Bounds on Surreptitious Communication Over DNS** (USENIX Security 2013)  
-  [Paper Link](https://www.usenix.org/conference/usenixsecurity13/technical-sessions/presentation/paxson)
-
-- **Outside the Closed World: On Using Machine Learning For Network Intrusion Detection** (IEEE S&P 2010)  
-  [Paper Link](https://doi.org/10.1109/SP.2010.25)
-
+* **로그 기반 이상 탐지 원리 습득**: 시스템 및 네트워크 로그를 활용한 이상 탐지(Anomaly Detection) 연구의 핵심 알고리즘과 아이디어를 이해한다.
+* **지능형 관제 기술 추적**: 관제 자동화 및 AI 기반 탐지 기술의 학술적 흐름을 파악하여 차세대 SOC의 기술적 진화 방향을 조망한다.
+* **학술적 관점의 체계화**: 파편화된 관제 지식을 논문이라는 구조적 틀을 통해 SOC 운영 체계 전반으로 통합 및 정리한다.
 
 ---
 
 ## 학습 원칙
 
-- 논문 이해의 목적은 **암기가 아니라 응용**이다.
-- 각 논문은 5일간 체계적으로 분석하며, **SOC 실무 적용 가능성**을 중심으로 정리한다.
-- 단순 요약을 넘어, "이 연구가 실제 SOC 운영에 어떻게 적용될 수 있는가"에 집중한다.
+* **응용 중심의 분석**: 논문의 내용을 단순 암기하는 것에 그치지 않고, 제안된 기법이 실제 SOC 운영 환경에 어떻게 이식될 수 있는지 비판적으로 검토한다.
+* **체계적 심화 학습**: 개별 논문을 다각도에서 분석하며, 연구 결과의 실무적 유효성과 한계를 식별하는 데 집중한다.
+* **실무적 가치 도출**: "이 연구가 실제 관제 효율성을 어떻게 높일 수 있는가"라는 질문에 대한 답을 찾는 과정을 기록한다.
 
 ---
 
-> 이 폴더의 모든 내용은 논문을 통한 **지식 확장**을 목적으로 하며,  
-> 실험 코드나 구현 내용은 포함하지 않는다.
+## 방법론적 특징
+
+본 리뷰 시스템은 다음의 원칙을 따릅니다.
+
+1. **데이터 과학적 접근**: 로그 파싱, 특징 추출(Feature Extraction), 모델링 등 관제 데이터 처리의 수리적·논리적 근거를 분석합니다.
+2. **탐지 모델의 타당성 검토**: 연구에서 사용된 데이터셋의 적절성과 탐지 모델의 오탐(False Positive) 및 미탐(False Negative) 제어 전략을 평가합니다.
+3. **인프라 통합 관점**: 단일 탐지 기법이 아닌, SIEM 및 SOAR 등 기존 관제 에코시스템과의 통합 가능성을 고찰합니다.
+
+---
+
+> 본 자료의 모든 내용은 논문을 통한 **지식 체계 확장**을 목적으로 수행됩니다. 따라서 실험을 위한 상세 코드나 특정 솔루션의 구현 내용은 포함하지 않습니다.
+
