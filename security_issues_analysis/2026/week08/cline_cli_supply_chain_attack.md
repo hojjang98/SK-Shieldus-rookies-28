@@ -1,10 +1,3 @@
----
-title: "보안 시사 분석: Cline CLI 공급망 공격"
-date: 2026-02-22
-categories: [보안 시사 분석, "2026"]
-tags: [공급망공격, npm, AI도구, 오픈소스]
----
-
 # Cline CLI 공급망 공격 — AI 코딩 도구를 통한 npm 토큰 탈취
 
 ## 사건 개요

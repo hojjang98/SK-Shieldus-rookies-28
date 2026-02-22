@@ -1,10 +1,3 @@
----
-title: "보안 시사 분석: PayPal Working Capital 6개월 데이터 침해"
-date: 2026-02-22
-categories: [보안 시사 분석, "2026"]
-tags: [데이터침해, 핀테크, 소프트웨어오류, 장기노출]
----
-
 # PayPal Working Capital 6개월 데이터 침해 — 소프트웨어 오류 기인 장기 개인정보 노출
 
 ## 사건 개요
