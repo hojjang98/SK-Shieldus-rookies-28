@@ -1,4 +1,4 @@
-### 📄 2025.11.18 (Day 16) [Project: Streamlit 시각화 대시보드 구현 완료]
+### 📄 2025.11.18 (Day 17) [Project: Streamlit 시각화 대시보드 구현 완료]
 
 ## 1. 핵심 개념 정리 (Concepts & Theory)
 

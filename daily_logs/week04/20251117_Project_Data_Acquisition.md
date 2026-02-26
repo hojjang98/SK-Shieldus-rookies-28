@@ -1,4 +1,4 @@
-### 📄 2025.11.17 (Day 15) [Project: Data Acquisition & Preprocessing]
+### 📄 2025.11.17 (Day 16) [Project: Data Acquisition & Preprocessing]
 
 ## 1. 핵심 개념 정리 (Concepts & Theory)
 
