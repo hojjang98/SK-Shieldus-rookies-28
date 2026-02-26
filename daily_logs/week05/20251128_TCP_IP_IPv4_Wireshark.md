@@ -1,4 +1,4 @@
-### 📄 2025.11.27 (Day 24) [TCP/IP 네트워크 보안: IPv4 프로토콜 & Wireshark 패킷 분석]
+### 📄 2025.11.27 (Day 25) [TCP/IP 네트워크 보안: IPv4 프로토콜 & Wireshark 패킷 분석]
 
 ## 1. 핵심 개념 정리 (Concepts & Theory)
 
