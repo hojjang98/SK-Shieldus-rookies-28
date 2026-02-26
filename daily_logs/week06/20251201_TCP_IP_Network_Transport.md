@@ -1,4 +1,4 @@
-### 📄 2025.12.01 (Day 25) [TCP/IP 네트워크 계층 & 트랜스포트 계층: 라우팅, ARP, ICMP, TCP]
+### 📄 2025.12.01 (Day 26) [TCP/IP 네트워크 계층 & 트랜스포트 계층: 라우팅, ARP, ICMP, TCP]
 
 ## 1. 핵심 개념 정리 (Concepts & Theory)
 
