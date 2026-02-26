@@ -1,4 +1,4 @@
-## 📄 2025.12.10 (Day 32) - AWS 보안 서비스: Shield, WAF, GuardDuty, Config
+## 📄 2025.12.10 (Day 33) - AWS 보안 서비스: Shield, WAF, GuardDuty, Config
 
 -----
 
