@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/ghwns/HJ_Blog/content/daily_logs//**)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\ghwns\\HJ_Blog\\content\\daily_logs"
+    ]
+  }
+}
