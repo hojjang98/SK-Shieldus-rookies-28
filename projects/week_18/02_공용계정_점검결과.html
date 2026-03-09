@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+<title>공용 계정 점검 결과 - 하랑케이터링</title>
+<style>
+body{font-family:'맑은 고딕',sans-serif;font-size:12px;margin:20px;color:#222}
+h2{color:#2F5496;border-bottom:2px solid #2F5496;padding-bottom:6px}
+.meta{background:#DEEAF6;padding:8px 12px;margin-bottom:12px;border-radius:4px;font-size:11px}
+table{border-collapse:collapse;width:100%;font-size:11px}
+th{background:#2F5496;color:#fff;padding:6px 8px;text-align:center}
+td{border:1px solid #BFBFBF;padding:5px 8px}
+.ng{color:#C00;font-weight:bold}.warn{color:#C57A00;font-weight:bold}.ok{color:green;font-weight:bold}
+.finding{background:#FCE4D6;border-left:4px solid #C00;padding:8px 12px;margin:8px 0;font-size:11px}
+.code{font-family:monospace;background:#F5F5F5;padding:2px 6px;border-radius:3px;font-size:10px}
+</style></head><body>
+<h2>개인정보처리시스템 계정 관리 점검 결과 (2.1.6)</h2>
+<div class="meta">점검일: 2026.03.18 | 점검자: 최호준 (리베로) | 대상: Oracle EBS R12.2 CMS/ERP, 주방 현장 공용 PC</div>
+<table>
+<tr><th>점검 항목</th><th>확인 결과</th><th>판정</th></tr>
+<tr>
+  <td><b>주방 공용 PC<br>계정 현황</b></td>
+  <td>
+    주방 생산·포장 라인 공용 단말기 총 8대에서 단일 계정 사용 확인:<br>
+    <span class="code">ID: admin / PW: 1234</span><br>
+    · 사용 인원: 주방 현장직 200명 중 CMS 접근 필요 인력 전원 공용 사용<br>
+    · 비밀번호 변경 이력: 전무 (최초 설정 이후 변경 없음)<br>
+    · 책임 추적성: 사고 발생 시 조작자 개인 식별 불가
+  </td>
+  <td><span class="ng">N</span></td>
+</tr>
+<tr>
+  <td><b>사무직 계정<br>현황</b></td>
+  <td>
+    경영지원팀(50명) 및 IT 직무: 1인 1계정 원칙 준수 확인<br>
+    Admin(IT인프라팀 3명) / 일반사용자 구분 적용 확인
+  </td>
+  <td><span class="ok">Y</span></td>
+</tr>
+<tr>
+  <td><b>배송팀 태블릿<br>계정 현황</b></td>
+  <td>
+    배송 기사 50명 보유 태블릿에서 부분적 공용 계정 사용 확인<br>
+    · 인원 대비 태블릿 부족(40대 보유)으로 2~3인 공용 사용<br>
+    · 개인 식별 방법: 없음 (로그에 태블릿 ID만 기록)
+  </td>
+  <td><span class="warn">P</span></td>
+</tr>
+<tr>
+  <td><b>퇴사자 계정<br>회수 현황</b></td>
+  <td>
+    ERP 계정 삭제 절차 문서 확인<br>
+    · 물리 출입(사원증): 퇴사 당일 즉시 회수 확인<br>
+    · ERP 시스템 계정 삭제: 부서 간 소통 지연으로 2~3일 지연 이력 확인 (2024년 사례 4건)<br>
+    · 최근 퇴사자 3명 계정 삭제 지연 이력(삭제일 - 퇴사일: 각 2일, 3일, 1일)
+  </td>
+  <td><span class="warn">P</span></td>
+</tr>
+</table>
+<div class="finding">
+<b>[N 판정 - 즉시 조치 필요]</b><br>
+주방 공용 PC 계정(admin/1234) 즉시 폐기. 주방 직원 개인 계정 발급 또는 불가피한 경우 사용자 식별 보완 통제(사번 기반 로그인 전 식별 입력) 도입 필요.
+</div>
+</body></html>
