@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIBERO — 산출물 마스터 플랜</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e0e;
+    --surface: #161616;
+    --border: #2a2a2a;
+    --accent: #c8f060;
+    --accent2: #60c8f0;
+    --accent3: #f06090;
+    --accent4: #f0b860;
+    --text: #e8e8e8;
+    --muted: #666;
+    --tag-done: #1a2e0a;
+    --tag-done-text: #a8d848;
+    --tag-wip: #0a1e2e;
+    --tag-wip-text: #48a8d8;
+    --tag-todo: #2e1a0a;
+    --tag-todo-text: #d8a848;
+    --tag-skip: #2a2a2a;
+    --tag-skip-text: #666;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    padding: 60px 40px;
+  }
+
+  .noise {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.4;
+  }
+
+  .container { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+
+  /* HEADER */
+  .header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 40px;
+    margin-bottom: 60px;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  .title {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .title span {
+    color: var(--accent);
+  }
+
+  .subtitle {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 14px;
+    letter-spacing: 0.05em;
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-done { background: var(--tag-done-text); }
+  .dot-wip  { background: var(--tag-wip-text); }
+  .dot-todo { background: var(--tag-todo-text); }
+  .dot-skip { background: #444; }
+
+  /* CATEGORY */
+  .category {
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.5s forwards;
+  }
+  .category:nth-child(1) { animation-delay: 0.05s; }
+  .category:nth-child(2) { animation-delay: 0.15s; }
+  .category:nth-child(3) { animation-delay: 0.25s; }
+  .category:nth-child(4) { animation-delay: 0.35s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .category-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 4px;
+  }
+
+  .category-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .category-name {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .category-name.c1 { color: var(--accent); }
+  .category-name.c2 { color: var(--accent2); }
+  .category-name.c3 { color: var(--accent3); }
+  .category-name.c4 { color: var(--accent4); }
+
+  .category-desc {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    padding-left: 2px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.02em;
+  }
+
+  /* ITEMS */
+  .items {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+    transition: background 0.15s;
+  }
+  .item:last-child { border-bottom: none; }
+  .item:hover { background: var(--surface); }
+
+  .item-left { display: flex; flex-direction: column; gap: 4px; }
+
+  .item-name {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .item-note {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .item-note em {
+    font-style: normal;
+    color: #888;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .tag-done { background: var(--tag-done); color: var(--tag-done-text); }
+  .tag-wip  { background: var(--tag-wip);  color: var(--tag-wip-text); }
+  .tag-todo { background: var(--tag-todo); color: var(--tag-todo-text); }
+  .tag-skip { background: var(--tag-skip); color: var(--tag-skip-text); text-decoration: line-through; }
+
+  /* NOTES SECTION */
+  .notes-section {
+    margin-top: 60px;
+    border-top: 1px solid var(--border);
+    padding-top: 40px;
+  }
+
+  .notes-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .note-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .note-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .note-card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .note-card-title.c2 { color: var(--accent2); }
+  .note-card-title.c3 { color: var(--accent3); }
+  .note-card-title.c4 { color: var(--accent4); }
+
+  .note-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .note-card ul li {
+    font-size: 12px;
+    color: var(--muted);
+    padding-left: 12px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .note-card ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #444;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .footer-right {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div class="logo">Team LIBERO · SK쉴더스 루키즈 28기</div>
+      <div class="meta">
+        하랑항공 / 하랑 케이터링<br>
+        개인정보처리 수탁사 점검 보안컨설팅<br>
+        Fraction 04 · 2026.03
+      </div>
+    </div>
+    <div class="title">산출물<br><span>마스터 플랜</span></div>
+    <div class="subtitle">최종 제출 기준 산출물 구성 확정본</div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><div class="dot dot-done"></div>완성</div>
+    <div class="legend-item"><div class="dot dot-wip"></div>진행 중</div>
+    <div class="legend-item"><div class="dot dot-todo"></div>미착수</div>
+    <div class="legend-item"><div class="dot dot-skip"></div>제외 확정</div>
+  </div>
+
+  <!-- CATEGORY 1: 5조 -->
+  <div class="category">
+    <div class="category-header">
+      <div class="category-label">CAT 01</div>
+      <div class="category-name c1">5조 공통</div>
+    </div>
+    <div class="category-desc">팀 전체 프로젝트 수준 산출물</div>
+    <div class="items">
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">WBS</div>
+          <div class="item-note">수정 필요 — B/C열 명칭 정비, 순서 재조정, 가중치·진척율·이행점검 행 삭제</div>
+        </div>
+        <div class="tag tag-wip">수정 중</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">수행계획서</div>
+          <div class="item-note">프로젝트 전체 수준 — WBS 날짜·내용과 정합성 맞추기, 팀원 이름 기재, 보고 체계 수정</div>
+        </div>
+        <div class="tag tag-wip">수정 중</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">PPT + 시연영상</div>
+          <div class="item-note">발표용 — 점검 방법론 흐름 포함 (현황분석→사전준비→진단평가→대책구현→이행)</div>
+        </div>
+        <div class="tag tag-todo">미착수</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">요구사항 정의서</div>
+          <div class="item-note"><em>컨설팅 프로젝트에서 잘 안 씀 → 제외. 질문 시 "다른 부분에 시간 투자"로 답변</em></div>
+        </div>
+        <div class="tag tag-skip">제외</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY 2: 위탁사 -->
+  <div class="category">
+    <div class="category-header">
+      <div class="category-label">CAT 02</div>
+      <div class="category-name c2">위탁사 (하랑항공)</div>
+    </div>
+    <div class="category-desc">위탁사가 수탁사를 관리하기 위한 관리체계 수립 산출물</div>
+    <div class="items">
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">제안요청서 (RFP)</div>
+          <div class="item-note"><em>시나리오상 생략 — 리베로가 하랑항공에 선제 제안한 구조로 설정. 질문 시 해당 답변으로 대응</em></div>
+        </div>
+        <div class="tag tag-skip">시나리오상 생략</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">위수탁 계약서</div>
+          <div class="item-note">보안요구사항 필수 포함 (ISMS-P 2.3.2 외부자 계약 시 보안 기준)</div>
+        </div>
+        <div class="tag tag-todo">미착수</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">수탁사 목록</div>
+          <div class="item-note">수탁사명, 위치, 담당자, 개인정보시스템 유무, 처리자 수, 개인정보 이동방식 등 — 한 장 요약본</div>
+        </div>
+        <div class="tag tag-todo">미착수</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">전체 결과 보고서</div>
+          <div class="item-note">6개 수탁사 결과 보고서 종합 — 수탁사별 점검 결과를 합쳐 위탁사에 제출하는 최종 보고서</div>
+        </div>
+        <div class="tag tag-todo">미착수</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY 3: 수탁사 -->
+  <div class="category">
+    <div class="category-header">
+      <div class="category-label">CAT 03</div>
+      <div class="category-name c3">수탁사 (하랑 케이터링 외)</div>
+    </div>
+    <div class="category-desc">리베로 담당: 하랑 케이터링 / 나머지 5개사는 각 팀 담당</div>
+    <div class="items">
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">시나리오 (= 수탁사 현황)</div>
+          <div class="item-note">법령 기반(개인정보보호법·안전조치 등)으로 AI 활용해 제작 — WBS상 체크리스트 수립 → 수탁사 현황 → 점검 순서 반영</div>
+        </div>
+        <div class="tag tag-wip">진행 중</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">체크리스트</div>
+          <div class="item-note">증적명 열 추가 / P·Y·N·NA 추가 / 미흡 항목 빨간 글씨 강조 / 증적자료는 새 시트(시트명: 항목번호)로 첨부</div>
+        </div>
+        <div class="tag tag-wip">수정 중</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">증적자료</div>
+          <div class="item-note">체크리스트와 같은 폴더 또는 엑셀 시트 — 파일명 규칙: 항목번호(1.1.1~) 순</div>
+        </div>
+        <div class="tag tag-wip">진행 중</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">점검계획서</div>
+          <div class="item-note">수탁사별 별도 X → 하나로 통합, 수탁사별 날짜·방문자·담당자 구분 표기</div>
+        </div>
+        <div class="tag tag-todo">미착수</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">수탁사별 결과 보고서</div>
+          <div class="item-note">점검 기간 = 실제 점검 기간 / 양호 항목 생략 가능 / 향후 조치 일정 표 순서 수정 (내용→일정)</div>
+        </div>
+        <div class="tag tag-wip">수정 중</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">개선방안 보고서</div>
+          <div class="item-note">미흡 항목에 대한 보호대책·개선방안 담은 문서 — 결과 보고서와 별도 또는 내부 챕터로 구성</div>
+        </div>
+        <div class="tag tag-todo">미착수</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">수행계획서 (수탁사 점검용)</div>
+          <div class="item-note">수탁사 점검 레벨 — 5조 수행계획서와 별도, 점검 범위·절차·일정 상세</div>
+        </div>
+        <div class="tag tag-wip">수정 중</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY 4: 리베로 -->
+  <div class="category">
+    <div class="category-header">
+      <div class="category-label">CAT 04</div>
+      <div class="category-name c4">리베로 고유</div>
+    </div>
+    <div class="category-desc">리베로 팀이 독자적으로 수행한 산출물</div>
+    <div class="items">
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">사업제안서</div>
+          <div class="item-note">Word 형태 / 목차·내용 대폭 수정 완료 — 예산 삭제, 수행일정·투입인력 통합, 이행점검 제외, 8·9장 합쳐 "왜 리베로인가"로 마무리</div>
+        </div>
+        <div class="tag tag-wip">수정 중</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="notes-section">
+    <div class="notes-title">Key Notes — 발표·면접 대응 포인트</div>
+    <div class="note-cards">
+      <div class="note-card">
+        <div class="note-card-title">이행점검</div>
+        <ul>
+          <li>이행점검은 시간 제약으로 제외</li>
+          <li>프로세스는 알고 있으나 진행 불가 답변</li>
+          <li>서면점검 형태로 사후 이행 가능 언급</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <div class="note-card-title c2">RFP / 요구사항정의서</div>
+        <ul>
+          <li>RFP 없음 — 리베로가 선제 제안한 시나리오</li>
+          <li>요구사항정의서 없음 — 컨설팅 관행</li>
+          <li>둘 다 질문 나오면 위 논리로 답변</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <div class="note-card-title c3">수탁사 현황 질문 대응</div>
+        <ul>
+          <li>개인정보보호법·안전조치 법령 기반</li>
+          <li>AI 활용해 가상 현황 제작</li>
+          <li>체크리스트 먼저냐 현황 먼저냐 — 분위기 보고 답변</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <div class="note-card-title c4">산출물 네이밍 규칙</div>
+        <ul>
+          <li>(5조)_사업명_(구분)_문서명_버전</li>
+          <li>버전은 1.0 이상</li>
+          <li>아라비아 숫자 / 가나다 혼용 금지</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">Team LIBERO · Fraction 04 · 2026.03</div>
+    <div class="footer-right">개인정보처리 수탁사 점검 보안컨설팅</div>
+  </div>
+
+</div>
+</body>
+</html>
