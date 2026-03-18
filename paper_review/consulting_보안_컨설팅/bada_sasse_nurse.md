@@ -123,19 +123,183 @@
 
 ---
 
+# Research Review: Cyber Security Awareness Campaigns: Why do they fail to change behaviour?
+> **Analyzed Date:** 2026.03.17 - 2026.03.21  
+> **Keywords:** Security Awareness, Behaviour Change, Persuasion, Risk Perception, Security Culture  
+> **Source:** arXiv preprint (Global Cyber Security Capacity Centre, University of Oxford), 2014/2019
+
+---
+
+## Day 2 – Research Model, Hypotheses, and Methodology
+*(심리학 이론의 렌즈로 보안 인식 실패를 해부하다)*
+
+### 1. 연구 모델 개요
+
+이 논문은 실증 데이터를 수집하는 연구가 아니라 문헌 검토(literature review) 기반의 개념적 논문이다. 따라서 전통적인 연구 모델이나 가설 검증 구조는 존재하지 않는다. 대신 저자들은 심리학, 행동경제학, 문화 이론의 기존 연구를 체계적으로 검토하여 보안 인식 캠페인 실패의 원인 구조를 설명하는 분석 틀을 구성한다.
+
+```
+[논문의 분석 흐름]
+
+현상 진단                   원인 분석                     처방 도출
+보안 인식 캠페인이   →   행동 변화 결정 요인 분석   →   성공/실패 요인 추출
+행동 변화로           (개인적 / 사회환경적 / 문화적)      + 실존 캠페인 사례 검토
+이어지지 않는다              ↓
+                    심리학 이론 적용
+                    - 보호동기이론 (PMT)
+                    - 조절초점이론
+                    - 확장병렬처리모델 (EPPM)
+                    - MINDSPACE 프레임워크
+```
+
+**설계 철학:**
+
+저자들은 보안 문제를 기술적 문제가 아닌 심리학적 문제로 재정의한다. 기존 연구가 캠페인의 내용(무엇을 전달할 것인가)에 집중한 반면, 이 논문은 전달 방식과 수신자의 심리적 반응 메커니즘(어떻게 받아들이는가)으로 분석의 초점을 이동한다.
+
+---
+
+### 2. 핵심 분석 가정
+
+이 논문은 가설 검증 연구가 아니므로, 논문 전체를 관통하는 핵심 가정(assumptions)으로 정리한다.
+
+| 가정 | 내용 | 근거 |
+|------|------|------|
+| **A1** | 지식 전달만으로는 행동 변화가 일어나지 않는다 | ISF(2014), Kirlappos et al.(2014) 등 기존 연구의 반복적 확인 |
+| **A2** | 행동 변화는 개인적, 사회적, 문화적 요인이 복합적으로 작용한 결과다 | Dolan et al.(2010) MINDSPACE 프레임워크 |
+| **A3** | 공포 소구(fear appeal)는 조건에 따라 역효과를 낸다 | PMT, EPPM, Drive Model 등 다수 심리학 이론 |
+| **A4** | 문화적 맥락이 메시지 수용 방식을 결정한다 | Hofstede(2010), Triandis(1989), Kreuter & McClure(2004) |
+| **A5** | 보안 시스템과 정책의 설계 실패가 사용자 비준수의 핵심 원인 중 하나다 | Nurse et al.(2011), Whitten & Tygar(1999) |
+
+---
+
+### 3. 분석 방법론
+
+#### A. 문헌 검토 범위
+
+이 논문은 다음 세 분야의 기존 문헌을 체계적으로 검토한다.
+
+| 분야 | 주요 이론/출처 | 활용 목적 |
+|------|--------------|-----------|
+| 심리학 및 행동과학 | PMT, 조절초점이론, EPPM, 자기효능감 이론 | 개인 수준의 행동 변화 메커니즘 설명 |
+| 행동경제학 및 공공정책 | MINDSPACE 프레임워크(Dolan et al., 2010) | 행동에 영향을 미치는 9가지 환경적 요인 구조화 |
+| 문화심리학 | Hofstede의 문화 차원 이론, Triandis의 집단주의 이론 | 국가·조직 문화가 메시지 수용에 미치는 영향 분석 |
+
+**데이터 수집 방식:**
+자체 설문, 실험, 인터뷰 없음. 기존 학술 문헌 및 실존 캠페인 사례(영국, 아프리카)의 공개 자료를 분석 대상으로 활용.
+
+#### B. 핵심 이론 분석 틀
+
+**보호동기이론(Protection Motivation Theory, PMT)**
+
+목적: 공포 소구가 행동 변화로 이어지는 조건을 설명
+
+구조:
+```
+위협 평가                    대처 평가
+- 위협의 심각성      →    - 대응 행동의 효과성(반응 효능감)
+- 위협의 발생 가능성  →    - 자신이 실행할 수 있다는 믿음(자기효능감)
+         ↓                          ↓
+              보호 동기 형성
+                    ↓
+              보호 행동 채택
+```
+
+핵심 함의: 위협만 강조하고 실행 가능한 대응 행동을 제시하지 않으면 보호 동기가 형성되지 않는다. 자기효능감이 낮은 수신자는 위협 메시지에 공포 통제(fear control) 반응, 즉 위협 자체를 부정하는 방식으로 대응한다.
+
+**확장병렬처리모델(Extended Parallel Process Model, EPPM)**
+
+목적: 공포 소구의 역효과 발생 조건 설명
+
+구조:
+```
+공포 소구 메시지 수신
+        ↓
+위협 인식 수준 평가
+        ↓
+    높음                              낮음
+     ↓                                ↓
+대처 효능감 평가               메시지 무시 (위협 부정)
+     ↓
+높음              낮음
+ ↓                 ↓
+위험 통제        공포 통제
+(보호 행동)      (부정, 방어적 회피)
+```
+
+핵심 함의: 위협 인식이 높더라도 대처 효능감이 낮으면 보호 행동 대신 위협 부정 반응이 나타난다. 이것이 공포 소구가 역효과를 내는 메커니즘이다.
+
+**MINDSPACE 프레임워크(Dolan et al., 2010)**
+
+목적: 행동에 영향을 미치는 9가지 환경적·심리적 요인 구조화
+
+| 요인 | 내용 | 보안 캠페인 적용 |
+|------|------|----------------|
+| Messenger | 누가 메시지를 전달하는가가 수용도를 결정 | 경영진 vs. IT 담당자의 메시지 전달 효과 차이 |
+| Incentives | 손실 회피 편향이 이득 추구보다 강하게 작동 | 보안 미준수의 결과를 손실 프레임으로 제시 |
+| Norms | 타인의 행동이 강력한 영향력을 발휘 | 동료 집단의 보안 행동을 사회적 규범으로 제시 |
+| Defaults | 기본 설정 옵션을 따르는 경향 | 보안 설정을 기본값으로 설정하는 시스템 설계 |
+| Salience | 자신과 관련 있다고 느끼는 정보에 주의 집중 | 직무별, 역할별 맞춤형 보안 메시지 설계 |
+| Priming | 무의식적 단서가 행동에 영향 | 보안 관련 시각적 환경 구성 |
+| Affect | 감정적 연상이 행동을 강하게 형성 | 긍정적 감정 연결(보안 = 보호, 안심)로 메시지 설계 |
+| Commitments | 공개적 약속과 상호성이 행동을 유도 | 보안 서약, 팀 단위 보안 목표 공개 설정 |
+| Ego | 자아 이미지와 일관된 행동을 취하려는 경향 | 보안 전문가 이미지와 연결된 인식 캠페인 |
+
+**조절초점이론(Regulatory Focus Theory, Higgins 1998)**
+
+목적: 개인의 동기 유형에 따른 메시지 프레이밍 효과 차이 설명
+
+```
+촉진 초점(Promotion Focus)        예방 초점(Prevention Focus)
+- 이상적 자아 달성 추구            - 의무와 책임 이행
+- 이득 추구                       - 손실 회피
+- 서구 개인주의 문화에서 강함       - 동아시아 집단주의 문화에서 강함
+        ↓                                  ↓
+보안 혜택 중심 메시지              보안 미준수 결과 중심 메시지
+(보안을 유지하면 얻는 것)          (보안을 지키지 않으면 잃는 것)
+```
+
+#### C. 사례 분석 방법
+
+영국(GetSafeOnline, Cyber Streetwise)과 아프리카(ISC Africa, Parents' Corner) 캠페인을 선정하여 Hofstede의 문화 차원 이론(개인주의-집단주의 축)을 기준으로 메시지 전략의 차이를 비교 분석한다. 사례 선정 기준은 두 지역이 문화적 특성과 보안 투자 규모 측면에서 뚜렷한 대조를 이룬다는 점이다.
+
+---
+
+### 4. 컨설팅 관점 인사이트
+
+**방법론의 실무 적용성:**
+
+장점:
+- 이론 기반 분석 틀은 고객사의 현행 보안 교육 프로그램을 진단하는 체크리스트 형태로 즉시 변환 가능하다
+- PMT와 EPPM은 공포 소구 중심의 보안 메시지가 왜 효과를 내지 못하는지를 경영진에게 설명하는 논리적 근거로 활용할 수 있다
+- MINDSPACE의 9가지 요인은 보안 인식 프로그램 설계 시 점검해야 할 항목 목록으로 활용 가능하다
+
+한계:
+- 자체 실증 데이터가 없어 인과관계의 강도를 정량적으로 제시하기 어렵다
+- 영국과 아프리카 사례는 국내 기업 환경에 직접 적용하기에 문화적 거리가 있다. 한국 조직 특성(위계 구조, 집단주의 성향)에 맞는 별도 분석이 필요하다
+
+**기존 보안 접근법과의 차별점:**
+
+| 접근 방식 | 초점 | 강점 | 약점 |
+|-----------|------|------|------|
+| 기존 컴플라이언스 중심 접근 | 규정 준수 여부 측정 | 측정 용이, 감사 대응 명확 | 행동 변화 여부와 무관한 형식적 이수로 귀결 |
+| 이 논문의 심리학적 접근 | 행동 변화의 심리적 선행 조건 | 실질적 행동 변화 설계 가능 | 효과 측정이 어렵고 장기 투자 필요 |
+
+**다음 학습 방향 (Day 3 Preview):**
+
+Day 3에서는 논문의 결론부(Section 5, 6, 7)에서 도출된 캠페인 성공/실패 요인과 영국-아프리카 사례 비교 결과를 집중 분석한다. 이론이 실제 캠페인 사례에 얼마나 정합적으로 적용되는지, 그리고 국내 기업 환경에 적용할 때 어떤 수정이 필요한지를 검토한다.
+
+---
+
 ## References
 
-[1] Bada, M., Sasse, A. M., & Nurse, J. R. C. (2014/2019). Cyber Security Awareness Campaigns: Why do they fail to change behaviour? arXiv preprint arXiv:1901.02672. Global Cyber Security Capacity Centre, University of Oxford.
+[1] Bada, M., Sasse, A. M., & Nurse, J. R. C. (2014/2019). Cyber Security Awareness Campaigns: Why do they fail to change behaviour? arXiv preprint arXiv:1901.02672.
 
 [2] Rogers, R. W. (1975). A protection motivation theory of fear appeals and attitude change. *Journal of Psychology*, 91, 93–114.
 
 [3] Higgins, E. T. (1998). Promotion and prevention: Regulatory focus as a motivational principle. *Advances in Experimental Social Psychology*, 30, 1–46.
 
-[4] Da Veiga, A., & Eloff, J. H. P. (2010). A framework and assessment instrument for information security culture. *Computers & Security*, 29(2), 196–207.
+[4] Dolan, P., Hallsworth, M., Halpern, D., King, D., & Vlaev, I. (2010). MINDSPACE: Influencing behaviour through public policy. Institute for Government, Cabinet Office.
 
-[5] Bulgurcu, B., Cavusoglu, H., & Benbasat, I. (2010). Information security policy compliance: An empirical study of rationality-based beliefs and information security awareness. *MIS Quarterly*, 34(3), 523–548.
+[5] Witte, K. (1994). Fear control and danger control: A test of the Extended Parallel Process Model (EPPM). *Communication Monographs*, 61, 113–134.
 
----
+[6] Hofstede, G., Hofstede, J. G., & Minkov, M. (2010). *Cultures and Organizations: Software of the Mind* (3rd ed.). McGraw-Hill.
 
-## Tags
-`#보안컨설팅` `#SecurityConsulting` `#SecurityAwareness` `#BehaviourChange` `#PersuasionTechniques` `#PaperReview` `#SKShieldusRookies`
