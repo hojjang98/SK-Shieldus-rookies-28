@@ -123,13 +123,6 @@
 
 ---
 
-# Research Review: Cyber Security Awareness Campaigns: Why do they fail to change behaviour?
-> **Analyzed Date:** 2026.03.17 - 2026.03.21  
-> **Keywords:** Security Awareness, Behaviour Change, Persuasion, Risk Perception, Security Culture  
-> **Source:** arXiv preprint (Global Cyber Security Capacity Centre, University of Oxford), 2014/2019
-
----
-
 ## Day 2 – Research Model, Hypotheses, and Methodology
 *(심리학 이론의 렌즈로 보안 인식 실패를 해부하다)*
 
