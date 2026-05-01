@@ -136,16 +136,16 @@ cp config.json.example config.json
 
 ```json
 {
-    "target_url": "http://localhost:8080",
-    "project_path": "/path/to/your/project",
-    "admin_login": {
-        "username": "admin",
-        "password": "your_password"
-    },
-    "guest_login": {
-        "username": "guest",
-        "password": "guest"
-    }
+"target_url": "http://localhost:8080",
+"project_path": "/path/to/your/project",
+"admin_login": {
+"username": "admin",
+"password": "your_password"
+},
+"guest_login": {
+"username": "guest",
+"password": "guest"
+}
 }
 ```
 
@@ -187,9 +187,9 @@ dna-lab-security-scanner/
 ├── 15_ssrf_scanner.py              # SSRF 및 명령어 인젝션
 │
 └── reports/                         # 생성된 스캔 리포트
-    ├── scan_report_YYYYMMDD_HHMMSS.txt
-    ├── scan_report_YYYYMMDD_HHMMSS.html
-    └── scan_report_YYYYMMDD_HHMMSS.pdf
+├── scan_report_YYYYMMDD_HHMMSS.txt
+├── scan_report_YYYYMMDD_HHMMSS.html
+└── scan_report_YYYYMMDD_HHMMSS.pdf
 ```
 
 ## 기술 아키텍처
@@ -200,12 +200,12 @@ dna-lab-security-scanner/
 
 ```python
 def scan(target_url, login_info=None):
-    return {
-        'name': '취약점 이름',
-        'vulnerable': True/False,
-        'details': ['발견사항 1', '발견사항 2'],
-        'recommendation': '수정 제안'
-    }
+return {
+'name': '취약점 이름',
+'vulnerable': True/False,
+'details': ['발견사항 1', '발견사항 2'],
+'recommendation': '수정 제안'
+}
 ```
 
 ### 정적 분석 기법
@@ -228,16 +228,16 @@ def scan(target_url, login_info=None):
 
 ```
 ============================================================
- DNA Lab Security Vulnerability Scanner
+DNA Lab Security Vulnerability Scanner
 ============================================================
- Target: http://localhost:8080
+Target: http://localhost:8080
 ------------------------------------------------------------
- Select Scan Mode:
-  1. Static Scan (Whitebox + Basic Blackbox)
-  2. Dynamic Scan (Crawler + Active Scan)
-  3. Full Scan (Static + Dynamic)
+Select Scan Mode:
+1. Static Scan (Whitebox + Basic Blackbox)
+2. Dynamic Scan (Crawler + Active Scan)
+3. Full Scan (Static + Dynamic)
 
- > Choice [1]: 3
+> Choice [1]: 3
 
 [ Phase 1: Static Scan ]
 [*] Running XSS scanner (1/15)... [!] VULNERABLE
@@ -246,14 +246,14 @@ def scan(target_url, login_info=None):
 ...
 
 ============================================================
- Scan Complete
+Scan Complete
 ============================================================
- Reports generated:
-  - TXT:  reports/scan_report_20260111_143022.txt
-  - HTML: reports/scan_report_20260111_143022.html
-  - PDF:  reports/scan_report_20260111_143022.pdf (Created)
+Reports generated:
+- TXT:  reports/scan_report_20260111_143022.txt
+- HTML: reports/scan_report_20260111_143022.html
+- PDF:  reports/scan_report_20260111_143022.pdf (Created)
 
- Summary: 12 Vulnerabilities found.
+Summary: 12 Vulnerabilities found.
 ```
 
 ### HTML 리포트 미리보기

@@ -7,10 +7,10 @@
 ### 1. 취약한 웹 애플리케이션 (Vulnerable Web App)
 - **기술 스택**: Flask, SQLite, HTML/CSS (Bootstrap)
 - **포함된 취약점**:
-  - SQL Injection (로그인, 검색)
-  - XSS (Cross-Site Scripting) (게시판)
-  - CSRF (Cross-Site Request Forgery) (프로필 수정)
-  - File Upload Vulnerability (파일 업로드)
+- SQL Injection (로그인, 검색)
+- XSS (Cross-Site Scripting) (게시판)
+- CSRF (Cross-Site Request Forgery) (프로필 수정)
+- File Upload Vulnerability (파일 업로드)
 
 ### 2. 자동화 취약점 스캐너
 - **SQL Injection Scanner**: 로그인 폼 및 검색 기능의 SQL Injection 취약점 탐지

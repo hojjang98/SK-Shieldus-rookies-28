@@ -117,9 +117,9 @@ iso27001_consulting_report/
 ```xml
 <!-- MyBatis Mapper -->
 <select id="login" resultType="User">
-    SELECT * FROM users 
-    WHERE username = '${username}' 
-    AND password = '${password}'
+SELECT * FROM users 
+WHERE username = '${username}' 
+AND password = '${password}'
 </select>
 ```
 
@@ -127,9 +127,9 @@ iso27001_consulting_report/
 ```xml
 <!-- MyBatis Mapper -->
 <select id="login" resultType="User">
-    SELECT * FROM users 
-    WHERE username = #{username} 
-    AND password = #{password}
+SELECT * FROM users 
+WHERE username = #{username} 
+AND password = #{password}
 </select>
 ```
 
@@ -138,9 +138,9 @@ iso27001_consulting_report/
 ```java
 @PostMapping("/ping")
 public String ping(@RequestParam String host) {
-    String command = "ping " + host;
-    Runtime.getRuntime().exec(command);
-    return "success";
+String command = "ping " + host;
+Runtime.getRuntime().exec(command);
+return "success";
 }
 ```
 
@@ -148,15 +148,15 @@ public String ping(@RequestParam String host) {
 ```java
 @PostMapping("/ping")
 public String ping(@RequestParam String host) {
-    // 화이트리스트 검증
-    if (!host.matches("^[0-9.]+$")) {
-        throw new IllegalArgumentException("Invalid host");
-    }
-    
-    // ProcessBuilder 사용 (인수 분리)
-    ProcessBuilder pb = new ProcessBuilder("ping", "-c", "4", host);
-    pb.start();
-    return "success";
+// 화이트리스트 검증
+if (!host.matches("^[0-9.]+$")) {
+throw new IllegalArgumentException("Invalid host");
+}
+
+// ProcessBuilder 사용 (인수 분리)
+ProcessBuilder pb = new ProcessBuilder("ping", "-c", "4", host);
+pb.start();
+return "success";
 }
 ```
 

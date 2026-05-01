@@ -1,4 +1,4 @@
-### 🗓️ 프로젝트 집중 주간 (Week 3 & 4 통합)
+### 프로젝트 집중 주간 (Week 3 & 4 통합)
 
 ## 주요 프로젝트 활동 요약 (Key Project Activities Summary)
 

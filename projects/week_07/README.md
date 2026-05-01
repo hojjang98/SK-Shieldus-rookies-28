@@ -30,9 +30,9 @@
 ┌─────────────────────────────────────────────────────────────┐
 │                         사용자 (Users)                        │
 └─────────────────────────────────────────────────────────────┘
-                              ↓
-                    Application Load Balancer
-                              ↓
+↓
+Application Load Balancer
+↓
 ┌─────────────────────────────────────────────────────────────┐
 │                    Amazon VPC (10.0.0.0/16)                 │
 │                                                              │
@@ -115,7 +115,7 @@ week7_AWS_3Tier_Infrastructure/
 │       ├── 11_website_instance1.png 
 │       ├── 12_vpc_resource_map.png  
 └── scripts/
-    └── ec2_user_data.sh            # EC2 User Data 스크립트
+└── ec2_user_data.sh            # EC2 User Data 스크립트
 ```
 
 ---

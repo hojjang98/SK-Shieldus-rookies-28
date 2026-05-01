@@ -1,11 +1,11 @@
-# 🛡️ SK Shieldus Rookies 28기 — Cybersecurity Study & Projects
+# SK Shieldus Rookies 28기 — Cybersecurity Study & Projects
 
 이 리포지토리는 **SK Shieldus 루키즈 28기** 활동 기간 동안 배운 내용을 체계적으로 기록하고,  
 각 분야별 학습을 기반으로 한 **실습 프로젝트**와 **논문 리뷰**를 정리하기 위한 공간입니다.
 
 ---
 
-## 📚 Repository Overview
+## Repository Overview
 
 | 구분 | 설명 |
 |------|------|
@@ -17,20 +17,20 @@
 
 ---
 
-## 🧭 Learning Goals
+## Learning Goals
 
 1. **보안 실무 지식의 체계적 정리**
-   - 교육 중 다루는 주요 개념·도구·프로세스를 매일 정리
+- 교육 중 다루는 주요 개념·도구·프로세스를 매일 정리
 2. **각 분야별 실습 프로젝트 수행**
-   - 배운 내용을 기반으로 직접 문제를 정의하고, 미니 프로젝트 형태로 구현
+- 배운 내용을 기반으로 직접 문제를 정의하고, 미니 프로젝트 형태로 구현
 3. **핵심 논문 리뷰 및 요약**
-   - 분야별 대표 논문을 직접 읽고 정리하여 연구적 이해력 강화
+- 분야별 대표 논문을 직접 읽고 정리하여 연구적 이해력 강화
 4. **보안 시사 분석**
-   - 주간 1~3개 최신 보안 사고/취약점 기사를 분석하여 트렌드 파악
+- 주간 1~3개 최신 보안 사고/취약점 기사를 분석하여 트렌드 파악
 
 ---
 
-## 🧩 Focus Areas
+## Focus Areas
 
 | 분야 | 설명 | 예시 프로젝트 |
 |------|------|----------------|
@@ -45,7 +45,7 @@
 
 ---
 
-## 🗓️ Study Plan (구성 방식)
+## Study Plan (구성 방식)
 
 이 리포지토리의 학습 흐름은 **매일의 학습 정리 → 주차별 실습 프로젝트 → 분야별 논문 리뷰 → 주간 보안 이슈 분석**로 구성되어 있습니다.  
 루키즈 활동 중 각 주차의 학습 내용이나 과제 주제에 따라 유동적으로 조정됩니다.
@@ -57,7 +57,7 @@
 | **Paper Review** | 각 분야(SOC, CERT, Pentest 등)와 연계된 핵심 논문을 선정해 읽고 요약 | 예: "DeepLog: Anomaly Detection and Diagnosis from System Logs" |
 | **Security Issues Analysis** | 주간 1~3개 최신 보안 기사를 선정하여 근본 원인과 대응 방안 분석 | 예: "2025-12주차 · 쿠팡 개인정보 유출 사건 분석" |
 
-> 💡 **진행 방식 예시:**  
+>  **진행 방식 예시:**  
 > 1. 매주 초, 학습 분야(예: SOC, CERT 등)와 실습 목표를 설정  
 > 2. 주중에는 Daily Log를 통해 배운 내용을 정리  
 > 3. 주말에는 Field Project와 Paper Review를 마무리하여 GitHub에 업로드  
@@ -69,7 +69,7 @@
 
 ---
 
-## 🧠 Study Methodology
+## Study Methodology
 
 > **"Learn → Apply → Review → Reflect"**  
 > 배운 것을 즉시 실습으로 연결하고, 결과를 기록하며 회고한다.
@@ -84,7 +84,7 @@
 
 ---
 
-## 🏆 파이널 프로젝트 — 개인정보 수탁사 점검 (Week 20~24)
+## 파이널 프로젝트 — 개인정보 수탁사 점검 (Week 20~24)
 
 > **주제:** 개인정보 위·수탁 관리체계 구축 및 수탁사 현장 점검  
 > **팀:** 5조 (리베로 컨설팅) · **위탁사:** 하랑항공 · **수탁사:** 6개사  
@@ -100,26 +100,26 @@
 
 ---
 
-## 📦 Repository Structure
+## Repository Structure
 
 ```bash
 skshielders-rookies-28/
-┣ 📂 daily_logs/
-┣ 📂 projects/
-┃  ┣ 📂 week_01 ~ week_19/       # 주차별 실습 프로젝트
-┃  ┣ 📂 week_20/                  # [파이널] 착수·계획 수립
-┃  ┣ 📂 week_21/                  # [파이널] 수탁사 분석·점검 계획
-┃  ┣ 📂 week_22/                  # [파이널] 현장 점검·증적 수집
-┃  ┣ 📂 week_23/                  # [파이널] 결과 보고서·개선방안
-┃  ┗ 📂 week_24/                  # [파이널] 최종 발표·마무리
-┣ 📂 paper_review/
-┣ 📂 security_issues_analysis/
+┣  daily_logs/
+┣  projects/
+┃  ┣  week_01 ~ week_19/       # 주차별 실습 프로젝트
+┃  ┣  week_20/                  # [파이널] 착수·계획 수립
+┃  ┣  week_21/                  # [파이널] 수탁사 분석·점검 계획
+┃  ┣  week_22/                  # [파이널] 현장 점검·증적 수집
+┃  ┣  week_23/                  # [파이널] 결과 보고서·개선방안
+┃  ┗  week_24/                  # [파이널] 최종 발표·마무리
+┣  paper_review/
+┣  security_issues_analysis/
 ┗ README.md
 ```
 
 ---
 
 
-## 🪄 License
+## License
 This repository is intended for educational and research purposes only.  
 All project implementations and datasets comply with ethical security research guidelines.

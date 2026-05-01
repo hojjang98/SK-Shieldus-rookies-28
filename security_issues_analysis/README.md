@@ -25,18 +25,18 @@ security_issues_analysis/
 │       ├── skt_usim_breach_analysis.md
 │       └── trust_wallet_supply_chain_attack.md
 └── 2026/
-    ├── week01/
-    │   ├── chrome_extension_malware.md
-    │   ├── korean_air_breach.md
-    │   └── marquis_ransomeware_breach.md
-    ├── week02/
-    │   ├── ledger_globale_braech.md
-    │   ├── esa_data_breach.md
-    │   └── blackcat_insider_threat.md
-    └── week03/
-        ├── ESA_external_server_breach.md
-        ├── manage_my_health_randsomware.md
-        └── trust_wallet_supply_chain_attack.md
+├── week01/
+│   ├── chrome_extension_malware.md
+│   ├── korean_air_breach.md
+│   └── marquis_ransomeware_breach.md
+├── week02/
+│   ├── ledger_globale_braech.md
+│   ├── esa_data_breach.md
+│   └── blackcat_insider_threat.md
+└── week03/
+├── ESA_external_server_breach.md
+├── manage_my_health_randsomware.md
+└── trust_wallet_supply_chain_attack.md
 ```
 
 ## 분석 템플릿

@@ -25,8 +25,8 @@ week_15/
 │   └── logs/                  # 수집된 로그
 │
 └── final_report/              # 최종 보고서
-    ├── consulting_report.md   # 종합 컨설팅 보고서
-    └── screenshots/           # 보고서용 스크린샷
+├── consulting_report.md   # 종합 컨설팅 보고서
+└── screenshots/           # 보고서용 스크린샷
 ```
 
 ---

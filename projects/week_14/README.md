@@ -36,9 +36,9 @@ week_14/
 │       └── uploads/
 │
 └── security_assessment/        # 검증 결과
-    ├── before_attack/          # Week 12 공격 성공
-    ├── after_defense/          # Week 14 방어 성공
-    └── scan_results/           # ZAP 스캔 결과
+├── before_attack/          # Week 12 공격 성공
+├── after_defense/          # Week 14 방어 성공
+└── scan_results/           # ZAP 스캔 결과
 ```
 
 ---
@@ -47,31 +47,31 @@ week_14/
 
 ### Critical 취약점 수정
 1. **SQL Injection 방어**
-   - Prepared Statement 적용
-   - 파라미터 바인딩 사용
-   - 검증: 로그인 우회 차단, 검색 필터 우회 차단
+- Prepared Statement 적용
+- 파라미터 바인딩 사용
+- 검증: 로그인 우회 차단, 검색 필터 우회 차단
 
 2. **XSS 방어**
-   - HTML 자동 이스케이프 처리
-   - |safe 필터 제거
-   - 검증: 스크립트가 텍스트로 표시됨
+- HTML 자동 이스케이프 처리
+- |safe 필터 제거
+- 검증: 스크립트가 텍스트로 표시됨
 
 ### High 취약점 수정
 3. **파일 업로드 검증**
-   - 화이트리스트 방식 (png, jpg, jpeg, gif만 허용)
-   - secure_filename() 사용
-   - 검증: txt 파일 업로드 차단
+- 화이트리스트 방식 (png, jpg, jpeg, gif만 허용)
+- secure_filename() 사용
+- 검증: txt 파일 업로드 차단
 
 ### Medium 취약점 수정
 4. **CSRF 방어**
-   - Flask-WTF 적용
-   - 모든 POST 폼에 CSRF 토큰 추가
+- Flask-WTF 적용
+- 모든 POST 폼에 CSRF 토큰 추가
 
 5. **보안 헤더 설정**
-   - X-Frame-Options: DENY
-   - X-Content-Type-Options: nosniff
-   - Content-Security-Policy 적용
-   - X-XSS-Protection 적용
+- X-Frame-Options: DENY
+- X-Content-Type-Options: nosniff
+- Content-Security-Policy 적용
+- X-XSS-Protection 적용
 
 ---
 
